@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nakshatra Daily Guide — ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</title>
+<title>Nakshatra Daily Guide & Kundli — ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -40,13 +40,9 @@ body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-
 .divider-ornament span{font-size:.6rem;color:var(--gold);letter-spacing:.2em;}
 .card{width:100%;max-width:520px;background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:2rem;animation:fadeUp .8s ease .2s both;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
-
-/* Toggle tabs */
 .toggle-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:var(--deep3);border-radius:10px;padding:4px;}
 .tab-btn{flex:1;height:36px;background:transparent;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:400;letter-spacing:.05em;color:var(--text-muted);cursor:pointer;transition:background .2s,color .2s;}
 .tab-btn.active{background:var(--surface);color:var(--gold);border:.5px solid rgba(201,168,76,.2);}
-
-/* Birth finder box */
 .birth-finder{background:rgba(201,168,76,.05);border:.5px solid rgba(201,168,76,.2);border-radius:12px;padding:1rem;margin-bottom:1.25rem;display:none;}
 .birth-finder.visible{display:block;}
 .birth-finder-title{font-size:.68rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.75rem;}
@@ -58,7 +54,6 @@ body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-
 .found-nak-kn{font-size:.85rem;color:var(--text-muted);margin-top:.1rem;}
 .find-btn{width:100%;height:38px;margin-top:.75rem;background:rgba(201,168,76,.1);border:.5px solid rgba(201,168,76,.3);border-radius:8px;color:var(--gold);font-family:'Outfit',sans-serif;font-size:.8rem;letter-spacing:.06em;cursor:pointer;transition:background .2s;}
 .find-btn:hover{background:rgba(201,168,76,.18);}
-
 .form-group{margin-bottom:1.25rem;}
 .form-group label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.5rem;}
 .form-group input,.form-group select{width:100%;height:44px;background:var(--deep3);border:.5px solid rgba(201,168,76,.2);border-radius:10px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:300;padding:0 1rem;transition:border-color .2s;appearance:none;-webkit-appearance:none;}
@@ -73,8 +68,6 @@ body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-
 .btn:disabled{opacity:.5;cursor:not-allowed;}
 .error-box{background:var(--challenging-bg);border:.5px solid rgba(224,112,112,.3);border-radius:10px;padding:.9rem 1rem;margin-top:1rem;font-size:.82rem;color:var(--challenging);line-height:1.6;display:none;}
 .error-box.visible{display:block;}
-
-/* Result */
 .result{display:none;margin-top:2rem;animation:fadeUp .5s ease both;}
 .result.visible{display:block;}
 .result-top{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;text-align:center;}
@@ -99,6 +92,45 @@ body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-
 .verify-btn{display:block;width:100%;height:40px;margin-top:1rem;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.06em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;text-decoration:none;line-height:40px;text-align:center;}
 .verify-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
 
+/* ── Kundli section ── */
+.kundli-section{width:100%;max-width:600px;margin-top:2.5rem;display:none;animation:fadeUp .6s ease both;}
+.kundli-section.visible{display:block;}
+.section-title{font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem;text-align:center;}
+.kundli-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--text);text-align:center;margin-bottom:.25rem;}
+.kundli-sub{font-size:.75rem;color:var(--text-muted);text-align:center;margin-bottom:1.25rem;}
+
+/* South Indian chart grid — 4x4 with centre 2x2 empty */
+.si-chart{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.3);border-radius:4px;overflow:hidden;aspect-ratio:1;}
+.si-cell{background:var(--deep2);padding:6px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;position:relative;}
+.si-cell.centre{background:var(--deep3);display:flex;align-items:center;justify-content:center;}
+.si-cell.lagna::after{content:'';position:absolute;top:0;left:0;width:0;height:0;border-top:18px solid rgba(201,168,76,.5);border-right:18px solid transparent;}
+.rasi-num{font-size:.62rem;color:var(--text-dim);font-weight:400;}
+.rasi-name{font-size:.6rem;color:var(--gold-dim);letter-spacing:.04em;margin-bottom:2px;}
+.planet-tag{font-size:.62rem;font-weight:500;padding:1px 4px;border-radius:3px;line-height:1.3;}
+.p-su{color:#F4C542;background:rgba(244,197,66,.12);}
+.p-mo{color:#B0C8E8;background:rgba(176,200,232,.12);}
+.p-ma{color:#E07070;background:rgba(224,112,112,.12);}
+.p-me{color:#4CAF7D;background:rgba(76,175,125,.12);}
+.p-ju{color:#E8C97A;background:rgba(232,201,122,.12);}
+.p-ve{color:#C97AE8;background:rgba(201,122,232,.12);}
+.p-sa{color:#9A8FA8;background:rgba(154,143,168,.12);}
+.p-ra{color:#8FA89A;background:rgba(143,168,154,.12);}
+.p-ke{color:#A88F9A;background:rgba(168,143,154,.12);}
+.p-as{color:var(--gold);background:rgba(201,168,76,.15);font-weight:600;}
+.centre-text{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--text-dim);text-align:center;line-height:1.6;}
+
+/* Planet details table */
+.planet-table-wrap{margin-top:1.25rem;border-radius:14px;border:.5px solid rgba(201,168,76,.15);overflow:hidden;}
+.planet-table{width:100%;border-collapse:collapse;font-size:.78rem;}
+.planet-table thead tr{background:var(--surface);}
+.planet-table thead th{padding:.55rem .75rem;text-align:left;font-size:.65rem;font-weight:500;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;border-bottom:.5px solid rgba(201,168,76,.15);}
+.planet-table tbody tr{border-bottom:.5px solid rgba(201,168,76,.08);}
+.planet-table tbody tr:last-child{border-bottom:none;}
+.planet-table tbody tr:hover{background:rgba(201,168,76,.04);}
+.planet-table td{padding:.5rem .75rem;color:var(--text-muted);vertical-align:middle;}
+.planet-table td:first-child{color:var(--text);font-weight:500;}
+.retro-tag{font-size:.6rem;color:var(--challenging);margin-left:4px;}
+
 /* History */
 .history{width:100%;max-width:900px;margin-top:2.5rem;animation:fadeUp .6s ease both;display:none;}
 .history.visible{display:block;}
@@ -122,16 +154,16 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .footer{margin-top:3rem;text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;animation:fadeUp .8s ease .4s both;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}}
+@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}}
 </style>
 </head>
 <body>
 <div class="page">
   <header class="header">
     <span class="header-symbol">✦</span>
-    <h1>Nakshatra <span>Daily Guide</span></h1>
+    <h1>Nakshatra <span>& Kundli</span></h1>
     <p class="kannada-title">ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</p>
-    <p class="subtitle">Location-accurate Vedic birth star readings</p>
+    <p class="subtitle">Daily guide · Birth chart · Vedic astrology</p>
   </header>
   <div class="divider-ornament"><span>✦</span></div>
 
@@ -144,25 +176,17 @@ tbody td:first-child{color:var(--text);font-weight:400;}
       <label>Current city / place</label>
       <input type="text" id="place" placeholder="e.g. Bengaluru, Seattle, Mumbai" autocomplete="off"/>
     </div>
-
-    <!-- Birth nakshatra toggle -->
     <div class="form-group">
       <label>Birth nakshatra — ಜನ್ಮ ನಕ್ಷತ್ರ</label>
       <div class="toggle-tabs">
         <button class="tab-btn active" id="tab-know" onclick="switchTab('know')">I know my nakshatra</button>
         <button class="tab-btn" id="tab-find" onclick="switchTab('find')">Find from birth details</button>
       </div>
-
-      <!-- Known nakshatra dropdown -->
       <div id="panel-know">
-        <select id="nakshatra">
-          <option value="">— Select your birth star —</option>
-        </select>
+        <select id="nakshatra"><option value="">— Select your birth star —</option></select>
       </div>
-
-      <!-- Birth details finder -->
       <div class="birth-finder" id="panel-find">
-        <div class="birth-finder-title">Enter birth details to find nakshatra</div>
+        <div class="birth-finder-title">Enter birth details · also generates your Kundli</div>
         <div class="birth-row">
           <div>
             <label style="display:block;font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.4rem;">Date of birth</label>
@@ -177,7 +201,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
           <label style="display:block;font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.4rem;">Place of birth</label>
           <input type="text" id="birth-place" placeholder="e.g. Mysuru, London, New York" autocomplete="off" style="height:40px;font-size:.85rem;"/>
         </div>
-        <button class="find-btn" onclick="findBirthNakshatra()">Find my birth nakshatra ✦</button>
+        <button class="find-btn" onclick="findBirthNakshatra()">Calculate nakshatra & generate Kundli ✦</button>
         <div class="found-nak" id="foundNak">
           <div class="found-nak-label">Your birth nakshatra</div>
           <div class="found-nak-value" id="found-en"></div>
@@ -186,10 +210,8 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="error-box" id="birthErrorBox"></div>
       </div>
     </div>
-
     <button class="btn" id="submitBtn" onclick="calculate()">Reveal Today's Nakshatra</button>
     <div class="error-box" id="errorBox"></div>
-
     <div class="result" id="result">
       <div class="result-top">
         <div class="result-greeting">Reading for</div>
@@ -221,7 +243,21 @@ tbody td:first-child{color:var(--text);font-weight:400;}
     </div>
   </div>
 
-  <footer class="footer">Powered by Vedic Tara Bala · 27 Nakshatras · ೨೭ ನಕ್ಷತ್ರಗಳು</footer>
+  <!-- Kundli Section -->
+  <div class="kundli-section" id="kundliSection">
+    <div class="section-title">✦ &nbsp; Janma Kundli &nbsp; ✦</div>
+    <div class="kundli-name" id="kundli-name"></div>
+    <div class="kundli-sub" id="kundli-sub"></div>
+    <div class="si-chart" id="siChart"></div>
+    <div class="planet-table-wrap">
+      <table class="planet-table">
+        <thead><tr><th>ಗ್ರಹ / Graha</th><th>ರಾಶಿ / Rasi</th><th>ಅಂಶ / Degrees</th><th>ನಕ್ಷತ್ರ / Nakshatra</th><th>ಪಾದ / Pada</th></tr></thead>
+        <tbody id="planetTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="footer">Powered by Vedic Tara Bala · Lahiri Ayanamsha · ೨೭ ನಕ್ಷತ್ರಗಳು</footer>
 
   <div class="history" id="historySection">
     <div class="history-header">
@@ -230,18 +266,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
     </div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Place</th>
-            <th>Birth nakshatra</th>
-            <th>Today's nakshatra</th>
-            <th>Tara Bala</th>
-            <th>Status</th>
-            <th>Time</th>
-          </tr>
-        </thead>
+        <thead><tr><th>#</th><th>Name</th><th>Place</th><th>Birth nakshatra</th><th>Today's nakshatra</th><th>Tara Bala</th><th>Status</th><th>Time</th></tr></thead>
         <tbody id="historyBody"></tbody>
       </table>
     </div>
@@ -249,7 +274,9 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 </div>
 
 <script>
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
 const nakshatras = [
   {en:"Ashwini",kn:"ಅಶ್ವಿನಿ"},{en:"Bharani",kn:"ಭರಣಿ"},{en:"Krittika",kn:"ಕೃತ್ತಿಕಾ"},
   {en:"Rohini",kn:"ರೋಹಿಣಿ"},{en:"Mrigashira",kn:"ಮೃಗಶಿರಾ"},{en:"Ardra",kn:"ಆರ್ದ್ರಾ"},
@@ -262,253 +289,390 @@ const nakshatras = [
   {en:"Purva Bhadrapada",kn:"ಪೂರ್ವಭಾದ್ರಪದ"},{en:"Uttara Bhadrapada",kn:"ಉತ್ತರಭಾದ್ರಪದ"},{en:"Revati",kn:"ರೇವತಿ"}
 ];
 
+const RASIS    = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+const RASIS_KN = ["ಮೇಷ","ವೃಷಭ","ಮಿಥುನ","ಕರ್ಕಾಟಕ","ಸಿಂಹ","ಕನ್ಯಾ","ತುಲಾ","ವೃಶ್ಚಿಕ","ಧನು","ಮಕರ","ಕುಂಭ","ಮೀನ"];
+const RASI_SHORT    = ["Ar","Ta","Ge","Ca","Le","Vi","Li","Sc","Sg","Cp","Aq","Pi"];
+const RASI_SHORT_KN = ["ಮೇ","ವೃಷ","ಮಿ","ಕ","ಸಿಂ","ಕ","ತು","ವೃಶ್ಚ","ಧ","ಮ","ಕುಂ","ಮೀ"];
+
 const taras = [
-  {name:"Janma — ಜನ್ಮ",            s:"neutral",     d:"This is your birth nakshatra. A day for self-reflection and introspection. Avoid major new decisions."},
-  {name:"Sampat — ಸಂಪತ್",          s:"favorable",   d:"Auspicious for financial matters, new ventures, and accumulating resources. A favorable day."},
-  {name:"Vipat — ವಿಪತ್",           s:"challenging", d:"Proceed with caution. Avoid risky activities, travel, or signing important documents today."},
-  {name:"Kshema — ಕ್ಷೇಮ",          s:"favorable",   d:"Good for health-related activities, rest, and nurturing relationships. Overall positive day."},
-  {name:"Pratyak — ಪ್ರತ್ಯಕ್",      s:"challenging", d:"Obstacles may arise. Best to pause, review plans, and avoid starting new projects."},
-  {name:"Sadhana — ಸಾಧನ",         s:"favorable",   d:"Excellent for focused work, completing goals, and skill-building. High productivity day."},
-  {name:"Naidhana — ನೈಧನ",        s:"challenging", d:"Considered inauspicious. Avoid important ceremonies, travel, or major commitments today."},
-  {name:"Mitra — ಮಿತ್ರ",           s:"favorable",   d:"Favorable for socializing, partnerships, and collaborative efforts. Good for meetings."},
-  {name:"Parama Mitra — ಪರಮ ಮಿತ್ರ",s:"favorable",   d:"Highly auspicious day. Excellent for all important activities, ceremonies, and new beginnings."}
+  {name:"Janma — ಜನ್ಮ",s:"neutral",d:"This is your birth nakshatra. A day for self-reflection and introspection. Avoid major new decisions."},
+  {name:"Sampat — ಸಂಪತ್",s:"favorable",d:"Auspicious for financial matters, new ventures, and accumulating resources. A favorable day."},
+  {name:"Vipat — ವಿಪತ್",s:"challenging",d:"Proceed with caution. Avoid risky activities, travel, or signing important documents today."},
+  {name:"Kshema — ಕ್ಷೇಮ",s:"favorable",d:"Good for health-related activities, rest, and nurturing relationships. Overall positive day."},
+  {name:"Pratyak — ಪ್ರತ್ಯಕ್",s:"challenging",d:"Obstacles may arise. Best to pause, review plans, and avoid starting new projects."},
+  {name:"Sadhana — ಸಾಧನ",s:"favorable",d:"Excellent for focused work, completing goals, and skill-building. High productivity day."},
+  {name:"Naidhana — ನೈಧನ",s:"challenging",d:"Considered inauspicious. Avoid important ceremonies, travel, or major commitments today."},
+  {name:"Mitra — ಮಿತ್ರ",s:"favorable",d:"Favorable for socializing, partnerships, and collaborative efforts. Good for meetings."},
+  {name:"Parama Mitra — ಪರಮ ಮಿತ್ರ",s:"favorable",d:"Highly auspicious day. Excellent for all important activities, ceremonies, and new beginnings."}
 ];
 
-// Populate dropdown
-const sel = document.getElementById('nakshatra');
-nakshatras.forEach((n,i)=>{
-  const o=document.createElement('option');
-  o.value=i; o.textContent=`${n.en} — ${n.kn}`; sel.appendChild(o);
-});
+// Populate nakshatra dropdown
+const sel=document.getElementById('nakshatra');
+nakshatras.forEach((n,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${n.en} — ${n.kn}`;sel.appendChild(o);});
 
-// ─── Tab switching ───────────────────────────────────────────────────────────
-let activeTab = 'know';
-let foundBirthIdx = -1; // set when birth finder succeeds
+// ═══════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════
+let activeTab='know', foundBirthIdx=-1, lastBirthUTC=null, lastBirthGeo=null;
 
-function switchTab(tab) {
-  activeTab = tab;
-  document.getElementById('tab-know').classList.toggle('active', tab==='know');
-  document.getElementById('tab-find').classList.toggle('active', tab==='find');
-  document.getElementById('panel-know').style.display = tab==='know' ? '' : 'none';
-  document.getElementById('panel-find').classList.toggle('visible', tab==='find');
-  document.getElementById('errorBox').className = 'error-box';
+function switchTab(tab){
+  activeTab=tab;
+  document.getElementById('tab-know').classList.toggle('active',tab==='know');
+  document.getElementById('tab-find').classList.toggle('active',tab==='find');
+  document.getElementById('panel-know').style.display=tab==='know'?'':'none';
+  document.getElementById('panel-find').classList.toggle('visible',tab==='find');
+  document.getElementById('errorBox').className='error-box';
 }
 
-// ─── Moon longitude (Jean Meeus) ─────────────────────────────────────────────
-function moonLongitude(date) {
-  const JD = date.getTime()/86400000 + 2440587.5;
-  const T  = (JD - 2451545.0) / 36525;
-  let L0 = 218.3164477 + 481267.88123421*T - 0.0015786*T*T + T*T*T/538841 - T*T*T*T/65194000;
-  let M  = 134.9633964 + 477198.8676313*T  + 0.0089970*T*T + T*T*T/69699  - T*T*T*T/14712000;
-  let Ms = 357.5291092 + 35999.0502909*T   - 0.0001536*T*T + T*T*T/24490000;
-  let F  = 93.2720950  + 483202.0175233*T  - 0.0036539*T*T - T*T*T/3526000 + T*T*T*T/863310000;
-  const n = v=>{v=v%360;return v<0?v+360:v;};
-  L0=n(L0);M=n(M);Ms=n(Ms);F=n(F);
+// ═══════════════════════════════════════════════════════════
+// ASTRONOMY — Moon longitude (Jean Meeus)
+// ═══════════════════════════════════════════════════════════
+function moonLongitude(date){
+  const JD=date.getTime()/86400000+2440587.5, T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};
+  let L0=n(218.3164477+481267.88123421*T-0.0015786*T*T+T*T*T/538841-T*T*T*T/65194000);
+  let M =n(134.9633964+477198.8676313*T +0.008997*T*T+T*T*T/69699-T*T*T*T/14712000);
+  let Ms=n(357.5291092+35999.0502909*T  -0.0001536*T*T+T*T*T/24490000);
+  let F =n(93.272095  +483202.0175233*T -0.0036539*T*T-T*T*T/3526000+T*T*T*T/863310000);
   const r=Math.PI/180;
-  let dL =
-    6.288774*Math.sin(r*M)+1.274027*Math.sin(r*(2*L0-M))+0.658314*Math.sin(r*2*L0)+
-    0.213618*Math.sin(r*2*M)-0.185116*Math.sin(r*Ms)-0.114332*Math.sin(r*2*F)+
-    0.058793*Math.sin(r*(2*L0-2*M))+0.057066*Math.sin(r*(2*L0-Ms-M))+0.053322*Math.sin(r*(2*L0+M))+
-    0.045758*Math.sin(r*(2*L0-Ms))-0.040923*Math.sin(r*(Ms-M))-0.034720*Math.sin(r*L0)+
-    -0.030383*Math.sin(r*(Ms+M))+0.015327*Math.sin(r*(2*L0-2*F))-0.012528*Math.sin(r*(2*F+M))+
-    0.010980*Math.sin(r*(2*F-M))+0.010675*Math.sin(r*(4*L0-M))+0.010034*Math.sin(r*3*M)+
-    0.008548*Math.sin(r*(4*L0-2*M))-0.007888*Math.sin(r*(2*L0+Ms-M))-0.006766*Math.sin(r*(2*L0+Ms))+
-    -0.005163*Math.sin(r*(L0-M))+0.004987*Math.sin(r*(L0+Ms))+0.004036*Math.sin(r*(2*L0-Ms+M))+
-    0.003994*Math.sin(r*(2*L0+2*M))+0.003861*Math.sin(r*4*L0)+0.003665*Math.sin(r*(2*L0-3*M))+
-    -0.002689*Math.sin(r*(Ms-2*M))-0.002602*Math.sin(r*(2*L0-2*F+M))+0.002390*Math.sin(r*(2*L0-Ms-2*M))+
-    -0.002348*Math.sin(r*(L0+M))+0.002236*Math.sin(r*(2*L0-2*Ms))-0.002120*Math.sin(r*(Ms+2*M))+
-    -0.002069*Math.sin(r*2*Ms)+0.002048*Math.sin(r*(2*L0-2*Ms-M));
-  let moonLon = n(L0+dL);
-  const ayanamsha = 23.85 + (JD-2415020.0)/365.25*(50.3/3600);
-  return n(moonLon-ayanamsha);
+  const dL=6.288774*Math.sin(r*M)+1.274027*Math.sin(r*(2*L0-M))+0.658314*Math.sin(r*2*L0)
+    +0.213618*Math.sin(r*2*M)-0.185116*Math.sin(r*Ms)-0.114332*Math.sin(r*2*F)
+    +0.058793*Math.sin(r*(2*L0-2*M))+0.057066*Math.sin(r*(2*L0-Ms-M))+0.053322*Math.sin(r*(2*L0+M))
+    +0.045758*Math.sin(r*(2*L0-Ms))-0.040923*Math.sin(r*(Ms-M))-0.034720*Math.sin(r*L0)
+    -0.030383*Math.sin(r*(Ms+M))+0.015327*Math.sin(r*(2*L0-2*F))+0.010980*Math.sin(r*(2*F-M))
+    +0.010675*Math.sin(r*(4*L0-M))+0.010034*Math.sin(r*3*M)-0.007888*Math.sin(r*(2*L0+Ms-M))
+    -0.006766*Math.sin(r*(2*L0+Ms))-0.005163*Math.sin(r*(L0-M))+0.004987*Math.sin(r*(L0+Ms))
+    +0.004036*Math.sin(r*(2*L0-Ms+M))+0.003994*Math.sin(r*(2*L0+2*M))+0.003861*Math.sin(r*4*L0)
+    +0.003665*Math.sin(r*(2*L0-3*M))-0.002689*Math.sin(r*(Ms-2*M))+0.002390*Math.sin(r*(2*L0-Ms-2*M))
+    -0.002348*Math.sin(r*(L0+M))+0.002236*Math.sin(r*(2*L0-2*Ms))-0.002120*Math.sin(r*(Ms+2*M))
+    +0.002048*Math.sin(r*(2*L0-2*Ms-M));
+  const ayanamsha=23.85+(JD-2415020)/365.25*(50.3/3600);
+  return n(n(L0+dL)-ayanamsha);
 }
 
-function nakshatraFromLongitude(lon){return Math.floor(lon/(360/27));}
+// ═══════════════════════════════════════════════════════════
+// PLANETARY POSITIONS (simplified VSOP87 / mean elements)
+// ═══════════════════════════════════════════════════════════
+function planetaryLongitudes(date){
+  const JD=date.getTime()/86400000+2440587.5;
+  const T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};
+  const r=Math.PI/180;
+  const ayanamsha=23.85+(JD-2415020)/365.25*(50.3/3600);
+  const sid=lon=>n(n(lon)-ayanamsha);
 
-function estimateNakshatraEnd(date, currentIdx) {
-  const nakSize=360/27;
-  const currentLon=moonLongitude(date);
-  const nextBoundary=(currentIdx+1)*nakSize;
-  const remaining=((nextBoundary-currentLon)%nakSize+nakSize)%nakSize;
-  return new Date(date.getTime()+remaining/0.55*3600000);
+  // Sun (tropical longitude)
+  const L_sun=n(280.46646+36000.76983*T+0.0003032*T*T);
+  const M_sun=n(357.52911+35999.05029*T-0.0001537*T*T);
+  const C_sun=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(r*M_sun)
+              +(0.019993-0.000101*T)*Math.sin(r*2*M_sun)+0.000289*Math.sin(r*3*M_sun);
+  const sun=sid(L_sun+C_sun);
+
+  // Moon
+  const moon=moonLongitude(date);
+
+  // Mercury (mean elements)
+  const L_me=n(252.2509+149474.0722*T);
+  const M_me=n(174.7948+1516.6478*T);
+  const me=sid(L_me+2.452*Math.sin(r*M_me)+0.555*Math.sin(r*2*M_me));
+
+  // Venus
+  const L_ve=n(181.9798+58519.2130*T);
+  const M_ve=n(50.4161+2145.5437*T);
+  const ve=sid(L_ve+0.7758*Math.sin(r*M_ve)+0.0033*Math.sin(r*2*M_ve));
+
+  // Mars
+  const L_ma=n(355.4330+19140.2993*T);
+  const M_ma=n(19.3730+191.4483*T);
+  const ma=sid(L_ma+10.6912*Math.sin(r*M_ma)+0.6228*Math.sin(r*2*M_ma)+0.0503*Math.sin(r*3*M_ma));
+
+  // Jupiter
+  const L_ju=n(34.3515+3036.3027*T);
+  const M_ju=n(20.9306+30.3479*T);
+  const ju=sid(L_ju+5.5549*Math.sin(r*M_ju)+0.1683*Math.sin(r*2*M_ju));
+
+  // Saturn
+  const L_sa=n(50.0774+1223.5110*T);
+  const M_sa=n(316.9670+12.2312*T);
+  const sa=sid(L_sa+6.3585*Math.sin(r*M_sa)+0.2204*Math.sin(r*2*M_sa));
+
+  // Rahu (True node) — mean node
+  const rahu=sid(n(125.0445-1934.1362*T+0.0020754*T*T));
+  const ketu=sid(n(rahu+180+ayanamsha)); // opposite of Rahu (already sid adjusted)
+
+  // Ascendant — requires lat/lon; use stored birth geo if available
+  let asc=sun; // fallback
+  if(lastBirthGeo){
+    const lat=lastBirthGeo.lat*r;
+    const LST=localSiderealTime(JD, lastBirthGeo.lon);
+    const e=23.4397*r;
+    const H=LST*r;
+    const ascTrop=Math.atan2(Math.cos(H),(-(Math.sin(H)*Math.cos(e)+Math.tan(lat)*Math.sin(e))))/r;
+    asc=sid(n(ascTrop));
+  }
+
+  // Retrograde check (simplified: planet behind sun in elongation for inner; neg speed for outer)
+  const isRetro=p=>false; // simplified — full retrograde needs 2-day comparison
+
+  return [
+    {name:"Asc (Lagna)", nameKn:"ಲಗ್ನ",    abbr:"As", abbrKn:"ಲ",  lon:asc,  retro:false, cls:"p-as"},
+    {name:"Sun",         nameKn:"ರವಿ",      abbr:"Su", abbrKn:"ರ",  lon:sun,  retro:false, cls:"p-su"},
+    {name:"Moon",        nameKn:"ಚಂದ್ರ",    abbr:"Mo", abbrKn:"ಚ",  lon:moon, retro:false, cls:"p-mo"},
+    {name:"Mars",        nameKn:"ಕುಜ",      abbr:"Ma", abbrKn:"ಕು", lon:ma,   retro:false, cls:"p-ma"},
+    {name:"Mercury",     nameKn:"ಬುಧ",      abbr:"Me", abbrKn:"ಬು", lon:me,   retro:false, cls:"p-me"},
+    {name:"Jupiter",     nameKn:"ಗುರು",     abbr:"Ju", abbrKn:"ಗು", lon:ju,   retro:false, cls:"p-ju"},
+    {name:"Venus",       nameKn:"ಶುಕ್ರ",   abbr:"Ve", abbrKn:"ಶು", lon:ve,   retro:false, cls:"p-ve"},
+    {name:"Saturn",      nameKn:"ಶನಿ",     abbr:"Sa", abbrKn:"ಶ",  lon:sa,   retro:false, cls:"p-sa"},
+    {name:"Rahu",        nameKn:"ರಾಹು",    abbr:"Ra", abbrKn:"ರಾ", lon:rahu, retro:true,  cls:"p-ra"},
+    {name:"Ketu",        nameKn:"ಕೇತು",    abbr:"Ke", abbrKn:"ಕೇ", lon:ketu, retro:true,  cls:"p-ke"},
+  ];
 }
 
-// ─── Geocode ─────────────────────────────────────────────────────────────────
-async function geocode(city) {
-  const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&limit=1`,{headers:{'Accept-Language':'en'}});
+function localSiderealTime(JD, lonDeg){
+  const T=(JD-2451545)/36525;
+  const GMST=280.46061837+360.98564736629*(JD-2451545)+0.000387933*T*T-T*T*T/38710000;
+  const n=v=>{v=v%360;return v<0?v+360:v;};
+  return n(GMST+lonDeg)/15; // hours
+}
+
+function rasiFn(lon){return Math.floor(lon/30);}
+function nakFn(lon){return Math.floor(lon/(360/27));}
+function padaFn(lon){return Math.floor((lon%(360/27))/(360/108))+1;}
+
+// ═══════════════════════════════════════════════════════════
+// SOUTH INDIAN CHART
+// South Indian layout — fixed rasi positions in 4x4 grid:
+// Pi Ar Ta Ge
+// Aq ** ** Ca
+// Cp ** ** Le
+// Sg Sc Li Vi
+// ═══════════════════════════════════════════════════════════
+const SI_LAYOUT=[
+  {rasi:11},{rasi:0},{rasi:1},{rasi:2},
+  {rasi:10},{centre:true},{centre:true},{rasi:3},
+  {rasi:9},{centre:true},{centre:true},{rasi:4},
+  {rasi:8},{rasi:7},{rasi:6},{rasi:5}
+];
+
+function buildSIChart(planets){
+  const chart=document.getElementById('siChart');
+  chart.innerHTML='';
+  const byRasi={};
+  planets.forEach(p=>{
+    const r=rasiFn(p.lon);
+    if(!byRasi[r]) byRasi[r]=[];
+    byRasi[r].push(p);
+  });
+  const lagnaRasi=rasiFn(planets[0].lon);
+
+  SI_LAYOUT.forEach(cell=>{
+    const div=document.createElement('div');
+    if(cell.centre){
+      div.className='si-cell centre';
+      div.innerHTML='<div class="centre-text">ಜನ್ಮ<br/>ಕುಂಡಲಿ</div>';
+    } else {
+      div.className='si-cell'+(cell.rasi===lagnaRasi?' lagna':'');
+      const rn=document.createElement('div');
+      rn.className='rasi-name';
+      rn.textContent=RASI_SHORT_KN[cell.rasi]+' / '+RASI_SHORT[cell.rasi];
+      div.appendChild(rn);
+      const rnum=document.createElement('div');
+      rnum.className='rasi-num';
+      rnum.textContent=cell.rasi+1;
+      div.appendChild(rnum);
+      (byRasi[cell.rasi]||[]).forEach(p=>{
+        const tag=document.createElement('span');
+        tag.className='planet-tag '+p.cls;
+        tag.textContent=p.abbrKn+(p.retro?'℞':'');
+        tag.title=p.nameKn+' / '+p.name;
+        div.appendChild(tag);
+      });
+    }
+    chart.appendChild(div);
+  });
+}
+
+function buildPlanetTable(planets){
+  const tbody=document.getElementById('planetTableBody');
+  tbody.innerHTML='';
+  planets.forEach(p=>{
+    const rasi=rasiFn(p.lon);
+    const nak=nakFn(p.lon);
+    const pada=padaFn(p.lon);
+    const deg=(p.lon%30).toFixed(2)+'°';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><span class="planet-tag ${p.cls}" style="font-size:.72rem;">${p.abbrKn}</span> ${p.nameKn} <span style="color:var(--text-dim);font-size:.72rem;">/ ${p.name}</span>${p.retro?'<span class="retro-tag">℞</span>':''}</td>
+      <td>${RASIS_KN[rasi]} <span style="color:var(--text-dim);font-size:.72rem;">/ ${RASIS[rasi]}</span></td>
+      <td>${deg}</td>
+      <td>${nakshatras[nak].kn} <span style="color:var(--text-dim);font-size:.72rem;">/ ${nakshatras[nak].en}</span></td>
+      <td>${pada}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// GEOCODE
+// ═══════════════════════════════════════════════════════════
+async function geocode(city){
+  const res=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&limit=1`,{headers:{'Accept-Language':'en'}});
   if(!res.ok) throw new Error('Location lookup failed.');
-  const data = await res.json();
+  const data=await res.json();
   if(!data.length) throw new Error(`Could not find "${city}". Try a nearby major city.`);
-  return {lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon),label:data[0].display_name.split(',').slice(0,2).join(', ')};
+  return{lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon),label:data[0].display_name.split(',').slice(0,2).join(', ')};
 }
 
-// ─── Find birth nakshatra from date/time/place ───────────────────────────────
-async function findBirthNakshatra() {
-  const dateVal  = document.getElementById('birth-date').value;
-  const timeVal  = document.getElementById('birth-time').value;
-  const placeVal = document.getElementById('birth-place').value.trim();
-  const errBox   = document.getElementById('birthErrorBox');
-  const foundBox = document.getElementById('foundNak');
+// ═══════════════════════════════════════════════════════════
+// FIND BIRTH NAKSHATRA + GENERATE KUNDLI
+// ═══════════════════════════════════════════════════════════
+async function findBirthNakshatra(){
+  const dateVal=document.getElementById('birth-date').value;
+  const timeVal=document.getElementById('birth-time').value;
+  const placeVal=document.getElementById('birth-place').value.trim();
+  const errBox=document.getElementById('birthErrorBox');
+  const foundBox=document.getElementById('foundNak');
   errBox.className='error-box'; foundBox.className='found-nak';
 
   if(!dateVal) return showBirthError('Please enter your date of birth.');
   if(!timeVal) return showBirthError('Please enter your time of birth.');
   if(!placeVal) return showBirthError('Please enter your place of birth.');
 
-  const findBtn = document.querySelector('.find-btn');
-  findBtn.textContent = 'Finding...'; findBtn.disabled=true;
+  const findBtn=document.querySelector('.find-btn');
+  findBtn.textContent='Calculating...'; findBtn.disabled=true;
 
-  try {
-    // Geocode birth place to get timezone offset
-    const geo = await geocode(placeVal);
+  try{
+    const geo=await geocode(placeVal);
+    lastBirthGeo=geo;
+    const tzOffsetHours=geo.lon/15;
+    const [year,month,day]=dateVal.split('-').map(Number);
+    const [hour,min]=timeVal.split(':').map(Number);
+    const localMs=Date.UTC(year,month-1,day,hour,min,0);
+    const birthUTC=new Date(localMs-tzOffsetHours*3600000);
+    lastBirthUTC=birthUTC;
 
-    // Get UTC timezone offset for birth place using longitude approximation
-    // More accurate: use the browser's Intl API with a known timezone
-    // We derive UTC birth time by converting local time using longitude-based offset
-    const tzOffsetHours = geo.lon / 15; // rough but good for nakshatra calculation
-
-    // Parse date and time
-    const [year,month,day] = dateVal.split('-').map(Number);
-    const [hour,min] = timeVal.split(':').map(Number);
-
-    // Build birth moment in UTC
-    const localMs = Date.UTC(year, month-1, day, hour, min, 0);
-    const birthUTC = new Date(localMs - tzOffsetHours * 3600000);
-
-    // Calculate Moon longitude at birth time
-    const birthLon = moonLongitude(birthUTC);
-    foundBirthIdx  = nakshatraFromLongitude(birthLon);
-    const nak = nakshatras[foundBirthIdx];
-
-    document.getElementById('found-en').textContent = nak.en;
-    document.getElementById('found-kn').textContent = nak.kn;
+    const birthLon=moonLongitude(birthUTC);
+    foundBirthIdx=Math.floor(birthLon/(360/27));
+    const nak=nakshatras[foundBirthIdx];
+    document.getElementById('found-en').textContent=nak.en;
+    document.getElementById('found-kn').textContent=nak.kn;
     foundBox.classList.add('visible');
 
-  } catch(err) {
-    showBirthError(err.message || 'Could not calculate. Please check your inputs.');
-    foundBirthIdx = -1;
-  } finally {
-    findBtn.textContent='Find my birth nakshatra ✦'; findBtn.disabled=false;
+    // Generate kundli
+    const planets=planetaryLongitudes(birthUTC);
+    const name=document.getElementById('name').value.trim()||'Birth Chart';
+    const dateDisplay=new Date(dateVal+'T'+timeVal).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+    document.getElementById('kundli-name').textContent=name;
+    document.getElementById('kundli-sub').textContent=`${timeVal} · ${geo.label} · ${dateDisplay}`;
+    buildSIChart(planets);
+    buildPlanetTable(planets);
+    document.getElementById('kundliSection').classList.add('visible');
+    document.getElementById('kundliSection').scrollIntoView({behavior:'smooth',block:'start'});
+
+  }catch(err){
+    showBirthError(err.message||'Could not calculate. Please check your inputs.');
+    foundBirthIdx=-1;
+  }finally{
+    findBtn.textContent='Calculate nakshatra & generate Kundli ✦'; findBtn.disabled=false;
   }
 }
 
 function showBirthError(msg){
   const e=document.getElementById('birthErrorBox');
   e.textContent=msg; e.classList.add('visible');
-  document.querySelector('.find-btn').textContent='Find my birth nakshatra ✦';
-  document.querySelector('.find-btn').disabled=false;
+  const fb=document.querySelector('.find-btn');
+  fb.textContent='Calculate nakshatra & generate Kundli ✦'; fb.disabled=false;
 }
 
-// ─── Main calculate ──────────────────────────────────────────────────────────
-async function calculate() {
-  const name     = document.getElementById('name').value.trim();
-  const place    = document.getElementById('place').value.trim();
-  const errBox   = document.getElementById('errorBox');
-  const result   = document.getElementById('result');
-  const btn      = document.getElementById('submitBtn');
+// ═══════════════════════════════════════════════════════════
+// TODAY'S NAKSHATRA CALCULATE
+// ═══════════════════════════════════════════════════════════
+function estimateNakshatraEnd(date,currentIdx){
+  const nakSize=360/27,currentLon=moonLongitude(date);
+  const nextBoundary=(currentIdx+1)*nakSize;
+  const remaining=((nextBoundary-currentLon)%nakSize+nakSize)%nakSize;
+  return new Date(date.getTime()+remaining/0.55*3600000);
+}
 
+async function calculate(){
+  const name=document.getElementById('name').value.trim();
+  const place=document.getElementById('place').value.trim();
+  const errBox=document.getElementById('errorBox');
+  const result=document.getElementById('result');
+  const btn=document.getElementById('submitBtn');
   errBox.className='error-box'; result.className='result';
 
-  if(!name)  return showError('Please enter your name.');
+  if(!name) return showError('Please enter your name.');
   if(!place) return showError('Please enter your current city or place.');
 
-  // Determine birth nakshatra index
-  let birthIdx = -1;
+  let birthIdx=-1;
   if(activeTab==='know'){
-    const v = document.getElementById('nakshatra').value;
+    const v=document.getElementById('nakshatra').value;
     if(v==='') return showError('Please select your birth nakshatra.');
-    birthIdx = parseInt(v);
+    birthIdx=parseInt(v);
   } else {
-    if(foundBirthIdx===-1) return showError('Please use "Find my birth nakshatra" above first.');
-    birthIdx = foundBirthIdx;
+    if(foundBirthIdx===-1) return showError('Please use "Calculate nakshatra & generate Kundli" above first.');
+    birthIdx=foundBirthIdx;
   }
 
   btn.textContent='Looking up location...'; btn.disabled=true;
 
-  try {
-    const geo = await geocode(place);
-
-    // Drikpanchang URL
+  try{
+    const geo=await geocode(place);
     let drikUrl='https://www.drikpanchang.com/panchang/day-panchang.html';
     try{
       const dr=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1&extratags=1`,{headers:{'Accept-Language':'en'}});
       const dd=await dr.json();
-      if(dd.length){
-        const tags=dd[0].extratags||{};
-        const gid=tags['geonames:ref']||tags['geonames_id']||tags['geonames:id'];
-        drikUrl=gid?`https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=${gid}`:`https://www.drikpanchang.com/location/panchang-city-finder.html`;
-      }
+      if(dd.length){const tags=dd[0].extratags||{};const gid=tags['geonames:ref']||tags['geonames_id']||tags['geonames:id'];
+        drikUrl=gid?`https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=${gid}`:`https://www.drikpanchang.com/location/panchang-city-finder.html`;}
     }catch(e){}
     document.getElementById('drikBtn').href=drikUrl;
 
-    const now = new Date();
-    const moonLon = moonLongitude(now);
-    const todayIdx = nakshatraFromLongitude(moonLon);
-    const endDate = estimateNakshatraEnd(now, todayIdx);
-    const endTimeStr = endDate.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-    const dateStr = now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    const tara = taras[((todayIdx-birthIdx+27)%27)%9];
+    const now=new Date();
+    const moonLon=moonLongitude(now);
+    const todayIdx=Math.floor(moonLon/(360/27));
+    const endDate=estimateNakshatraEnd(now,todayIdx);
+    const endTimeStr=endDate.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    const dateStr=now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const tara=taras[((todayIdx-birthIdx+27)%27)%9];
 
-    document.getElementById('res-name').textContent = name;
-    document.getElementById('res-place').textContent = geo.label;
-    document.getElementById('res-today-en').textContent = nakshatras[todayIdx].en;
-    document.getElementById('res-today-kn').textContent = nakshatras[todayIdx].kn;
-    document.getElementById('res-date').textContent = dateStr;
-    document.getElementById('res-ends').textContent = `Ends approx. ${endTimeStr}`;
-    document.getElementById('res-birth-en').textContent = nakshatras[birthIdx].en;
-    document.getElementById('res-birth-kn').textContent = nakshatras[birthIdx].kn;
-    document.getElementById('res-relation').textContent = tara.d;
+    document.getElementById('res-name').textContent=name;
+    document.getElementById('res-place').textContent=geo.label;
+    document.getElementById('res-today-en').textContent=nakshatras[todayIdx].en;
+    document.getElementById('res-today-kn').textContent=nakshatras[todayIdx].kn;
+    document.getElementById('res-date').textContent=dateStr;
+    document.getElementById('res-ends').textContent=`Ends approx. ${endTimeStr}`;
+    document.getElementById('res-birth-en').textContent=nakshatras[birthIdx].en;
+    document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
+    document.getElementById('res-relation').textContent=tara.d;
     document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
-
     result.classList.add('visible');
     result.scrollIntoView({behavior:'smooth',block:'nearest'});
 
-    addToHistory({
-      name, place:geo.label,
+    addToHistory({name,place:geo.label,
       birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,
       todayNak:`${nakshatras[todayIdx].en} (${nakshatras[todayIdx].kn})`,
-      taraName:tara.name, status:tara.s
-    });
+      taraName:tara.name,status:tara.s});
 
-  } catch(err){
-    showError(err.message||'Something went wrong. Please try again.');
-  } finally {
-    btn.textContent="Reveal Today's Nakshatra"; btn.disabled=false;
-  }
+  }catch(err){showError(err.message||'Something went wrong. Please try again.');}
+  finally{btn.textContent="Reveal Today's Nakshatra";btn.disabled=false;}
 }
 
-// ─── History ─────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════════════════════
 const historyLog=[];
 function addToHistory(entry){
   historyLog.push(entry);
   const tbody=document.getElementById('historyBody');
   const row=document.createElement('tr');
   const timeStr=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-  row.innerHTML=`
-    <td>${historyLog.length}</td>
-    <td>${entry.name}</td>
-    <td>${entry.place}</td>
-    <td>${entry.birthNak}</td>
-    <td>${entry.todayNak}</td>
-    <td>${entry.taraName}</td>
-    <td><span class="pill ${entry.status}">${entry.status.charAt(0).toUpperCase()+entry.status.slice(1)}</span></td>
-    <td>${timeStr}</td>`;
+  row.innerHTML=`<td>${historyLog.length}</td><td>${entry.name}</td><td>${entry.place}</td><td>${entry.birthNak}</td><td>${entry.todayNak}</td><td>${entry.taraName}</td><td><span class="pill ${entry.status}">${entry.status.charAt(0).toUpperCase()+entry.status.slice(1)}</span></td><td>${timeStr}</td>`;
   tbody.appendChild(row);
   document.getElementById('historySection').classList.add('visible');
 }
-
-function clearHistory(){
-  historyLog.length=0;
-  document.getElementById('historyBody').innerHTML='';
-  document.getElementById('historySection').classList.remove('visible');
-}
-
-function showError(msg){
-  const e=document.getElementById('errorBox');
-  e.textContent=msg; e.classList.add('visible');
-  document.getElementById('submitBtn').textContent="Reveal Today's Nakshatra";
-  document.getElementById('submitBtn').disabled=false;
-}
+function clearHistory(){historyLog.length=0;document.getElementById('historyBody').innerHTML='';document.getElementById('historySection').classList.remove('visible');}
+function showError(msg){const e=document.getElementById('errorBox');e.textContent=msg;e.classList.add('visible');document.getElementById('submitBtn').textContent="Reveal Today's Nakshatra";document.getElementById('submitBtn').disabled=false;}
 </script>
 </body>
 </html>
