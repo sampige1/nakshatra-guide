@@ -152,6 +152,8 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .pill.neutral{background:var(--neutral-bg);color:var(--neutral);}
 .pill.challenging{background:var(--challenging-bg);color:var(--challenging);}
 .footer{margin-top:3rem;text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;animation:fadeUp .8s ease .4s both;}
+.download-btn{margin-top:1.25rem;padding:0 1.75rem;height:44px;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:400;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.download-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}}
@@ -203,9 +205,18 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         </div>
         <button class="find-btn" onclick="findBirthNakshatra()">Calculate nakshatra & generate Kundli ✦</button>
         <div class="found-nak" id="foundNak">
-          <div class="found-nak-label">Your birth nakshatra</div>
-          <div class="found-nak-value" id="found-en"></div>
-          <div class="found-nak-kn" id="found-kn"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+            <div>
+              <div class="found-nak-label">ಜನ್ಮ ನಕ್ಷತ್ರ / Birth nakshatra</div>
+              <div class="found-nak-value" id="found-en"></div>
+              <div class="found-nak-kn" id="found-kn"></div>
+            </div>
+            <div>
+              <div class="found-nak-label">ಜನ್ಮ ರಾಶಿ / Birth rashi</div>
+              <div class="found-nak-value" id="found-rashi-en"></div>
+              <div class="found-nak-kn" id="found-rashi-kn"></div>
+            </div>
+          </div>
         </div>
         <div class="error-box" id="birthErrorBox"></div>
       </div>
@@ -245,9 +256,25 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 
   <!-- Kundli Section -->
   <div class="kundli-section" id="kundliSection">
-    <div class="section-title">✦ &nbsp; Janma Kundli &nbsp; ✦</div>
+    <div class="section-title">✦ &nbsp; Janma Kundli &nbsp; · &nbsp; ಜನ್ಮ ಕುಂಡಲಿ &nbsp; ✦</div>
     <div class="kundli-name" id="kundli-name"></div>
     <div class="kundli-sub" id="kundli-sub"></div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಜನ್ಮ ನಕ್ಷತ್ರ / Nakshatra</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-nak"></div>
+      </div>
+      <div style="color:var(--text-dim);font-size:1.2rem;align-self:center;">·</div>
+      <div style="text-align:center;">
+        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಜನ್ಮ ರಾಶಿ / Rashi</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-rashi"></div>
+      </div>
+      <div style="color:var(--text-dim);font-size:1.2rem;align-self:center;">·</div>
+      <div style="text-align:center;">
+        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಲಗ್ನ / Lagna</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-lagna"></div>
+      </div>
+    </div>
     <div class="si-chart" id="siChart"></div>
     <div class="planet-table-wrap">
       <table class="planet-table">
@@ -258,6 +285,8 @@ tbody td:first-child{color:var(--text);font-weight:400;}
   </div>
 
   <footer class="footer">Powered by Vedic Tara Bala · Lahiri Ayanamsha · ೨೭ ನಕ್ಷತ್ರಗಳು</footer>
+
+  <button class="download-btn" id="downloadBtn" onclick="downloadPage()" style="display:none;">⬇ Download this page</button>
 
   <div class="history" id="historySection">
     <div class="history-header">
@@ -553,21 +582,31 @@ async function findBirthNakshatra(){
     const birthLon=moonLongitude(birthUTC);
     foundBirthIdx=Math.floor(birthLon/(360/27));
     const nak=nakshatras[foundBirthIdx];
+    const birthRasiIdx=Math.floor(birthLon/30);
+
+    // Found nakshatra + rashi box
     document.getElementById('found-en').textContent=nak.en;
     document.getElementById('found-kn').textContent=nak.kn;
+    document.getElementById('found-rashi-en').textContent=RASIS[birthRasiIdx];
+    document.getElementById('found-rashi-kn').textContent=RASIS_KN[birthRasiIdx];
     foundBox.classList.add('visible');
 
     // Generate kundli
     const planets=planetaryLongitudes(birthUTC);
+    const lagnaRasiIdx=Math.floor(planets[0].lon/30);
     const name=document.getElementById('name').value.trim()||'Birth Chart';
     const dateDisplay=new Date(dateVal+'T'+timeVal).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
 
     document.getElementById('kundli-name').textContent=name;
     document.getElementById('kundli-sub').textContent=`${timeVal} · ${geo.label} · ${dateDisplay}`;
+    document.getElementById('kundli-nak').textContent=`${nak.kn} / ${nak.en}`;
+    document.getElementById('kundli-rashi').textContent=`${RASIS_KN[birthRasiIdx]} / ${RASIS[birthRasiIdx]}`;
+    document.getElementById('kundli-lagna').textContent=`${RASIS_KN[lagnaRasiIdx]} / ${RASIS[lagnaRasiIdx]}`;
     buildSIChart(planets);
     buildPlanetTable(planets);
     document.getElementById('kundliSection').classList.add('visible');
     document.getElementById('kundliSection').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('downloadBtn').style.display='inline-block';
 
   }catch(err){
     showBirthError(err.message||'Could not calculate. Please check your inputs.');
@@ -648,6 +687,7 @@ async function calculate(){
     document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
     result.classList.add('visible');
     result.scrollIntoView({behavior:'smooth',block:'nearest'});
+    document.getElementById('downloadBtn').style.display='inline-block';
 
     addToHistory({name,place:geo.label,
       birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,
@@ -672,6 +712,26 @@ function addToHistory(entry){
   document.getElementById('historySection').classList.add('visible');
 }
 function clearHistory(){historyLog.length=0;document.getElementById('historyBody').innerHTML='';document.getElementById('historySection').classList.remove('visible');}
+function downloadPage(){
+  const name = document.getElementById('name').value.trim() || 'kundli';
+  const safeName = name.replace(/[^a-z0-9]/gi,'_').toLowerCase();
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2,'0');
+  const month = now.toLocaleString('en-IN',{month:'short'});
+  const year = now.getFullYear();
+  const dateStr = `${day}${month}${year}`;
+  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = `${safeName}_${dateStr}_kundli.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function showError(msg){const e=document.getElementById('errorBox');e.textContent=msg;e.classList.add('visible');document.getElementById('submitBtn').textContent="Reveal Today's Nakshatra";document.getElementById('submitBtn').disabled=false;}
 </script>
 </body>
