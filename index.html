@@ -154,6 +154,27 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .footer{margin-top:3rem;text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;animation:fadeUp .8s ease .4s both;}
 .download-btn{margin-top:1.25rem;padding:0 1.75rem;height:44px;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:400;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
 .download-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
+.kalam-section{margin-top:1rem;background:var(--surface);border:.5px solid rgba(224,112,112,.2);border-radius:14px;padding:1rem 1.25rem;}
+.kalam-title{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--challenging);margin-bottom:.75rem;}
+.kalam-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.kalam-card{background:var(--deep3);border:.5px solid rgba(224,112,112,.15);border-radius:10px;padding:.75rem 1rem;text-align:center;}
+.kalam-icon{font-size:1.1rem;margin-bottom:.25rem;opacity:.7;}
+.kalam-label{font-size:.65rem;color:var(--text-dim);letter-spacing:.06em;margin-bottom:.3rem;}
+.kalam-time{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--challenging);}
+.kalam-note{font-size:.62rem;color:var(--text-dim);margin-top:.25rem;}
+.kalam-note-small{font-size:.65rem;color:var(--text-dim);margin-top:.6rem;text-align:center;}
+.date-checker-section{width:100%;max-width:520px;margin-top:2.5rem;animation:fadeUp .6s ease both;}
+.date-checker-card{background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:1.5rem 2rem;position:relative;overflow:hidden;}
+.date-checker-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
+.date-checker-intro{font-size:.82rem;color:var(--text-muted);margin-bottom:1.25rem;text-align:center;}
+.date-checker-row{display:flex;gap:.75rem;align-items:flex-end;}
+.check-date-btn{height:44px;padding:0 1.25rem;white-space:nowrap;background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;border:none;border-radius:10px;color:var(--deep);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.06em;cursor:pointer;transition:background-position .4s,transform .15s;}
+.check-date-btn:hover{background-position:100% 0;}
+.check-date-btn:active{transform:scale(.98);}
+.check-result{display:none;margin-top:1rem;}
+.check-result.visible{display:block;}
+.check-result-top{text-align:center;margin-bottom:.25rem;}
+.check-result-date{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}}
@@ -221,7 +242,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="error-box" id="birthErrorBox"></div>
       </div>
     </div>
-    <button class="btn" id="submitBtn" onclick="calculate()">Reveal Today's Nakshatra</button>
+    <button class="btn" id="submitBtn" onclick="calculate()">Is Today Auspicious for you?</button>
     <div class="error-box" id="errorBox"></div>
     <div class="result" id="result">
       <div class="result-top">
@@ -249,6 +270,27 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="relation-text" id="res-relation"></div>
         <div id="res-badge"></div>
       </div>
+
+      <!-- Rahu Kalam & Gulika Kalam -->
+      <div class="kalam-section">
+        <div class="kalam-title">ಇಂದಿನ ಅಶುಭ ಕಾಲ / Inauspicious timings today</div>
+        <div class="kalam-grid">
+          <div class="kalam-card">
+            <div class="kalam-icon">☽</div>
+            <div class="kalam-label">ರಾಹು ಕಾಲ / Rahu Kalam</div>
+            <div class="kalam-time" id="rahu-time">—</div>
+            <div class="kalam-note">Avoid new beginnings</div>
+          </div>
+          <div class="kalam-card">
+            <div class="kalam-icon">♄</div>
+            <div class="kalam-label">ಗುಳಿಕ ಕಾಲ / Gulika Kalam</div>
+            <div class="kalam-time" id="guli-time">—</div>
+            <div class="kalam-note">Avoid important work</div>
+          </div>
+        </div>
+        <div class="kalam-note-small" id="kalam-place-note"></div>
+      </div>
+
       <p class="source-note">Calculated using Lahiri ayanamsha · Same method as drikpanchang.com</p>
       <a class="verify-btn" id="drikBtn" href="https://www.drikpanchang.com/panchang/day-panchang.html" target="_blank">Verify on Drikpanchang ↗</a>
     </div>
@@ -281,6 +323,44 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <thead><tr><th>ಗ್ರಹ / Graha</th><th>ರಾಶಿ / Rasi</th><th>ಅಂಶ / Degrees</th><th>ನಕ್ಷತ್ರ / Nakshatra</th><th>ಪಾದ / Pada</th></tr></thead>
         <tbody id="planetTableBody"></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Date Auspiciousness Checker -->
+  <div class="date-checker-section" id="dateCheckerSection" style="display:none;">
+    <div class="section-title">✦ &nbsp; Check a Date &nbsp; · &nbsp; ದಿನ ಶುಭಾಶುಭ &nbsp; ✦</div>
+    <div class="date-checker-card">
+      <p class="date-checker-intro">Check if any date is auspicious for you based on Tara Bala</p>
+      <div class="date-checker-row">
+        <div class="form-group" style="margin-bottom:0;flex:1;">
+          <label>Date to check</label>
+          <input type="date" id="check-date" style="height:44px;font-size:.95rem;color-scheme:dark;"/>
+        </div>
+        <button class="check-date-btn" onclick="checkDate()">Check ↗</button>
+      </div>
+      <div class="error-box" id="checkDateError"></div>
+      <div class="check-result" id="checkResult">
+        <div class="check-result-top">
+          <div class="check-result-date" id="check-result-date"></div>
+        </div>
+        <div class="nak-grid" style="margin-top:.75rem;">
+          <div class="nak-card">
+            <div class="nak-card-label">Nakshatra on that day</div>
+            <div class="nak-card-en" id="check-nak-en"></div>
+            <div class="nak-card-kn" id="check-nak-kn"></div>
+          </div>
+          <div class="nak-card">
+            <div class="nak-card-label">Your birth star</div>
+            <div class="nak-card-en" id="check-birth-en"></div>
+            <div class="nak-card-kn" id="check-birth-kn"></div>
+          </div>
+        </div>
+        <div class="relation-box" style="margin-top:.75rem;">
+          <div class="relation-header">Tara Bala for that day</div>
+          <div class="relation-text" id="check-relation"></div>
+          <div id="check-badge"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -624,6 +704,67 @@ function showBirthError(msg){
 }
 
 // ═══════════════════════════════════════════════════════════
+// RAHU KALAM & GULIKA KALAM
+// Both are calculated from sunrise/sunset for the day.
+// Each day is split into 8 equal parts from sunrise to sunset.
+// Rahu Kalam and Gulika occupy one part each, varying by weekday.
+// ═══════════════════════════════════════════════════════════
+// Rahu Kalam slot index by weekday (Sun=0 … Sat=6)
+const RAHU_SLOTS  = [8,2,7,5,6,4,3]; // which 1/8th slot (1-based)
+const GULIKA_SLOTS= [6,5,4,3,2,1,7];
+
+function getSunriseSunset(lat, lon, date){
+  // Accurate sunrise/sunset using NOAA algorithm
+  const JD=date.getTime()/86400000+2440587.5;
+  const T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};
+  const r=Math.PI/180;
+  const L0=n(280.46646+36000.76983*T);
+  const M =n(357.52911+35999.05029*T);
+  const C =(1.914602-0.004817*T)*Math.sin(r*M)+(0.019993-0.000101*T)*Math.sin(r*2*M);
+  const sunLon=n(L0+C);
+  const e=23.4397-0.0000004*T;
+  const decl=Math.asin(Math.sin(r*e)*Math.sin(r*sunLon))/r;
+  const cosH=( Math.cos(r*90.833) - Math.sin(r*lat)*Math.sin(r*decl) ) / ( Math.cos(r*lat)*Math.cos(r*decl) );
+  if(cosH>1||cosH<-1) return null; // polar day/night
+  const H=Math.acos(cosH)/r;
+  // Solar noon in UTC hours
+  const GMST=n(280.46061837+360.98564736629*(JD-2451545))/15;
+  const solarNoon=12+(lon<0?Math.abs(lon):- lon)/15 - (C*4/60);
+  const sunriseUTC=solarNoon - H/15;
+  const sunsetUTC =solarNoon + H/15;
+  return {sunrise:sunriseUTC, sunset:sunsetUTC};
+}
+
+function formatHoursToTime(utcHours, tzOffsetHours){
+  const localH=(utcHours+tzOffsetHours+24)%24;
+  const h=Math.floor(localH);
+  const m=Math.round((localH-h)*60);
+  const hh=String(h%12||12).padStart(2,'0');
+  const mm=String(m).padStart(2,'0');
+  const ampm=h<12?'AM':'PM';
+  return `${hh}:${mm} ${ampm}`;
+}
+
+function computeKalamTimings(lat, lon, tzOffsetHours, date){
+  const ss=getSunriseSunset(lat,lon,date);
+  if(!ss) return null;
+  const {sunrise,sunset}=ss;
+  const dayLen=(sunset-sunrise)/8; // each slot in hours (UTC)
+  const dow=date.getDay(); // 0=Sun
+  const rahuSlot =RAHU_SLOTS[dow]-1;
+  const guliSlot =GULIKA_SLOTS[dow]-1;
+  const rahuStart =sunrise+rahuSlot*dayLen;
+  const rahuEnd   =rahuStart+dayLen;
+  const guliStart =sunrise+guliSlot*dayLen;
+  const guliEnd   =guliStart+dayLen;
+  return{
+    rahu:`${formatHoursToTime(rahuStart,tzOffsetHours)} – ${formatHoursToTime(rahuEnd,tzOffsetHours)}`,
+    guli:`${formatHoursToTime(guliStart,tzOffsetHours)} – ${formatHoursToTime(guliEnd,tzOffsetHours)}`
+  };
+}
+
+// ═══════════════════════════════════════════════════════════
 // TODAY'S NAKSHATRA CALCULATE
 // ═══════════════════════════════════════════════════════════
 function estimateNakshatraEnd(date,currentIdx){
@@ -685,9 +826,24 @@ async function calculate(){
     document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
     document.getElementById('res-relation').textContent=tara.d;
     document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+    // Rahu Kalam & Gulika Kalam
+    const tzOffsetHours = -now.getTimezoneOffset()/60;
+    const kalamGeo = geo; // use current place for timings
+    const kalams = computeKalamTimings(kalamGeo.lat, kalamGeo.lon, tzOffsetHours, now);
+    if(kalams){
+      document.getElementById('rahu-time').textContent = kalams.rahu;
+      document.getElementById('guli-time').textContent  = kalams.guli;
+      document.getElementById('kalam-place-note').textContent = `Timings for ${kalamGeo.label}`;
+    } else {
+      document.getElementById('rahu-time').textContent = 'N/A';
+      document.getElementById('guli-time').textContent  = 'N/A';
+    }
+
     result.classList.add('visible');
     result.scrollIntoView({behavior:'smooth',block:'nearest'});
     document.getElementById('downloadBtn').style.display='inline-block';
+    document.getElementById('dateCheckerSection').style.display='block';
 
     addToHistory({name,place:geo.label,
       birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,
@@ -695,7 +851,49 @@ async function calculate(){
       taraName:tara.name,status:tara.s});
 
   }catch(err){showError(err.message||'Something went wrong. Please try again.');}
-  finally{btn.textContent="Reveal Today's Nakshatra";btn.disabled=false;}
+  finally{btn.textContent='Is Today Auspicious for you?';btn.disabled=false;}
+}
+
+// ═══════════════════════════════════════════════════════════
+// DATE AUSPICIOUSNESS CHECKER
+// ═══════════════════════════════════════════════════════════
+function checkDate(){
+  const dateVal = document.getElementById('check-date').value;
+  const errBox  = document.getElementById('checkDateError');
+  const result  = document.getElementById('checkResult');
+  errBox.className='error-box'; result.className='check-result';
+
+  if(!dateVal) { errBox.textContent='Please select a date.'; errBox.classList.add('visible'); return; }
+
+  // Determine birth nakshatra index
+  let birthIdx=-1;
+  if(activeTab==='know'){
+    const v=document.getElementById('nakshatra').value;
+    if(v!=='') birthIdx=parseInt(v);
+  } else {
+    birthIdx=foundBirthIdx;
+  }
+  if(birthIdx===-1){ errBox.textContent='Please enter your birth details or select your birth nakshatra first.'; errBox.classList.add('visible'); return; }
+
+  // Calculate Moon's nakshatra at noon UTC on that date
+  const [y,m,d] = dateVal.split('-').map(Number);
+  const noonUTC = new Date(Date.UTC(y, m-1, d, 6, 0, 0)); // 6 AM UTC ≈ midday IST
+  const moonLon = moonLongitude(noonUTC);
+  const dayNakIdx = Math.floor(moonLon/(360/27));
+  const tara = taras[((dayNakIdx - birthIdx + 27) % 27) % 9];
+
+  const dateDisplay = new Date(dateVal+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  document.getElementById('check-result-date').textContent = dateDisplay;
+  document.getElementById('check-nak-en').textContent  = nakshatras[dayNakIdx].en;
+  document.getElementById('check-nak-kn').textContent  = nakshatras[dayNakIdx].kn;
+  document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
+  document.getElementById('check-birth-kn').textContent = nakshatras[birthIdx].kn;
+  document.getElementById('check-relation').textContent = tara.d;
+  document.getElementById('check-badge').innerHTML =
+    `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+  result.classList.add('visible');
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -732,7 +930,7 @@ function downloadPage(){
   URL.revokeObjectURL(url);
 }
 
-function showError(msg){const e=document.getElementById('errorBox');e.textContent=msg;e.classList.add('visible');document.getElementById('submitBtn').textContent="Reveal Today's Nakshatra";document.getElementById('submitBtn').disabled=false;}
+function showError(msg){const e=document.getElementById('errorBox');e.textContent=msg;e.classList.add('visible');document.getElementById('submitBtn').textContent='Is Today Auspicious for you?';document.getElementById('submitBtn').disabled=false;}
 </script>
 </body>
 </html>
