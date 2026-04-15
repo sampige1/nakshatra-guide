@@ -1079,11 +1079,34 @@ function getPanchangDetails(date){
   else if(tithiNum === 29){ tithiName_en='Amavasya'; tithiName_kn='ಅಮಾವಾಸ್ಯೆ'; }
   else { tithiName_en=TITHIS_EN[tithiIdx]; tithiName_kn=TITHIS_KN[tithiIdx]; }
 
-  // Masa: based on Sun's sidereal rasi at new moon
-  // Approximate: Sun's rasi at the time gives the masa
-  const sunRasi = Math.floor(sunLon / 30);
-  // Masa starts when Sun enters a rasi; Moon masa = Sun's rasi name (Amanta system)
-  const masaIdx = sunRasi % 12;
+  // Chandramana Masa (Amanta system):
+  // The lunar month is named after the Sun's rasi at the most recent Amavasya (new moon).
+  // Mesha(0)=Chaitra, Vrishabha(1)=Vaishakha, ... Meena(11)=Phalguna
+  // We find the most recent new moon by stepping back from the given date.
+  let masaIdx;
+  const elongation0 = ((moonLon - sunLon) + 360) % 360;
+  if(elongation0 < 1 || elongation0 > 359){
+    // We are AT the new moon — use current Sun rasi + 1
+    masaIdx = (Math.floor(sunLon / 30) + 1) % 12;
+  } else {
+    // Step back in 6-hour increments to find recent new moon (max 30 days)
+    let prevElong = elongation0;
+    let searchDate = new Date(date.getTime());
+    let foundMasaIdx = (Math.floor(sunLon / 30) + 1) % 12; // fallback
+    for(let i = 1; i <= 120; i++){
+      searchDate = new Date(searchDate.getTime() - 6*3600000);
+      const ml = moonLongitude(searchDate);
+      const sl = sunLongitude(searchDate);
+      const elong = ((ml - sl) + 360) % 360;
+      // New moon crossed: elongation jumped from near 0 to near 360 as we go back
+      if(elong > 350 && prevElong < 10){
+        foundMasaIdx = (Math.floor(sl / 30) + 1) % 12;
+        break;
+      }
+      prevElong = elong;
+    }
+    masaIdx = foundMasaIdx;
+  }
 
   // Vara (weekday)
   const vara_en = VARAS_EN[date.getDay()];
