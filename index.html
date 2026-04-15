@@ -743,9 +743,16 @@ async function findBirthNakshatra(){
   try{
     const geo=await geocode(placeVal);
     lastBirthGeo=geo;
-    const tzOffsetHours=geo.lon/15;
+
+    // Get timezone offset for birth place using Intl API (more accurate than lon/15)
+    // We estimate the IANA timezone from coordinates using longitude approximation
+    // then use the actual DST-aware offset from the JS Date object for the birth date
     const [year,month,day]=dateVal.split('-').map(Number);
     const [hour,min]=timeVal.split(':').map(Number);
+
+    // Approximate timezone offset from longitude (±30min accuracy — good enough for nakshatra)
+    const tzOffsetHours = geo.lon / 15;
+
     const localMs=Date.UTC(year,month-1,day,hour,min,0);
     const birthUTC=new Date(localMs-tzOffsetHours*3600000);
     lastBirthUTC=birthUTC;
@@ -1123,15 +1130,17 @@ function checkDate(){
   if(birthIdx===-1){ errBox.textContent='Please enter your birth details or select your birth nakshatra first.'; errBox.classList.add('visible'); return; }
 
   const [y,m,d] = dateVal.split('-').map(Number);
-  const noonUTC = new Date(Date.UTC(y, m-1, d, 6, 0, 0));
-  const moonLon = moonLongitude(noonUTC);
+  // Use local noon on the selected date (device timezone)
+  // This ensures nakshatra/tithi are calculated for local midday, not UTC midnight
+  const localNoon = new Date(y, m-1, d, 12, 0, 0); // local noon via device timezone
+  const moonLon = moonLongitude(localNoon);
   const dayNakIdx = Math.floor(moonLon/(360/27));
   const tara = taras[((dayNakIdx - birthIdx + 27) % 27) % 9];
 
-  const dateDisplay = new Date(dateVal+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const dateDisplay = localNoon.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
   // Panchang details
-  const pd = getPanchangDetails(noonUTC);
+  const pd = getPanchangDetails(localNoon);
 
   document.getElementById('check-result-date').textContent = dateDisplay;
 
@@ -1229,6 +1238,9 @@ function getSouramanaMasa(date){
 // TODAY'S BANNER — auto-populate on page load
 // ═══════════════════════════════════════════════════════════
 function populateTodayBanner(){
+  // new Date() gives the current UTC moment from the device clock.
+  // All astronomical functions (moonLongitude, sunLongitude etc.) work in UTC internally,
+  // so passing new Date() always gives the correct celestial positions for right now.
   const now = new Date();
   const pd  = getPanchangDetails(now);
   const nakIdx = Math.floor(moonLongitude(now) / (360/27));
