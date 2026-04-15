@@ -178,6 +178,9 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .check-result.visible{display:block;}
 .check-result-divider{font-size:.68rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin:.75rem 0 .5rem;border-top:.5px solid rgba(201,168,76,.15);padding-top:.75rem;}
 .check-result-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);text-align:center;margin-bottom:.5rem;}
+.result-section-header{background:var(--deep3);border:.5px solid rgba(201,168,76,.25);border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.result-section-label{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);white-space:nowrap;}
+.result-section-date{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);text-align:right;}
 .day-info-box{background:var(--deep3);border:.5px solid rgba(201,168,76,.15);border-radius:12px;padding:.85rem 1rem;margin-bottom:.75rem;}
 .day-info-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;}
 .day-info-item{text-align:center;}
@@ -335,8 +338,10 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 
     <!-- Check a Date result — outside result div so it shows independently -->
     <div class="check-result" id="checkResult">
-      <div class="check-result-divider">✦ &nbsp; Check a Date Result &nbsp; ✦</div>
-      <div class="check-result-date" id="check-result-date"></div>
+      <div class="result-section-header">
+        <div class="result-section-label">ದಿನ ಶುಭಾಶುಭ / Date Check</div>
+        <div class="result-section-date" id="check-result-date"></div>
+      </div>
       <div class="day-info-box" id="dayInfoBox">
         <div class="day-info-row">
           <div class="day-info-item">
@@ -394,6 +399,10 @@ tbody td:first-child{color:var(--text);font-weight:400;}
       </div>
     </div>
     <div class="result" id="result">
+      <div class="result-section-header">
+        <div class="result-section-label">ಇಂದಿನ ಶುಭಾಶುಭ / Today's Reading</div>
+        <div class="result-section-date" id="res-section-date"></div>
+      </div>
       <div class="result-top">
         <div class="result-greeting">Reading for</div>
         <div class="result-name" id="res-name"></div>
@@ -1002,6 +1011,7 @@ async function calculate(){
 
     document.getElementById('res-name').textContent=name;
     document.getElementById('res-place').textContent=geo.label;
+    document.getElementById('res-section-date').textContent=dateStr;
     document.getElementById('res-today-en').textContent=nakshatras[todayIdx].en;
     document.getElementById('res-today-kn').textContent=nakshatras[todayIdx].kn;
     document.getElementById('res-date').textContent=dateStr;
@@ -1311,6 +1321,7 @@ function checkDate(){
   applyInauspiciousWarning(nakshatras[dayNakIdx].en, 'check-inauspicious', 'check-inauspicious-title', 'check-inauspicious-text');
 
   result.classList.add('visible');
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 // ═══════════════════════════════════════════════════════════
