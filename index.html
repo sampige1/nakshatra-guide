@@ -163,21 +163,35 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .kalam-time{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--challenging);}
 .kalam-note{font-size:.62rem;color:var(--text-dim);margin-top:.25rem;}
 .kalam-note-small{font-size:.65rem;color:var(--text-dim);margin-top:.6rem;text-align:center;}
-.date-checker-section{width:100%;max-width:520px;margin-top:2.5rem;animation:fadeUp .6s ease both;}
-.date-checker-card{background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:1.5rem 2rem;position:relative;overflow:hidden;}
-.date-checker-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
-.date-checker-intro{font-size:.82rem;color:var(--text-muted);margin-bottom:1.25rem;text-align:center;}
-.date-checker-row{display:flex;gap:.75rem;align-items:flex-end;}
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem;}
+.btn-today{margin-top:0;}
+.btn-date{margin-top:0;background:var(--deep3);background-size:unset;border:.5px solid rgba(201,168,76,.3);color:var(--gold-dim);}
+.btn-date:hover{background:rgba(201,168,76,.08);color:var(--gold);}
+.btn-date.active{background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;color:var(--deep);border:none;}
+.inline-date-picker{display:none;margin-top:.75rem;animation:fadeUp .3s ease both;}
+.inline-date-picker.visible{display:block;}
+.date-picker-row{display:flex;gap:.75rem;align-items:center;}
 .check-date-btn{height:44px;padding:0 1.25rem;white-space:nowrap;background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;border:none;border-radius:10px;color:var(--deep);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.06em;cursor:pointer;transition:background-position .4s,transform .15s;}
 .check-date-btn:hover{background-position:100% 0;}
 .check-date-btn:active{transform:scale(.98);}
 .check-result{display:none;margin-top:1rem;}
 .check-result.visible{display:block;}
-.check-result-top{text-align:center;margin-bottom:.25rem;}
-.check-result-date{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);}
+.check-result-divider{font-size:.68rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin:.75rem 0 .5rem;border-top:.5px solid rgba(201,168,76,.15);padding-top:.75rem;}
+.check-result-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);text-align:center;margin-bottom:.5rem;}
+.day-info-box{background:var(--deep3);border:.5px solid rgba(201,168,76,.15);border-radius:12px;padding:.85rem 1rem;margin-bottom:.75rem;}
+.day-info-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;}
+.day-info-item{text-align:center;}
+.day-info-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.2rem;}
+.day-info-value{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);line-height:1.2;}
+.day-info-kn{font-size:.72rem;color:var(--text-muted);margin-top:.1rem;}
+.day-info-summary{font-size:.78rem;color:var(--gold-light);text-align:center;margin-top:.65rem;padding-top:.6rem;border-top:.5px solid rgba(201,168,76,.12);font-style:italic;line-height:1.5;}
+.festival-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.65rem;padding:.6rem .75rem;background:rgba(201,168,76,.08);border:.5px solid rgba(201,168,76,.25);border-radius:8px;}
+.festival-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
+.festival-content{font-size:.78rem;color:var(--gold-light);line-height:1.5;}
+.festival-name{font-weight:500;font-size:.85rem;color:var(--gold);}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}}
+@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}.day-info-row{grid-template-columns:repeat(2,1fr);}.action-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -242,8 +256,19 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="error-box" id="birthErrorBox"></div>
       </div>
     </div>
-    <button class="btn" id="submitBtn" onclick="calculate()">Is Today Auspicious for you?</button>
+    <div class="action-row">
+      <button class="btn btn-today" id="submitBtn" onclick="calculate()">Is Today Auspicious?</button>
+      <button class="btn btn-date" id="checkDateBtn" onclick="toggleDatePicker()">Check a Date</button>
+    </div>
+    <!-- Inline date picker (hidden until Check a Date clicked) -->
+    <div class="inline-date-picker" id="inlineDatePicker">
+      <div class="date-picker-row">
+        <input type="date" id="check-date" style="flex:1;height:44px;font-size:.9rem;color-scheme:dark;"/>
+        <button class="check-date-btn" onclick="checkDate()">Check ↗</button>
+      </div>
+    </div>
     <div class="error-box" id="errorBox"></div>
+    <div class="error-box" id="checkDateError"></div>
     <div class="result" id="result">
       <div class="result-top">
         <div class="result-greeting">Reading for</div>
@@ -293,6 +318,61 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 
       <p class="source-note">Calculated using Lahiri ayanamsha · Same method as drikpanchang.com</p>
       <a class="verify-btn" id="drikBtn" href="https://www.drikpanchang.com/panchang/day-panchang.html" target="_blank">Verify on Drikpanchang ↗</a>
+
+      <!-- Check a Date result — shown inline when user picks a date -->
+      <div class="check-result" id="checkResult">
+        <div class="check-result-divider">✦ &nbsp; Check a Date Result &nbsp; ✦</div>
+        <div class="check-result-date" id="check-result-date"></div>
+
+        <!-- Day details: Tithi, Masa, Vara, Paksha -->
+        <div class="day-info-box" id="dayInfoBox">
+          <div class="day-info-row">
+            <div class="day-info-item">
+              <div class="day-info-label">ತಿಥಿ / Tithi</div>
+              <div class="day-info-value" id="di-tithi"></div>
+              <div class="day-info-kn" id="di-tithi-kn"></div>
+            </div>
+            <div class="day-info-item">
+              <div class="day-info-label">ಪಕ್ಷ / Paksha</div>
+              <div class="day-info-value" id="di-paksha"></div>
+              <div class="day-info-kn" id="di-paksha-kn"></div>
+            </div>
+            <div class="day-info-item">
+              <div class="day-info-label">ಮಾಸ / Masa</div>
+              <div class="day-info-value" id="di-masa"></div>
+              <div class="day-info-kn" id="di-masa-kn"></div>
+            </div>
+            <div class="day-info-item">
+              <div class="day-info-label">ವಾರ / Vara</div>
+              <div class="day-info-value" id="di-vara"></div>
+              <div class="day-info-kn" id="di-vara-kn"></div>
+            </div>
+          </div>
+          <div class="day-info-summary" id="di-summary"></div>
+          <div class="festival-box" id="festivalBox" style="display:none;">
+            <div class="festival-icon">🪔</div>
+            <div class="festival-content" id="festivalContent"></div>
+          </div>
+        </div>
+
+        <div class="nak-grid" style="margin-top:.75rem;">
+          <div class="nak-card">
+            <div class="nak-card-label">Nakshatra on that day</div>
+            <div class="nak-card-en" id="check-nak-en"></div>
+            <div class="nak-card-kn" id="check-nak-kn"></div>
+          </div>
+          <div class="nak-card">
+            <div class="nak-card-label">Your birth star</div>
+            <div class="nak-card-en" id="check-birth-en"></div>
+            <div class="nak-card-kn" id="check-birth-kn"></div>
+          </div>
+        </div>
+        <div class="relation-box" style="margin-top:.75rem;">
+          <div class="relation-header">Tara Bala for that day</div>
+          <div class="relation-text" id="check-relation"></div>
+          <div id="check-badge"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -323,44 +403,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <thead><tr><th>ಗ್ರಹ / Graha</th><th>ರಾಶಿ / Rasi</th><th>ಅಂಶ / Degrees</th><th>ನಕ್ಷತ್ರ / Nakshatra</th><th>ಪಾದ / Pada</th></tr></thead>
         <tbody id="planetTableBody"></tbody>
       </table>
-    </div>
-  </div>
-
-  <!-- Date Auspiciousness Checker -->
-  <div class="date-checker-section" id="dateCheckerSection" style="display:none;">
-    <div class="section-title">✦ &nbsp; Check a Date &nbsp; · &nbsp; ದಿನ ಶುಭಾಶುಭ &nbsp; ✦</div>
-    <div class="date-checker-card">
-      <p class="date-checker-intro">Check if any date is auspicious for you based on Tara Bala</p>
-      <div class="date-checker-row">
-        <div class="form-group" style="margin-bottom:0;flex:1;">
-          <label>Date to check</label>
-          <input type="date" id="check-date" style="height:44px;font-size:.95rem;color-scheme:dark;"/>
-        </div>
-        <button class="check-date-btn" onclick="checkDate()">Check ↗</button>
-      </div>
-      <div class="error-box" id="checkDateError"></div>
-      <div class="check-result" id="checkResult">
-        <div class="check-result-top">
-          <div class="check-result-date" id="check-result-date"></div>
-        </div>
-        <div class="nak-grid" style="margin-top:.75rem;">
-          <div class="nak-card">
-            <div class="nak-card-label">Nakshatra on that day</div>
-            <div class="nak-card-en" id="check-nak-en"></div>
-            <div class="nak-card-kn" id="check-nak-kn"></div>
-          </div>
-          <div class="nak-card">
-            <div class="nak-card-label">Your birth star</div>
-            <div class="nak-card-en" id="check-birth-en"></div>
-            <div class="nak-card-kn" id="check-birth-kn"></div>
-          </div>
-        </div>
-        <div class="relation-box" style="margin-top:.75rem;">
-          <div class="relation-header">Tara Bala for that day</div>
-          <div class="relation-text" id="check-relation"></div>
-          <div id="check-badge"></div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -843,7 +885,6 @@ async function calculate(){
     result.classList.add('visible');
     result.scrollIntoView({behavior:'smooth',block:'nearest'});
     document.getElementById('downloadBtn').style.display='inline-block';
-    document.getElementById('dateCheckerSection').style.display='block';
 
     addToHistory({name,place:geo.label,
       birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,
@@ -855,8 +896,164 @@ async function calculate(){
 }
 
 // ═══════════════════════════════════════════════════════════
+// TITHI, MASA, PAKSHA, VARA CALCULATION
+// ═══════════════════════════════════════════════════════════
+const TITHIS_EN = [
+  "Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami",
+  "Shashthi","Saptami","Ashtami","Navami","Dashami",
+  "Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima/Amavasya"
+];
+const TITHIS_KN = [
+  "ಪ್ರತಿಪದ","ದ್ವಿತೀಯ","ತೃತೀಯ","ಚತುರ್ಥಿ","ಪಂಚಮಿ",
+  "ಷಷ್ಠಿ","ಸಪ್ತಮಿ","ಅಷ್ಟಮಿ","ನವಮಿ","ದಶಮಿ",
+  "ಏಕಾದಶಿ","ದ್ವಾದಶಿ","ತ್ರಯೋದಶಿ","ಚತುರ್ದಶಿ","ಪೂರ್ಣಿಮಾ/ಅಮಾವಾಸ್ಯೆ"
+];
+
+const MASAS_EN = [
+  "Chaitra","Vaishakha","Jyeshtha","Ashadha","Shravana","Bhadrapada",
+  "Ashwin","Kartika","Margashirsha","Pausha","Magha","Phalguna"
+];
+const MASAS_KN = [
+  "ಚೈತ್ರ","ವೈಶಾಖ","ಜ್ಯೇಷ್ಠ","ಆಷಾಢ","ಶ್ರಾವಣ","ಭಾದ್ರಪದ",
+  "ಆಶ್ವಿನ","ಕಾರ್ತಿಕ","ಮಾರ್ಗಶಿರ","ಪೌಷ","ಮಾಘ","ಫಾಲ್ಗುಣ"
+];
+
+const VARAS_EN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const VARAS_KN = ["ಭಾನುವಾರ","ಸೋಮವಾರ","ಮಂಗಳವಾರ","ಬುಧವಾರ","ಗುರುವಾರ","ಶುಕ್ರವಾರ","ಶನಿವಾರ"];
+
+// Special tithi names
+const SPECIAL_TITHIS = {
+  "Ekadashi": "Ekadashi — a sacred day for fasting and devotion to Vishnu",
+  "Purnima/Amavasya": null, // handled separately
+  "Chaturthi": "Chaturthi — auspicious for Ganesha worship",
+  "Ashtami": "Ashtami — significant for Durga and Shiva worship",
+  "Navami": "Navami — auspicious for Devi worship",
+  "Chaturdashi": "Chaturdashi — associated with Shiva and ancestral rites",
+  "Dwadashi": "Dwadashi — auspicious, follows Ekadashi fast-breaking"
+};
+
+// ═══════════════════════════════════════════════════════════
+// FESTIVAL LOOKUP
+// Each festival defined by: masa (0–11), paksha (S=Shukla, K=Krishna),
+// tithi (1–15, where 15 = Purnima for S or Amavasya for K),
+// and optionally nakshatra or vara. null = any.
+// ═══════════════════════════════════════════════════════════
+const FESTIVALS = [
+  // masa, paksha, tithi, nakshatra(en or null), vara(0-6 or null), name_en, name_kn, note
+  {masa:0, p:'S', t:1,  nak:null, vara:null, en:"Ugadi / Gudi Padwa",           kn:"ಯುಗಾದಿ",            note:"Telugu & Kannada New Year — marks the beginning of a new Samvatsara."},
+  {masa:0, p:'S', t:9,  nak:"Punarvasu", vara:null, en:"Rama Navami",            kn:"ರಾಮ ನವಮಿ",          note:"Birthday of Lord Rama — observed with fasting and Ramayana recitation."},
+  {masa:1, p:'S', t:3,  nak:null, vara:null, en:"Akshaya Tritiya",               kn:"ಅಕ್ಷಯ ತೃತೀಯ",       note:"The imperishable third — auspicious for new beginnings, gold purchases and charity."},
+  {masa:2, p:'S', t:11, nak:null, vara:null, en:"Nirjala Ekadashi",              kn:"ನಿರ್ಜಲ ಏಕಾದಶಿ",      note:"The strictest Ekadashi fast — observed without even water."},
+  {masa:3, p:'S', t:2,  nak:null, vara:null, en:"Ratha Yatra",                   kn:"ರಥ ಯಾತ್ರೆ",          note:"Chariot festival of Lord Jagannath — one of the largest Hindu processions."},
+  {masa:4, p:'S', t:5,  nak:null, vara:null, en:"Naga Panchami",                 kn:"ನಾಗ ಪಂಚಮಿ",         note:"Worship of serpent deities — milk offerings and prayers for protection."},
+  {masa:4, p:'S', t:15, nak:"Shravana", vara:null, en:"Shravana Purnima / Raksha Bandhan", kn:"ರಕ್ಷಾ ಬಂಧನ", note:"Festival of the sacred thread — sisters tie rakhi to brothers for protection."},
+  {masa:4, p:'K', t:8,  nak:"Rohini",   vara:null, en:"Krishna Janmashtami",     kn:"ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ",   note:"Birthday of Lord Krishna — celebrated with midnight worship, fasting and devotional singing."},
+  {masa:5, p:'S', t:4,  nak:null, vara:null, en:"Ganesh Chaturthi",              kn:"ಗಣೇಶ ಚತುರ್ಥಿ",      note:"Birth of Lord Ganesha — 10-day festival with clay idol installation and immersion."},
+  {masa:5, p:'K', t:8,  nak:null, vara:null, en:"Radha Ashtami",                 kn:"ರಾಧಾ ಅಷ್ಟಮಿ",        note:"Birthday of Radha — celebrated with devotional music and fasting."},
+  {masa:6, p:'S', t:1,  nak:null, vara:null, en:"Navratri begins",               kn:"ನವರಾತ್ರಿ ಆರಂಭ",      note:"Nine nights of Devi worship — each night dedicated to a form of Durga."},
+  {masa:6, p:'S', t:10, nak:null, vara:null, en:"Vijayadashami / Dasara",        kn:"ವಿಜಯದಶಮಿ / ದಸರಾ",   note:"Victory of good over evil — celebrates Rama's victory over Ravana and Durga over Mahishasura."},
+  {masa:6, p:'K', t:13, nak:null, vara:null, en:"Dhanteras",                     kn:"ಧನ್ತೇರಸ್",           note:"First day of Diwali — auspicious for purchasing gold, silver and new utensils."},
+  {masa:6, p:'K', t:14, nak:null, vara:null, en:"Naraka Chaturdashi / Choti Diwali", kn:"ನರಕ ಚತುರ್ದಶಿ",  note:"Celebrates Krishna's victory over Narakasura — early morning oil bath is traditional."},
+  {masa:6, p:'K', t:15, nak:null, vara:null, en:"Diwali / Deepavali",            kn:"ದೀಪಾವಳಿ",            note:"Festival of lights — Lakshmi puja, fireworks and exchange of sweets."},
+  {masa:6, p:'S', t:2,  nak:null, vara:null, en:"Bhai Dooj / Yama Dwitiya",      kn:"ಭಾಯಿ ದೂಜ್",          note:"Brothers and sisters celebrate their bond — sisters pray for brothers' long life."},
+  {masa:7, p:'S', t:6,  nak:null, vara:null, en:"Skanda Sashti",                 kn:"ಸ್ಕಂದ ಷಷ್ಠಿ",        note:"Six-day fast culminating in worship of Lord Murugan / Kartikeya."},
+  {masa:7, p:'S', t:12, nak:null, vara:null, en:"Tulasi Vivah",                  kn:"ತುಲಸಿ ವಿವಾಹ",        note:"Symbolic marriage of Tulasi plant to Lord Vishnu — marks the start of the wedding season."},
+  {masa:7, p:'S', t:15, nak:null, vara:null, en:"Kartika Purnima / Dev Diwali",  kn:"ಕಾರ್ತಿಕ ಪೂರ್ಣಿಮಾ",   note:"The most sacred Purnima — bathing in holy rivers is considered equivalent to all pilgrimages."},
+  {masa:8, p:'S', t:3,  nak:null, vara:null, en:"Vivah Panchami",                kn:"ವಿವಾಹ ಪಂಚಮಿ",        note:"Commemorates the wedding of Rama and Sita — auspicious for marriages."},
+  {masa:9, p:'S', t:1,  nak:null, vara:null, en:"Makar Sankranti",               kn:"ಮಕರ ಸಂಕ್ರಾಂತಿ",      note:"Sun's entry into Capricorn — harvest festival, kite flying, sesame sweets."},
+  {masa:10,p:'S', t:5,  nak:null, vara:null, en:"Vasant Panchami / Saraswati Puja", kn:"ವಸಂತ ಪಂಚಮಿ",      note:"Marks the onset of spring — worship of Goddess Saraswati, goddess of knowledge."},
+  {masa:10,p:'K', t:14, nak:"Shatabhisha", vara:null, en:"Maha Shivaratri",      kn:"ಮಹಾ ಶಿವರಾತ್ರಿ",      note:"The great night of Shiva — night-long vigil, fasting and Shiva puja with bael leaves."},
+  {masa:11,p:'S', t:1,  nak:null, vara:null, en:"Ugadi / Holi (Dhuleti)",        kn:"ಹೋಳಿ",               note:"Festival of colours — marks the end of winter and triumph of good over evil."},
+  {masa:11,p:'S', t:15, nak:null, vara:null, en:"Holi Purnima",                  kn:"ಹೋಳಿ ಹುಣ್ಣಿಮೆ",       note:"Full moon before Holi — Holika Dahan bonfire ritual performed this night."},
+  // Recurring weekly/nakshatra festivals
+  {masa:null,p:null,t:null,nak:null,vara:1,  en:"Soma Pradosh / Mondays",        kn:"ಸೋಮವಾರ",             note:"Mondays are especially sacred to Lord Shiva — fasting on this day is auspicious."},
+  {masa:null,p:null,t:null,nak:"Pushya",vara:null, en:"Pushya Nakshatra",        kn:"ಪುಷ್ಯ ನಕ್ಷತ್ರ",       note:"One of the most auspicious nakshatras — ideal for starting new ventures, education and purchases."},
+  {masa:null,p:null,t:null,nak:"Rohini",vara:null, en:"Rohini Nakshatra",        kn:"ರೋಹಿಣಿ ನಕ್ಷತ್ರ",      note:"Beloved nakshatra of the Moon — favourable for all auspicious activities."},
+];
+
+function getFestivals(masaIdx, paksha, tithiNum, nakEn, varaNum){
+  const p = paksha === 'Shukla' ? 'S' : 'K';
+  // tithi in 1-based for comparison
+  const t = (tithiNum % 15) + 1;
+  const found = [];
+  for(const f of FESTIVALS){
+    const masaMatch  = f.masa  === null || f.masa  === masaIdx;
+    const pakshaMatch= f.p     === null || f.p     === p;
+    const tithiMatch = f.t     === null || f.t     === t;
+    const nakMatch   = f.nak   === null || f.nak   === nakEn;
+    const varaMatch  = f.vara  === null || f.vara  === varaNum;
+    // For entries with nakshatra or vara, tithi/masa must also match or be null
+    if(masaMatch && pakshaMatch && tithiMatch && nakMatch && varaMatch){
+      // Skip generic weekly entries unless no festival-specific match
+      found.push(f);
+    }
+  }
+  // Prefer specific (masa+tithi) matches over generic (vara/nak only)
+  const specific = found.filter(f => f.masa !== null || f.t !== null);
+  return specific.length > 0 ? specific : found.filter(f => f.nak !== null || f.vara !== null);
+}
+
+function sunLongitude(date){
+  const JD=date.getTime()/86400000+2440587.5, T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};
+  const r=Math.PI/180;
+  const L0=n(280.46646+36000.76983*T);
+  const M=n(357.52911+35999.05029*T);
+  const C=(1.914602-0.004817*T)*Math.sin(r*M)+(0.019993-0.000101*T)*Math.sin(r*2*M);
+  const ayanamsha=23.85+(JD-2415020)/365.25*(50.3/3600);
+  return n(n(L0+C)-ayanamsha);
+}
+
+function getPanchangDetails(date){
+  const moonLon = moonLongitude(date);
+  const sunLon  = sunLongitude(date);
+
+  // Tithi: every 12° of Moon-Sun elongation = 1 tithi
+  const elongation = ((moonLon - sunLon) + 360) % 360;
+  const tithiNum   = Math.floor(elongation / 12); // 0–29
+  const paksha     = tithiNum < 15 ? 'Shukla' : 'Krishna';
+  const paksha_kn  = tithiNum < 15 ? 'ಶುಕ್ಲ ಪಕ್ಷ' : 'ಕೃಷ್ಣ ಪಕ್ಷ';
+  const tithiIdx   = tithiNum % 15;
+
+  // Special names for Purnima (15) and Amavasya (30/0)
+  let tithiName_en, tithiName_kn;
+  if(tithiNum === 14){ tithiName_en='Purnima'; tithiName_kn='ಪೂರ್ಣಿಮಾ'; }
+  else if(tithiNum === 29){ tithiName_en='Amavasya'; tithiName_kn='ಅಮಾವಾಸ್ಯೆ'; }
+  else { tithiName_en=TITHIS_EN[tithiIdx]; tithiName_kn=TITHIS_KN[tithiIdx]; }
+
+  // Masa: based on Sun's sidereal rasi at new moon
+  // Approximate: Sun's rasi at the time gives the masa
+  const sunRasi = Math.floor(sunLon / 30);
+  // Masa starts when Sun enters a rasi; Moon masa = Sun's rasi name (Amanta system)
+  const masaIdx = sunRasi % 12;
+
+  // Vara (weekday)
+  const vara_en = VARAS_EN[date.getDay()];
+  const vara_kn = VARAS_KN[date.getDay()];
+
+  // Build a human-readable summary line
+  let special = SPECIAL_TITHIS[tithiName_en] || null;
+  if(tithiName_en==='Purnima') special='Purnima — full moon, auspicious for all good deeds';
+  if(tithiName_en==='Amavasya') special='Amavasya — new moon, observe ancestral rites (Pitru Tarpana)';
+
+  const summary = `This is ${tithiName_en} of ${paksha} Paksha in ${MASAS_EN[masaIdx]} Masa (${MASAS_KN[masaIdx]} ಮಾಸ).`
+    + (special ? `\n${special}.` : '');
+
+  return { tithiName_en, tithiName_kn, paksha, paksha_kn, masaIdx, vara_en, vara_kn, summary, tithiNum, varaNum: date.getDay() };
+}
+
+// ═══════════════════════════════════════════════════════════
 // DATE AUSPICIOUSNESS CHECKER
 // ═══════════════════════════════════════════════════════════
+function toggleDatePicker(){
+  const picker = document.getElementById('inlineDatePicker');
+  const btn    = document.getElementById('checkDateBtn');
+  const isOpen = picker.classList.contains('visible');
+  picker.classList.toggle('visible', !isOpen);
+  btn.classList.toggle('active', !isOpen);
+  if(!isOpen) document.getElementById('check-date').focus();
+}
+
 function checkDate(){
   const dateVal = document.getElementById('check-date').value;
   const errBox  = document.getElementById('checkDateError');
@@ -865,7 +1062,6 @@ function checkDate(){
 
   if(!dateVal) { errBox.textContent='Please select a date.'; errBox.classList.add('visible'); return; }
 
-  // Determine birth nakshatra index
   let birthIdx=-1;
   if(activeTab==='know'){
     const v=document.getElementById('nakshatra').value;
@@ -875,16 +1071,46 @@ function checkDate(){
   }
   if(birthIdx===-1){ errBox.textContent='Please enter your birth details or select your birth nakshatra first.'; errBox.classList.add('visible'); return; }
 
-  // Calculate Moon's nakshatra at noon UTC on that date
   const [y,m,d] = dateVal.split('-').map(Number);
-  const noonUTC = new Date(Date.UTC(y, m-1, d, 6, 0, 0)); // 6 AM UTC ≈ midday IST
+  const noonUTC = new Date(Date.UTC(y, m-1, d, 6, 0, 0));
   const moonLon = moonLongitude(noonUTC);
   const dayNakIdx = Math.floor(moonLon/(360/27));
   const tara = taras[((dayNakIdx - birthIdx + 27) % 27) % 9];
 
   const dateDisplay = new Date(dateVal+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
+  // Panchang details
+  const pd = getPanchangDetails(noonUTC);
+
   document.getElementById('check-result-date').textContent = dateDisplay;
+
+  // Populate day-info
+  document.getElementById('di-tithi').textContent    = pd.tithiName_en;
+  document.getElementById('di-tithi-kn').textContent = pd.tithiName_kn;
+  document.getElementById('di-paksha').textContent   = pd.paksha;
+  document.getElementById('di-paksha-kn').textContent= pd.paksha_kn;
+  document.getElementById('di-masa').textContent     = MASAS_EN[pd.masaIdx];
+  document.getElementById('di-masa-kn').textContent  = MASAS_KN[pd.masaIdx];
+  document.getElementById('di-vara').textContent     = pd.vara_en;
+  document.getElementById('di-vara-kn').textContent  = pd.vara_kn;
+  document.getElementById('di-summary').textContent  = pd.summary;
+
+  // Festival lookup
+  const festivals = getFestivals(pd.masaIdx, pd.paksha, pd.tithiNum, nakshatras[dayNakIdx].en, pd.varaNum);
+  const festBox = document.getElementById('festivalBox');
+  const festContent = document.getElementById('festivalContent');
+  if(festivals.length > 0){
+    festContent.innerHTML = festivals.map(f =>
+      `<div style="margin-bottom:${festivals.length>1?'.5rem':'0'};">
+        <div class="festival-name">${f.en} &nbsp;<span style="font-size:.72rem;color:var(--gold-dim);">${f.kn}</span></div>
+        <div style="margin-top:.2rem;">${f.note}</div>
+      </div>`
+    ).join('');
+    festBox.style.display='flex';
+  } else {
+    festBox.style.display='none';
+  }
+
   document.getElementById('check-nak-en').textContent  = nakshatras[dayNakIdx].en;
   document.getElementById('check-nak-kn').textContent  = nakshatras[dayNakIdx].kn;
   document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
