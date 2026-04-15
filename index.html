@@ -189,6 +189,17 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .festival-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
 .festival-content{font-size:.78rem;color:var(--gold-light);line-height:1.5;}
 .festival-name{font-weight:500;font-size:.85rem;color:var(--gold);}
+.inauspicious-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:10px;}
+.inauspicious-box.strong{background:rgba(224,112,112,.08);border:.5px solid rgba(224,112,112,.3);}
+.inauspicious-box.mild{background:rgba(201,168,76,.06);border:.5px solid rgba(201,168,76,.2);}
+.inauspicious-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
+.inauspicious-box.strong .inauspicious-icon{color:var(--challenging);}
+.inauspicious-box.mild .inauspicious-icon{color:var(--gold-dim);}
+.inauspicious-content{flex:1;}
+.inauspicious-title{font-size:.78rem;font-weight:500;margin-bottom:.25rem;}
+.inauspicious-box.strong .inauspicious-title{color:var(--challenging);}
+.inauspicious-box.mild .inauspicious-title{color:var(--gold-dim);}
+.inauspicious-text{font-size:.74rem;color:var(--text-dim);line-height:1.6;}
 .today-banner{width:100%;max-width:520px;background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:16px;padding:1.1rem 1.5rem 1rem;margin-bottom:1.5rem;animation:fadeUp .6s ease .1s both;position:relative;overflow:hidden;}
 .today-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
 .today-banner-date{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:.75rem;}
@@ -372,6 +383,15 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="relation-text" id="check-relation"></div>
         <div id="check-badge"></div>
       </div>
+
+      <!-- Inauspicious nakshatra warning for check-date -->
+      <div class="inauspicious-box" id="check-inauspicious" style="display:none;">
+        <div class="inauspicious-icon" id="check-inauspicious-icon">⚠</div>
+        <div class="inauspicious-content">
+          <div class="inauspicious-title" id="check-inauspicious-title"></div>
+          <div class="inauspicious-text" id="check-inauspicious-text"></div>
+        </div>
+      </div>
     </div>
     <div class="result" id="result">
       <div class="result-top">
@@ -398,6 +418,15 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="relation-header">Relationship to your birth star</div>
         <div class="relation-text" id="res-relation"></div>
         <div id="res-badge"></div>
+      </div>
+
+      <!-- Inauspicious nakshatra warning -->
+      <div class="inauspicious-box" id="res-inauspicious" style="display:none;">
+        <div class="inauspicious-icon" id="res-inauspicious-icon">⚠</div>
+        <div class="inauspicious-content">
+          <div class="inauspicious-title" id="res-inauspicious-title"></div>
+          <div class="inauspicious-text" id="res-inauspicious-text"></div>
+        </div>
       </div>
 
       <!-- Rahu Kalam & Gulika Kalam -->
@@ -802,6 +831,63 @@ function showBirthError(msg){
 }
 
 // ═══════════════════════════════════════════════════════════
+// INAUSPICIOUS NAKSHATRA CHECK
+// Bharani and Krittika are Ugra (fierce) nakshatras —
+// considered inauspicious for new beginnings and ceremonies.
+// Ardra, Ashlesha, Jyeshtha, Mula are also Ugra/Tikshna
+// but to a lesser degree — shown with a subdued note.
+// ═══════════════════════════════════════════════════════════
+const INAUSPICIOUS_NAKSHATRAS = {
+  "Bharani": {
+    level: "strong",
+    title: "Bharani — ಭರಣಿ · Inauspicious Nakshatra",
+    text: "Bharani is an Ugra (fierce) nakshatra ruled by Yama, the lord of death. This day is considered inauspicious for starting new ventures, marriages, travel, ceremonies or auspicious events. Suitable for tasks requiring courage, confrontation, or completion of difficult work."
+  },
+  "Krittika": {
+    level: "strong",
+    title: "Krittika — ಕೃತ್ತಿಕಾ · Inauspicious Nakshatra",
+    text: "Krittika is an Ugra-Misra (fierce-mixed) nakshatra associated with fire and sharp energy. It is generally avoided for auspicious ceremonies, new beginnings, and weddings. Activities involving fire rituals, purification, or cutting are acceptable."
+  },
+  "Ardra": {
+    level: "mild",
+    title: "Ardra — ಆರ್ದ್ರಾ · Use with caution",
+    text: "Ardra is a Tikshna (sharp/dreadful) nakshatra ruled by Rahu. It carries intense, turbulent energy. Generally avoided for auspicious events and new beginnings, though it is useful for activities involving research, destruction of obstacles, or bold action."
+  },
+  "Ashlesha": {
+    level: "mild",
+    title: "Ashlesha — ಆಶ್ಲೇಷಾ · Use with caution",
+    text: "Ashlesha is a Tikshna nakshatra ruled by Mercury with serpentine energy. It is typically avoided for auspicious activities, travel, or new endeavors. However it can be good for activities involving secrecy, research, or dealing with hidden matters."
+  },
+  "Jyeshtha": {
+    level: "mild",
+    title: "Jyeshtha — ಜ್ಯೇಷ್ಠಾ · Use with caution",
+    text: "Jyeshtha is a Tikshna nakshatra ruled by Mercury, associated with authority and power but also pride and conflict. Exercise caution for new ventures and ceremonies. Suitable for asserting authority or handling competitive situations."
+  },
+  "Mula": {
+    level: "mild",
+    title: "Mula — ಮೂಲ · Use with caution",
+    text: "Mula is a Tikshna (sharp) nakshatra ruled by Ketu, associated with roots and destruction before renewal. Often avoided for marriages, new ventures, and auspicious events — particularly the first three days. Good for research, introspection, and breaking old patterns."
+  }
+};
+
+function applyInauspiciousWarning(nakEn, boxId, titleId, textId){
+  const box = document.getElementById(boxId);
+  const info = INAUSPICIOUS_NAKSHATRAS[nakEn];
+  if(info){
+    document.getElementById(titleId).textContent = info.title;
+    document.getElementById(textId).textContent  = info.text;
+    box.style.display = 'flex';
+    // Strong = red warning, mild = amber subdued note
+    box.className = info.level === 'strong' ? 'inauspicious-box strong' : 'inauspicious-box mild';
+    // Set icon — ⚠ for strong, ℹ for mild
+    const iconEl = box.querySelector('.inauspicious-icon');
+    if(iconEl) iconEl.textContent = info.level === 'strong' ? '⚠' : 'ℹ';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
 // RAHU KALAM & GULIKA KALAM
 // Both are calculated from sunrise/sunset for the day.
 // Each day is split into 8 equal parts from sunrise to sunset.
@@ -924,6 +1010,9 @@ async function calculate(){
     document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
     document.getElementById('res-relation').textContent=tara.d;
     document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+    // Inauspicious nakshatra check
+    applyInauspiciousWarning(nakshatras[todayIdx].en, 'res-inauspicious', 'res-inauspicious-title', 'res-inauspicious-text');
 
     // Rahu Kalam & Gulika Kalam
     const tzOffsetHours = -now.getTimezoneOffset()/60;
@@ -1201,6 +1290,9 @@ function checkDate(){
   document.getElementById('check-relation').textContent = tara.d;
   document.getElementById('check-badge').innerHTML =
     `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+  // Inauspicious nakshatra check
+  applyInauspiciousWarning(nakshatras[dayNakIdx].en, 'check-inauspicious', 'check-inauspicious-title', 'check-inauspicious-text');
 
   result.classList.add('visible');
 }
