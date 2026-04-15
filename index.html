@@ -1008,8 +1008,16 @@ async function calculate(){
     document.getElementById('res-ends').textContent=`Ends approx. ${endTimeStr}`;
     document.getElementById('res-birth-en').textContent=nakshatras[birthIdx].en;
     document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
-    document.getElementById('res-relation').textContent=tara.d;
-    document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+    // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
+    const nakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[todayIdx].en];
+    if(nakInfo && nakInfo.level === 'strong'){
+      document.getElementById('res-relation').textContent = 'This day falls on ' + nakshatras[todayIdx].en + ', an Ugra (fierce) nakshatra. Regardless of your Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
+      document.getElementById('res-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
+    } else {
+      document.getElementById('res-relation').textContent=tara.d;
+      document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+    }
 
     // Inauspicious nakshatra check
     applyInauspiciousWarning(nakshatras[todayIdx].en, 'res-inauspicious', 'res-inauspicious-title', 'res-inauspicious-text');
@@ -1287,9 +1295,17 @@ function checkDate(){
   document.getElementById('check-nak-kn').textContent  = nakshatras[dayNakIdx].kn;
   document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
   document.getElementById('check-birth-kn').textContent = nakshatras[birthIdx].kn;
-  document.getElementById('check-relation').textContent = tara.d;
-  document.getElementById('check-badge').innerHTML =
-    `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+
+  // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
+  const checkNakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[dayNakIdx].en];
+  if(checkNakInfo && checkNakInfo.level === 'strong'){
+    document.getElementById('check-relation').textContent = 'This date falls on ' + nakshatras[dayNakIdx].en + ', an Ugra (fierce) nakshatra. Regardless of Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
+    document.getElementById('check-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
+  } else {
+    document.getElementById('check-relation').textContent = tara.d;
+    document.getElementById('check-badge').innerHTML =
+      `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+  }
 
   // Inauspicious nakshatra check
   applyInauspiciousWarning(nakshatras[dayNakIdx].en, 'check-inauspicious', 'check-inauspicious-title', 'check-inauspicious-text');
