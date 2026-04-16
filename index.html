@@ -367,6 +367,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <input type="date" id="tithi-finder-date" style="flex:1;height:44px;font-size:.9rem;color-scheme:dark;"/>
         <button class="check-date-btn" onclick="findTithi()">Find ↗</button>
       </div>
+      <div style="font-size:.65rem;color:var(--text-dim);margin-top:.4rem;">Enter date in YYYY-MM-DD format (e.g. 2026-10-05 for 5 Oct 2026)</div>
     </div>
 
     <!-- Tithi Finder result — inline inside card -->
@@ -1479,22 +1480,26 @@ function findTithi(){
 }
 
 // Search every day of a given Gregorian year for matching Tithi+Masa+Paksha
-// excludeDate: skip the input date itself (to avoid returning the same date for current year)
 function searchTithiInYear(targetTithiNum, targetMasaIdx, targetPaksha, year, excludeDate){
-  const start = new Date(year, 0, 1, 12, 0, 0);  // Jan 1
-  const end   = new Date(year, 11, 31, 12, 0, 0); // Dec 31
-  for(let d = new Date(start); d <= end; d.setDate(d.getDate()+1)){
-    // Skip the exact input date
-    if(excludeDate &&
-       d.getFullYear()===excludeDate.getFullYear() &&
-       d.getMonth()===excludeDate.getMonth() &&
-       d.getDate()===excludeDate.getDate()) continue;
+  // Iterate using a day counter to avoid Date mutation bugs
+  const msPerDay = 86400000;
+  const yearStart = new Date(year, 0, 1, 12, 0, 0).getTime();
+  const yearEnd   = new Date(year, 11, 31, 12, 0, 0).getTime();
 
-    const pd = getPanchangDetails(new Date(d));
+  for(let ms = yearStart; ms <= yearEnd; ms += msPerDay){
+    const candidate = new Date(ms);
+
+    // Skip the exact input date if provided
+    if(excludeDate &&
+       candidate.getFullYear() === excludeDate.getFullYear() &&
+       candidate.getMonth()    === excludeDate.getMonth()    &&
+       candidate.getDate()     === excludeDate.getDate()) continue;
+
+    const pd = getPanchangDetails(candidate);
     if(pd.tithiNum === targetTithiNum &&
        pd.masaIdx  === targetMasaIdx  &&
        pd.paksha   === targetPaksha){
-      return new Date(d);
+      return candidate;
     }
   }
   return null;
