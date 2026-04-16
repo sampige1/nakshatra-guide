@@ -1438,12 +1438,13 @@ function findTithi(){
       <div class="tf-panchang-kn">${MASAS_KN[pd.masaIdx]}</div>
     </div>`;
 
-  // Search for same Tithi+Masa+Paksha in current year and previous year
-  const currentYear = new Date().getFullYear();
-  const prevYear    = currentYear - 1;
+  // Search for same Tithi+Masa+Paksha in previous year and next year relative to input date
+  const inputYear = y;
+  const prevYear  = inputYear - 1;
+  const nextYear  = inputYear + 1;
 
-  const thisYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, currentYear, inputDate);
-  const lastYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, prevYear,    null);
+  const lastYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, prevYear, null);
+  const nextYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, nextYear, null);
 
   // Display previous year result
   document.getElementById('tf-prev-label').textContent = prevYear + ' occurrence';
@@ -1459,17 +1460,17 @@ function findTithi(){
     document.getElementById('tf-prev-sub').textContent = 'May fall in Adhika (leap) lunar month';
   }
 
-  // Display current year result
-  document.getElementById('tf-next-label').textContent = currentYear + ' occurrence';
+  // Display next year result
+  document.getElementById('tf-next-label').textContent = nextYear + ' occurrence';
 
-  if(thisYearMatch){
-    const tpd = getPanchangDetails(thisYearMatch);
+  if(nextYearMatch){
+    const tpd = getPanchangDetails(nextYearMatch);
     document.getElementById('tf-next-date').textContent =
-      thisYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
+      nextYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
     document.getElementById('tf-next-sub').textContent =
       `${tpd.tithiName_en} · ${tpd.paksha} Paksha · ${MASAS_EN[tpd.masaIdx]} Masa`;
   } else {
-    document.getElementById('tf-next-date').textContent = 'Not found in ' + currentYear;
+    document.getElementById('tf-next-date').textContent = 'Not found in ' + nextYear;
     document.getElementById('tf-next-sub').textContent = 'May fall in Adhika (leap) lunar month';
   }
 
