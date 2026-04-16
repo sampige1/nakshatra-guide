@@ -378,12 +378,12 @@ tbody td:first-child{color:var(--text);font-weight:400;}
       <div class="tf-panchang-row" id="tf-panchang"></div>
       <div class="tf-occ-grid">
         <div class="tf-occurrence-card tf-prev">
-          <div class="tf-occ-label">⟵ Previous occurrence</div>
+          <div class="tf-occ-label" id="tf-prev-label">Previous year</div>
           <div class="tf-occ-date" id="tf-prev-date"></div>
           <div class="tf-occ-sub" id="tf-prev-sub"></div>
         </div>
         <div class="tf-occurrence-card tf-next">
-          <div class="tf-occ-label">Next occurrence ⟶</div>
+          <div class="tf-occ-label" id="tf-next-label">This year</div>
           <div class="tf-occ-date" id="tf-next-date"></div>
           <div class="tf-occ-sub" id="tf-next-sub"></div>
         </div>
@@ -1438,60 +1438,63 @@ function findTithi(){
       <div class="tf-panchang-kn">${MASAS_KN[pd.masaIdx]}</div>
     </div>`;
 
-  // Search for previous occurrence (go back ~340–390 days)
-  const prevMatch = searchTithiMatch(inputDate, pd.tithiNum, pd.masaIdx, pd.paksha, 'prev');
-  // Search for next occurrence (go forward ~340–390 days)
-  const nextMatch = searchTithiMatch(inputDate, pd.tithiNum, pd.masaIdx, pd.paksha, 'next');
+  // Search for same Tithi+Masa+Paksha in current year and previous year
+  const currentYear = new Date().getFullYear();
+  const prevYear    = currentYear - 1;
 
-  // Display previous
-  if(prevMatch){
-    const prevPd = getPanchangDetails(prevMatch);
+  const thisYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, currentYear, inputDate);
+  const lastYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, prevYear,    null);
+
+  // Display previous year result
+  document.getElementById('tf-prev-label').textContent = prevYear + ' occurrence';
+
+  if(lastYearMatch){
+    const lpd = getPanchangDetails(lastYearMatch);
     document.getElementById('tf-prev-date').textContent =
-      prevMatch.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+      lastYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
     document.getElementById('tf-prev-sub').textContent =
-      `${prevPd.tithiName_en} · ${prevPd.paksha} · ${MASAS_EN[prevPd.masaIdx]}`;
+      `${lpd.tithiName_en} · ${lpd.paksha} Paksha · ${MASAS_EN[lpd.masaIdx]} Masa`;
   } else {
-    document.getElementById('tf-prev-date').textContent = 'Not found';
-    document.getElementById('tf-prev-sub').textContent = 'Could not find within ±2 years';
+    document.getElementById('tf-prev-date').textContent = 'Not found in ' + prevYear;
+    document.getElementById('tf-prev-sub').textContent = 'May fall in Adhika (leap) lunar month';
   }
 
-  // Display next
-  if(nextMatch){
-    const nextPd = getPanchangDetails(nextMatch);
+  // Display current year result
+  document.getElementById('tf-next-label').textContent = currentYear + ' occurrence';
+
+  if(thisYearMatch){
+    const tpd = getPanchangDetails(thisYearMatch);
     document.getElementById('tf-next-date').textContent =
-      nextMatch.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+      thisYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
     document.getElementById('tf-next-sub').textContent =
-      `${nextPd.tithiName_en} · ${nextPd.paksha} · ${MASAS_EN[nextPd.masaIdx]}`;
+      `${tpd.tithiName_en} · ${tpd.paksha} Paksha · ${MASAS_EN[tpd.masaIdx]} Masa`;
   } else {
-    document.getElementById('tf-next-date').textContent = 'Not found';
-    document.getElementById('tf-next-sub').textContent = 'Could not find within ±2 years';
+    document.getElementById('tf-next-date').textContent = 'Not found in ' + currentYear;
+    document.getElementById('tf-next-sub').textContent = 'May fall in Adhika (leap) lunar month';
   }
 
   result.classList.add('visible');
   result.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
-// Search for matching Tithi+Masa+Paksha in given direction from inputDate
-// Strategy: start ~330 days away and scan ±30 days around that point
-function searchTithiMatch(inputDate, targetTithiNum, targetMasaIdx, targetPaksha, direction){
-  const sign = direction === 'next' ? 1 : -1;
+// Search every day of a given Gregorian year for matching Tithi+Masa+Paksha
+// excludeDate: skip the input date itself (to avoid returning the same date for current year)
+function searchTithiInYear(targetTithiNum, targetMasaIdx, targetPaksha, year, excludeDate){
+  const start = new Date(year, 0, 1, 12, 0, 0);  // Jan 1
+  const end   = new Date(year, 11, 31, 12, 0, 0); // Dec 31
+  for(let d = new Date(start); d <= end; d.setDate(d.getDate()+1)){
+    // Skip the exact input date
+    if(excludeDate &&
+       d.getFullYear()===excludeDate.getFullYear() &&
+       d.getMonth()===excludeDate.getMonth() &&
+       d.getDate()===excludeDate.getDate()) continue;
 
-  // A lunar year is ~354 days, search from 330 to 400 days away
-  for(let offset = 330; offset <= 420; offset++){
-    const candidate = new Date(inputDate.getTime() + sign * offset * 86400000);
-    const pd = getPanchangDetails(candidate);
-    const tithiMatch  = pd.tithiNum === targetTithiNum;
-    const masaMatch   = pd.masaIdx  === targetMasaIdx;
-    const pakshaMatch = pd.paksha   === targetPaksha;
-    if(tithiMatch && masaMatch && pakshaMatch) return candidate;
-  }
-
-  // Wider search if not found (intercalary months / adhika masa)
-  for(let offset = 420; offset <= 750; offset++){
-    const candidate = new Date(inputDate.getTime() + sign * offset * 86400000);
-    const pd = getPanchangDetails(candidate);
-    if(pd.tithiNum === targetTithiNum && pd.masaIdx === targetMasaIdx && pd.paksha === targetPaksha)
-      return candidate;
+    const pd = getPanchangDetails(new Date(d));
+    if(pd.tithiNum === targetTithiNum &&
+       pd.masaIdx  === targetMasaIdx  &&
+       pd.paksha   === targetPaksha){
+      return new Date(d);
+    }
   }
   return null;
 }
