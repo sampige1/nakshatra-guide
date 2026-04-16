@@ -154,6 +154,27 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .footer{margin-top:3rem;text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;animation:fadeUp .8s ease .4s both;}
 .download-btn{margin-top:1.25rem;padding:0 1.75rem;height:44px;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:400;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
 .download-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
+.tithi-finder-section{width:100%;max-width:520px;margin-top:2.5rem;animation:fadeUp .6s ease both;}
+.tithi-finder-card{background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:1.75rem 2rem;position:relative;overflow:hidden;}
+.tithi-finder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
+.tithi-finder-intro{font-size:.8rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6;}
+.tithi-finder-result{display:none;margin-top:1.25rem;}
+.tithi-finder-result.visible{display:block;}
+.tf-section-header{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);text-align:center;margin-bottom:.75rem;}
+.tf-panchang-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1rem;}
+.tf-panchang-item{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:10px;padding:.65rem .75rem;text-align:center;}
+.tf-panchang-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.3rem;}
+.tf-panchang-val{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);line-height:1.2;}
+.tf-panchang-kn{font-size:.72rem;color:var(--text-muted);margin-top:.1rem;}
+.tf-occ-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.tf-occurrence-card{border-radius:12px;padding:.9rem 1rem;text-align:center;}
+.tf-prev{background:rgba(154,143,168,.08);border:.5px solid rgba(154,143,168,.2);}
+.tf-next{background:rgba(76,175,125,.08);border:.5px solid rgba(76,175,125,.2);}
+.tf-occ-label{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem;}
+.tf-prev .tf-occ-label{color:var(--text-dim);}
+.tf-next .tf-occ-label{color:var(--favorable);}
+.tf-occ-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);line-height:1.3;margin-bottom:.25rem;}
+.tf-occ-sub{font-size:.7rem;color:var(--text-dim);}
 .kalam-section{margin-top:1rem;background:var(--surface);border:.5px solid rgba(224,112,112,.2);border-radius:14px;padding:1rem 1.25rem;}
 .kalam-title{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--challenging);margin-bottom:.75rem;}
 .kalam-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
@@ -168,6 +189,9 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .btn-date{margin-top:0;background:var(--deep3);background-size:unset;border:.5px solid rgba(201,168,76,.3);color:var(--gold-dim);}
 .btn-date:hover{background:rgba(201,168,76,.08);color:var(--gold);}
 .btn-date.active{background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;color:var(--deep);border:none;}
+.btn-tithi{background:var(--deep3);border:.5px solid rgba(201,168,76,.3);color:var(--gold-dim);font-size:.8rem;letter-spacing:.05em;}
+.btn-tithi:hover{background:rgba(201,168,76,.08);color:var(--gold);}
+.btn-tithi.active{background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;color:var(--deep);border:none;}
 .inline-date-picker{display:none;margin-top:.75rem;animation:fadeUp .3s ease both;}
 .inline-date-picker.visible{display:block;}
 .date-picker-row{display:flex;gap:.75rem;align-items:center;}
@@ -216,7 +240,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .today-banner-festival-icon{font-size:.9rem;flex-shrink:0;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}.day-info-row{grid-template-columns:repeat(2,1fr);}.action-row{grid-template-columns:1fr;}.today-banner-grid{grid-template-columns:repeat(3,1fr) !important;}.today-banner-item{border-right:none;border-bottom:.5px solid rgba(201,168,76,.1);}}
+@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}.day-info-row{grid-template-columns:repeat(2,1fr);}.action-row{grid-template-columns:1fr;}.today-banner-grid{grid-template-columns:repeat(3,1fr) !important;}.today-banner-item{border-right:none;border-bottom:.5px solid rgba(201,168,76,.1);}.tf-occ-grid{grid-template-columns:1fr;}.tf-panchang-row{grid-template-columns:1fr 1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -326,6 +350,9 @@ tbody td:first-child{color:var(--text);font-weight:400;}
       <button class="btn btn-today" id="submitBtn" onclick="calculate()">Is Today Auspicious?</button>
       <button class="btn btn-date" id="checkDateBtn" onclick="toggleDatePicker()">Check a Date</button>
     </div>
+    <!-- Tithi Finder button — full width below -->
+    <button class="btn btn-tithi" id="tithiBtnInline" onclick="toggleTithiFinder()" style="width:100%;margin-top:.6rem;">ತಿಥಿ ಹುಡುಕಾಟ / Tithi Finder</button>
+
     <!-- Inline date picker (hidden until Check a Date clicked) -->
     <div class="inline-date-picker" id="inlineDatePicker">
       <div class="date-picker-row">
@@ -333,6 +360,38 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <button class="check-date-btn" onclick="checkDate()">Check ↗</button>
       </div>
     </div>
+
+    <!-- Inline Tithi Finder panel -->
+    <div class="inline-date-picker" id="inlineTithiFinder">
+      <div class="date-picker-row">
+        <input type="date" id="tithi-finder-date" style="flex:1;height:44px;font-size:.9rem;color-scheme:dark;"/>
+        <button class="check-date-btn" onclick="findTithi()">Find ↗</button>
+      </div>
+    </div>
+
+    <!-- Tithi Finder result — inline inside card -->
+    <div class="tithi-finder-result" id="tithiFinderResult">
+      <div class="result-section-header">
+        <div class="result-section-label">ತಿಥಿ ಹುಡುಕಾಟ / Tithi Finder</div>
+        <div class="result-section-date" id="tf-input-header"></div>
+      </div>
+      <div class="tf-panchang-row" id="tf-panchang"></div>
+      <div class="tf-occ-grid">
+        <div class="tf-occurrence-card tf-prev">
+          <div class="tf-occ-label">⟵ Previous occurrence</div>
+          <div class="tf-occ-date" id="tf-prev-date"></div>
+          <div class="tf-occ-sub" id="tf-prev-sub"></div>
+        </div>
+        <div class="tf-occurrence-card tf-next">
+          <div class="tf-occ-label">Next occurrence ⟶</div>
+          <div class="tf-occ-date" id="tf-next-date"></div>
+          <div class="tf-occ-sub" id="tf-next-sub"></div>
+        </div>
+      </div>
+      <p class="source-note" style="margin-top:.75rem;">Same Tithi + Masa + Paksha · Lahiri ayanamsha</p>
+    </div>
+
+    <div class="error-box" id="tithiFinderError"></div>
     <div class="error-box" id="errorBox"></div>
     <div class="error-box" id="checkDateError"></div>
 
@@ -1233,10 +1292,25 @@ function getPanchangDetails(date){
 // ═══════════════════════════════════════════════════════════
 // DATE AUSPICIOUSNESS CHECKER
 // ═══════════════════════════════════════════════════════════
+function toggleTithiFinder(){
+  const panel = document.getElementById('inlineTithiFinder');
+  const btn   = document.getElementById('tithiBtnInline');
+  const isOpen = panel.classList.contains('visible');
+  // Close date picker if open
+  document.getElementById('inlineDatePicker').classList.remove('visible');
+  document.getElementById('checkDateBtn').classList.remove('active');
+  panel.classList.toggle('visible', !isOpen);
+  btn.classList.toggle('active', !isOpen);
+  if(!isOpen) document.getElementById('tithi-finder-date').focus();
+}
+
 function toggleDatePicker(){
   const picker = document.getElementById('inlineDatePicker');
   const btn    = document.getElementById('checkDateBtn');
   const isOpen = picker.classList.contains('visible');
+  // Close tithi finder if open
+  document.getElementById('inlineTithiFinder').classList.remove('visible');
+  document.getElementById('tithiBtnInline').classList.remove('active');
   picker.classList.toggle('visible', !isOpen);
   btn.classList.toggle('active', !isOpen);
   if(!isOpen) document.getElementById('check-date').focus();
@@ -1322,6 +1396,104 @@ function checkDate(){
 
   result.classList.add('visible');
   result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ═══════════════════════════════════════════════════════════
+// TITHI FINDER
+// ═══════════════════════════════════════════════════════════
+function findTithi(){
+  const dateVal = document.getElementById('tithi-finder-date').value;
+  const errBox  = document.getElementById('tithiFinderError');
+  const result  = document.getElementById('tithiFinderResult');
+  errBox.className='error-box';
+  result.className='tithi-finder-result';
+
+  if(!dateVal){ errBox.textContent='Please select a date.'; errBox.classList.add('visible'); return; }
+
+  const [y,m,d] = dateVal.split('-').map(Number);
+  const inputDate = new Date(y, m-1, d, 12, 0, 0);
+
+  // Get panchang for input date
+  const pd = getPanchangDetails(inputDate);
+
+  // Display input date details
+  const dateDisplay = inputDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('tf-input-header').textContent = dateDisplay;
+
+  // Build panchang row
+  document.getElementById('tf-panchang').innerHTML = `
+    <div class="tf-panchang-item">
+      <div class="tf-panchang-label">ತಿಥಿ / Tithi</div>
+      <div class="tf-panchang-val">${pd.tithiName_en}</div>
+      <div class="tf-panchang-kn">${pd.tithiName_kn}</div>
+    </div>
+    <div class="tf-panchang-item">
+      <div class="tf-panchang-label">ಪಕ್ಷ / Paksha</div>
+      <div class="tf-panchang-val">${pd.paksha}</div>
+      <div class="tf-panchang-kn">${pd.paksha_kn}</div>
+    </div>
+    <div class="tf-panchang-item">
+      <div class="tf-panchang-label">ಮಾಸ / Masa</div>
+      <div class="tf-panchang-val">${MASAS_EN[pd.masaIdx]}</div>
+      <div class="tf-panchang-kn">${MASAS_KN[pd.masaIdx]}</div>
+    </div>`;
+
+  // Search for previous occurrence (go back ~340–390 days)
+  const prevMatch = searchTithiMatch(inputDate, pd.tithiNum, pd.masaIdx, pd.paksha, 'prev');
+  // Search for next occurrence (go forward ~340–390 days)
+  const nextMatch = searchTithiMatch(inputDate, pd.tithiNum, pd.masaIdx, pd.paksha, 'next');
+
+  // Display previous
+  if(prevMatch){
+    const prevPd = getPanchangDetails(prevMatch);
+    document.getElementById('tf-prev-date').textContent =
+      prevMatch.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+    document.getElementById('tf-prev-sub').textContent =
+      `${prevPd.tithiName_en} · ${prevPd.paksha} · ${MASAS_EN[prevPd.masaIdx]}`;
+  } else {
+    document.getElementById('tf-prev-date').textContent = 'Not found';
+    document.getElementById('tf-prev-sub').textContent = 'Could not find within ±2 years';
+  }
+
+  // Display next
+  if(nextMatch){
+    const nextPd = getPanchangDetails(nextMatch);
+    document.getElementById('tf-next-date').textContent =
+      nextMatch.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+    document.getElementById('tf-next-sub').textContent =
+      `${nextPd.tithiName_en} · ${nextPd.paksha} · ${MASAS_EN[nextPd.masaIdx]}`;
+  } else {
+    document.getElementById('tf-next-date').textContent = 'Not found';
+    document.getElementById('tf-next-sub').textContent = 'Could not find within ±2 years';
+  }
+
+  result.classList.add('visible');
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// Search for matching Tithi+Masa+Paksha in given direction from inputDate
+// Strategy: start ~330 days away and scan ±30 days around that point
+function searchTithiMatch(inputDate, targetTithiNum, targetMasaIdx, targetPaksha, direction){
+  const sign = direction === 'next' ? 1 : -1;
+
+  // A lunar year is ~354 days, search from 330 to 400 days away
+  for(let offset = 330; offset <= 420; offset++){
+    const candidate = new Date(inputDate.getTime() + sign * offset * 86400000);
+    const pd = getPanchangDetails(candidate);
+    const tithiMatch  = pd.tithiNum === targetTithiNum;
+    const masaMatch   = pd.masaIdx  === targetMasaIdx;
+    const pakshaMatch = pd.paksha   === targetPaksha;
+    if(tithiMatch && masaMatch && pakshaMatch) return candidate;
+  }
+
+  // Wider search if not found (intercalary months / adhika masa)
+  for(let offset = 420; offset <= 750; offset++){
+    const candidate = new Date(inputDate.getTime() + sign * offset * 86400000);
+    const pd = getPanchangDetails(candidate);
+    if(pd.tithiNum === targetTithiNum && pd.masaIdx === targetMasaIdx && pd.paksha === targetPaksha)
+      return candidate;
+  }
+  return null;
 }
 
 // ═══════════════════════════════════════════════════════════
