@@ -216,6 +216,11 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .festival-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
 .festival-content{font-size:.78rem;color:var(--gold-light);line-height:1.5;}
 .festival-name{font-weight:500;font-size:.85rem;color:var(--gold);}
+.amrit-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;padding:.75rem 1rem;background:rgba(76,175,125,.08);border:.5px solid rgba(76,175,125,.3);border-radius:10px;}
+.amrit-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
+.amrit-content{flex:1;}
+.amrit-title{font-size:.8rem;font-weight:500;color:#2E9B57;margin-bottom:.25rem;}
+.amrit-text{font-size:.76rem;color:var(--text-muted);line-height:1.6;}
 .inauspicious-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:10px;}
 .inauspicious-box.strong{background:rgba(224,112,112,.08);border:.5px solid rgba(224,112,112,.3);}
 .inauspicious-box.mild{background:rgba(201,168,76,.06);border:.5px solid rgba(201,168,76,.2);}
@@ -238,6 +243,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
 .today-banner-kn{font-size:.68rem;color:var(--text-muted);margin-top:.15rem;}
 .today-banner-festival{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;padding-top:.6rem;border-top:.5px solid rgba(201,168,76,.12);font-size:.75rem;color:var(--gold-light);}
 .today-banner-festival-icon{font-size:.9rem;flex-shrink:0;}
+.today-banner-divider{height:.5px;background:rgba(201,168,76,.15);margin:.6rem 0 .25rem;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}.day-info-row{grid-template-columns:repeat(2,1fr);}.action-row{grid-template-columns:1fr;}.today-banner-grid{grid-template-columns:repeat(3,1fr) !important;}.today-banner-item{border-right:none;border-bottom:.5px solid rgba(201,168,76,.1);}.tf-occ-grid{grid-template-columns:1fr;}.tf-panchang-row{grid-template-columns:1fr 1fr 1fr;}}
@@ -256,22 +262,27 @@ tbody td:first-child{color:var(--text);font-weight:400;}
   <!-- Today's panchang banner — auto-populated on load -->
   <div class="today-banner" id="todayBanner">
     <div class="today-banner-date" id="tb-date"></div>
-    <div class="today-banner-grid" style="grid-template-columns:repeat(6,1fr);">
+    <!-- Row 1: Samvatsara, Ayana, Ruthu -->
+    <div class="today-banner-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="today-banner-item">
-        <div class="today-banner-label">ನಕ್ಷತ್ರ / Nakshatra</div>
-        <div class="today-banner-en" id="tb-nak-en"></div>
-        <div class="today-banner-kn" id="tb-nak-kn"></div>
+        <div class="today-banner-label">ಸಂವತ್ಸರ / Samvatsara</div>
+        <div class="today-banner-en" id="tb-samvatsara-en"></div>
+        <div class="today-banner-kn" id="tb-samvatsara-kn"></div>
       </div>
       <div class="today-banner-item">
-        <div class="today-banner-label">ತಿಥಿ / Tithi</div>
-        <div class="today-banner-en" id="tb-tithi-en"></div>
-        <div class="today-banner-kn" id="tb-tithi-kn"></div>
+        <div class="today-banner-label">ಅಯನ / Ayana</div>
+        <div class="today-banner-en" id="tb-ayana-en"></div>
+        <div class="today-banner-kn" id="tb-ayana-kn"></div>
       </div>
       <div class="today-banner-item">
-        <div class="today-banner-label">ಪಕ್ಷ / Paksha</div>
-        <div class="today-banner-en" id="tb-paksha"></div>
-        <div class="today-banner-kn" id="tb-paksha-kn"></div>
+        <div class="today-banner-label">ಋತು / Ruthu</div>
+        <div class="today-banner-en" id="tb-ruthu-en"></div>
+        <div class="today-banner-kn" id="tb-ruthu-kn"></div>
       </div>
+    </div>
+    <div class="today-banner-divider"></div>
+    <!-- Row 2: Chandramana, Souramana, Paksha, Tithi, Vara, Nakshatra -->
+    <div class="today-banner-grid" style="grid-template-columns:repeat(6,1fr);margin-top:.5rem;">
       <div class="today-banner-item">
         <div class="today-banner-label">ಚಾಂದ್ರಮಾನ ಮಾಸ</div>
         <div class="today-banner-en" id="tb-masa-en"></div>
@@ -283,14 +294,33 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="today-banner-kn" id="tb-souramana-kn"></div>
       </div>
       <div class="today-banner-item">
+        <div class="today-banner-label">ಪಕ್ಷ / Paksha</div>
+        <div class="today-banner-en" id="tb-paksha"></div>
+        <div class="today-banner-kn" id="tb-paksha-kn"></div>
+      </div>
+      <div class="today-banner-item">
+        <div class="today-banner-label">ತಿಥಿ / Tithi</div>
+        <div class="today-banner-en" id="tb-tithi-en"></div>
+        <div class="today-banner-kn" id="tb-tithi-kn"></div>
+      </div>
+      <div class="today-banner-item">
         <div class="today-banner-label">ವಾರ / Vara</div>
         <div class="today-banner-en" id="tb-vara-en"></div>
         <div class="today-banner-kn" id="tb-vara-kn"></div>
+      </div>
+      <div class="today-banner-item">
+        <div class="today-banner-label">ನಕ್ಷತ್ರ / Nakshatra</div>
+        <div class="today-banner-en" id="tb-nak-en"></div>
+        <div class="today-banner-kn" id="tb-nak-kn"></div>
       </div>
     </div>
     <div class="today-banner-festival" id="tb-festival" style="display:none;">
       <span class="today-banner-festival-icon">🪔</span>
       <span id="tb-festival-text"></span>
+    </div>
+    <div class="today-banner-festival" id="tb-amrit-banner" style="display:none;background:rgba(76,175,125,.06);border-top:.5px solid rgba(76,175,125,.2);">
+      <span class="today-banner-festival-icon">🪷</span>
+      <span id="tb-amrit-banner-text" style="color:#2E9B57;"></span>
     </div>
   </div>
 
@@ -457,6 +487,15 @@ tbody td:first-child{color:var(--text);font-weight:400;}
           <div class="inauspicious-text" id="check-inauspicious-text"></div>
         </div>
       </div>
+
+      <!-- Amrit Siddhi Yoga -->
+      <div class="amrit-box" id="check-amrit" style="display:none;">
+        <div class="amrit-icon">🪷</div>
+        <div class="amrit-content">
+          <div class="amrit-title">ಅಮೃತ ಸಿದ್ಧಿ ಯೋಗ / Amrit Siddhi Yoga</div>
+          <div class="amrit-text" id="check-amrit-text"></div>
+        </div>
+      </div>
     </div>
     <div class="result" id="result">
       <div class="result-section-header">
@@ -495,6 +534,15 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="inauspicious-content">
           <div class="inauspicious-title" id="res-inauspicious-title"></div>
           <div class="inauspicious-text" id="res-inauspicious-text"></div>
+        </div>
+      </div>
+
+      <!-- Amrit Siddhi Yoga -->
+      <div class="amrit-box" id="res-amrit" style="display:none;">
+        <div class="amrit-icon">🪷</div>
+        <div class="amrit-content">
+          <div class="amrit-title">ಅಮೃತ ಸಿದ್ಧಿ ಯೋಗ / Amrit Siddhi Yoga</div>
+          <div class="amrit-text" id="res-amrit-text"></div>
         </div>
       </div>
 
@@ -900,6 +948,40 @@ function showBirthError(msg){
 }
 
 // ═══════════════════════════════════════════════════════════
+// AMRIT SIDDHI YOGA
+// Formed when a specific weekday coincides with a specific nakshatra
+// vara: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+// ═══════════════════════════════════════════════════════════
+const AMRIT_SIDDHI_COMBOS = {
+  0: { nak:'Hasta',      vara:'Sunday',    note:'Sunday + Hasta — excellent for new ventures, investments, health-related activities and buying property.' },
+  1: { nak:'Mrigashira', vara:'Monday',    note:'Monday + Mrigashira — highly auspicious for starting new work, travel, education and buying vehicles.' },
+  2: { nak:'Ashwini',    vara:'Tuesday',   note:'Tuesday + Ashwini — powerful for health, medicine, new beginnings and courage-based endeavours.' },
+  3: { nak:'Anuradha',   vara:'Wednesday', note:'Wednesday + Anuradha — ideal for business partnerships, commerce, signing agreements and investments.' },
+  4: { nak:'Pushya',     vara:'Thursday',  note:'Thursday + Pushya (Guru Pushya Yoga) — the most auspicious of all Amrit Siddhi combinations. Exceptional for buying gold, property, starting businesses and long-term investments.' },
+  5: { nak:'Revati',     vara:'Friday',    note:'Friday + Revati — very favourable for buying jewellery, luxury items, starting creative work and spiritual practices.' },
+  6: { nak:'Rohini',     vara:'Saturday',  note:'Saturday + Rohini — auspicious for agriculture, land purchases, long-term growth investments and laying foundations.' }
+};
+
+function checkAmritSiddhi(varaNum, nakEn){
+  const combo = AMRIT_SIDDHI_COMBOS[varaNum];
+  if(combo && combo.nak === nakEn) return combo;
+  return null;
+}
+
+function applyAmritSiddhi(varaNum, nakEn, boxId, textId){
+  const box   = document.getElementById(boxId);
+  const textEl= document.getElementById(textId);
+  const yoga  = checkAmritSiddhi(varaNum, nakEn);
+  if(yoga){
+    const isGuru = varaNum === 4;
+    textEl.textContent = yoga.note + (isGuru ? '' : ' Works best for long-term investments and growth. Note: some astrologers advise against marriages during this yoga.');
+    box.style.display = 'flex';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
 // INAUSPICIOUS NAKSHATRA CHECK
 // Bharani and Krittika are Ugra (fierce) nakshatras —
 // considered inauspicious for new beginnings and ceremonies.
@@ -1091,6 +1173,9 @@ async function calculate(){
 
     // Inauspicious nakshatra check
     applyInauspiciousWarning(nakshatras[todayIdx].en, 'res-inauspicious', 'res-inauspicious-title', 'res-inauspicious-text');
+
+    // Amrit Siddhi Yoga check
+    applyAmritSiddhi(now.getDay(), nakshatras[todayIdx].en, 'res-amrit', 'res-amrit-text');
 
     // Rahu Kalam & Gulika Kalam
     const tzOffsetHours = -now.getTimezoneOffset()/60;
@@ -1395,6 +1480,9 @@ function checkDate(){
   // Inauspicious nakshatra check
   applyInauspiciousWarning(nakshatras[dayNakIdx].en, 'check-inauspicious', 'check-inauspicious-title', 'check-inauspicious-text');
 
+  // Amrit Siddhi Yoga check
+  applyAmritSiddhi(localNoon.getDay(), nakshatras[dayNakIdx].en, 'check-amrit', 'check-amrit-text');
+
   result.classList.add('visible');
   result.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
@@ -1551,10 +1639,104 @@ const SOURAMANA_KN = [
 ];
 
 function getSouramanaMasa(date){
-  // Sun's sidereal rasi directly gives the Souramana Masa
   const sunLon = sunLongitude(date);
   const rasaIdx = Math.floor(sunLon / 30);
   return { en: SOURAMANA_EN[rasaIdx], kn: SOURAMANA_KN[rasaIdx] };
+}
+
+// ─── Samvatsara (60-year Jupiter cycle) ──────────────────────────────────────
+// Each Samvatsara lasts ~1 Jupiter year (~361 days sidereal)
+// Cycle starts from Prabhava. Reference: Prabhava started ~1987 CE
+// Vishwavasu = year 2025-2026 (Ugadi Mar 19 2026 to next Ugadi)
+const SAMVATSARA_EN = [
+  "Prabhava","Vibhava","Shukla","Pramoda","Prajapati",
+  "Angirasa","Shrimukha","Bhava","Yuva","Dhatru",
+  "Ishvara","Bahudhanya","Pramathi","Vikrama","Vrisha",
+  "Chitrabhanu","Subhanu","Tarana","Parthiva","Vyaya",
+  "Sarvajit","Sarvadharin","Virodhi","Vikruti","Khara",
+  "Nandana","Vijaya","Jaya","Manmatha","Durmukhi",
+  "Hevilambi","Vilambi","Vikari","Sharvari","Plava",
+  "Shubhakrut","Shobhana","Krodhi","Vishvavasu","Parabhava",
+  "Plavanga","Kilaka","Saumya","Sadharana","Virodhakrut",
+  "Paridhavi","Pramadi","Ananda","Rakshasa","Nala",
+  "Pingala","Kalayukti","Siddharthi","Raudra","Durmati",
+  "Dundubhi","Rudhirodgari","Raktakshi","Krodhana","Akshaya"
+];
+const SAMVATSARA_KN = [
+  "ಪ್ರಭವ","ವಿಭವ","ಶುಕ್ಲ","ಪ್ರಮೋದ","ಪ್ರಜಾಪತಿ",
+  "ಅಂಗಿರಸ","ಶ್ರೀಮುಖ","ಭವ","ಯುವ","ಧಾತ್ರು",
+  "ಈಶ್ವರ","ಬಹುಧಾನ್ಯ","ಪ್ರಮಾಥಿ","ವಿಕ್ರಮ","ವೃಷ",
+  "ಚಿತ್ರಭಾನು","ಸುಭಾನು","ತಾರಣ","ಪಾರ್ಥಿವ","ವ್ಯಯ",
+  "ಸರ್ವಜಿತ್","ಸರ್ವಧಾರಿ","ವಿರೋಧಿ","ವಿಕೃತಿ","ಖರ",
+  "ನಂದನ","ವಿಜಯ","ಜಯ","ಮನ್ಮಥ","ದುರ್ಮುಖಿ",
+  "ಹೇವಿಳಂಬಿ","ವಿಳಂಬಿ","ವಿಕಾರಿ","ಶಾರ್ವರಿ","ಪ್ಲವ",
+  "ಶುಭಕೃತ್","ಶೋಭನ","ಕ್ರೋಧಿ","ವಿಶ್ವಾವಸು","ಪರಾಭವ",
+  "ಪ್ಲವಂಗ","ಕೀಲಕ","ಸೌಮ್ಯ","ಸಾಧಾರಣ","ವಿರೋಧಕೃತ್",
+  "ಪರಿಧಾವಿ","ಪ್ರಮಾದಿ","ಆನಂದ","ರಾಕ್ಷಸ","ನಳ",
+  "ಪಿಂಗಳ","ಕಾಲಯುಕ್ತಿ","ಸಿದ್ಧಾರ್ಥಿ","ರೌದ್ರ","ದುರ್ಮತಿ",
+  "ದುಂದುಭಿ","ರುಧಿರೋದ್ಗಾರಿ","ರಕ್ತಾಕ್ಷಿ","ಕ್ರೋಧನ","ಅಕ್ಷಯ"
+];
+
+// Reference: Vishwavasu (39th) started at Ugadi 2025 (Mar 30 2025)
+// Parabhava (40th) started at Ugadi 2026 (Mar 19 2026)
+function getSamvatsara(date){
+  // Samvatsara changes at Ugadi (Chaitra Shukla Pratipada) each year
+  // Use Chandramana new year: find which Ugadi has most recently passed
+  // Simple approach: map Gregorian year to Samvatsara
+  // 2025 CE = Vishwavasu (index 38, 0-based), 2026 = Parabhava (index 39)
+  // Ugadi 2026 was Mar 19 2026 — before that date still Vishwavasu
+  const ugadi2026 = new Date(2026, 2, 19, 6, 0, 0); // Mar 19 2026
+  const ugadi2025 = new Date(2025, 2, 30, 6, 0, 0); // Mar 30 2025
+  const ugadi2027 = new Date(2027, 3, 7,  6, 0, 0); // Apr 7 2027 (approx)
+
+  let idx;
+  if(date >= ugadi2027)      idx = 40; // Plavanga
+  else if(date >= ugadi2026) idx = 39; // Parabhava
+  else if(date >= ugadi2025) idx = 38; // Vishwavasu
+  else {
+    // Approximate for other years: each year advances by 1
+    const yearsSince2026 = date.getFullYear() - 2026;
+    idx = ((39 + yearsSince2026) % 60 + 60) % 60;
+  }
+  idx = idx % 60;
+  return { en: SAMVATSARA_EN[idx], kn: SAMVATSARA_KN[idx] };
+}
+
+// ─── Ayana (Uttarayana / Dakshinayana) ───────────────────────────────────────
+// Uttarayana: Sun in Makara through Mithuna (sidereal lon 270–90°, i.e. Capricorn–Gemini)
+// Dakshinayana: Sun in Karka through Dhanu (sidereal lon 90–270°, i.e. Cancer–Sagittarius)
+function getAyana(date){
+  const sunLon = sunLongitude(date);
+  // Uttarayana: Makara Sankranti (~Jan 14) to Karka Sankranti (~Jul 16)
+  // Sidereal: Makara=270°, Mithuna ends at 90° → Uttarayana when lon 270–360 or 0–90
+  if(sunLon >= 270 || sunLon < 90){
+    return { en:'Uttarayana', kn:'ಉತ್ತರಾಯಣ' };
+  } else {
+    return { en:'Dakshinayana', kn:'ದಕ್ಷಿಣಾಯಣ' };
+  }
+}
+
+// ─── Ruthu (Season) — 6 seasons of 2 months each ─────────────────────────────
+// Based on Souramana (solar) masa:
+// Vasanta (Spring):   Mesha + Vrishabha (0,1)
+// Grishma (Summer):   Mithuna + Karka   (2,3)
+// Varsha (Monsoon):   Simha + Kanya     (4,5)
+// Sharad (Autumn):    Tula + Vrischika  (6,7)
+// Hemanta (Pre-winter):Dhanu + Makara   (8,9)
+// Shishira (Winter):  Kumbha + Mina     (10,11)
+const RUTHU_EN = ["Vasanta","Grishma","Varsha","Sharad","Hemanta","Shishira"];
+const RUTHU_KN = ["ವಸಂತ","ಗ್ರೀಷ್ಮ","ವರ್ಷ","ಶರತ್","ಹೇಮಂತ","ಶಿಶಿರ"];
+const RUTHU_DESC_EN = ["Spring","Summer","Monsoon","Autumn","Pre-winter","Winter"];
+
+function getRuthu(date){
+  const sunLon = sunLongitude(date);
+  const rasaIdx = Math.floor(sunLon / 30); // 0–11
+  const ruthuIdx = Math.floor(rasaIdx / 2);
+  return {
+    en: RUTHU_EN[ruthuIdx],
+    kn: RUTHU_KN[ruthuIdx],
+    desc: RUTHU_DESC_EN[ruthuIdx]
+  };
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1587,6 +1769,21 @@ function populateTodayBanner(){
   document.getElementById('tb-souramana-en').textContent = sm.en;
   document.getElementById('tb-souramana-kn').textContent = sm.kn;
 
+  // Samvatsara
+  const sv = getSamvatsara(now);
+  document.getElementById('tb-samvatsara-en').textContent = sv.en;
+  document.getElementById('tb-samvatsara-kn').textContent = sv.kn;
+
+  // Ayana
+  const ay = getAyana(now);
+  document.getElementById('tb-ayana-en').textContent = ay.en;
+  document.getElementById('tb-ayana-kn').textContent = ay.kn;
+
+  // Ruthu
+  const rt = getRuthu(now);
+  document.getElementById('tb-ruthu-en').textContent = rt.en + ' (' + rt.desc + ')';
+  document.getElementById('tb-ruthu-kn').textContent = rt.kn;
+
   // Festival check for today
   const festivals = getFestivals(pd.masaIdx, pd.paksha, pd.tithiNum, nakshatras[nakIdx].en, pd.varaNum);
   const fbEl = document.getElementById('tb-festival');
@@ -1596,6 +1793,18 @@ function populateTodayBanner(){
     fbEl.style.display = 'flex';
   } else {
     fbEl.style.display = 'none';
+  }
+
+  // Amrit Siddhi Yoga check for banner
+  const amritBanner = document.getElementById('tb-amrit-banner');
+  const amritYoga = checkAmritSiddhi(now.getDay(), nakshatras[nakIdx].en);
+  if(amritYoga){
+    const isGuru = now.getDay() === 4;
+    document.getElementById('tb-amrit-banner-text').textContent =
+      (isGuru ? 'Guru Pushya Yoga · ' : '') + 'ಅಮೃತ ಸಿದ್ಧಿ ಯೋಗ — ' + amritYoga.vara + ' + ' + amritYoga.nak + ' · Highly auspicious for new ventures and investments';
+    amritBanner.style.display = 'flex';
+  } else {
+    amritBanner.style.display = 'none';
   }
 }
 
