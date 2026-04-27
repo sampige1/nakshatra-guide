@@ -4,327 +4,902 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Nakshatra Daily Guide & Kundli — ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#8A6E30;
-  --deep:#0D0B14;--deep2:#13101E;--deep3:#1C1828;
-  --surface:#201C2E;--text:#F0EAD6;--text-muted:#9A8FA8;--text-dim:#5C5470;
-  --favorable:#4CAF7D;--favorable-bg:rgba(76,175,125,0.12);
-  --neutral:#C9A84C;--neutral-bg:rgba(201,168,76,0.12);
-  --challenging:#E07070;--challenging-bg:rgba(224,112,112,0.12);
+:root {
+  --ink:      #1A1209;
+  --ink2:     #2E2010;
+  --ink3:     #3D2E18;
+  --parchment:#F7F0E0;
+  --parchment2:#EEE4CC;
+  --parchment3:#E5D8B8;
+  --rust:     #B84C1A;
+  --rust-dim: #7A3210;
+  --rust-lt:  #D97040;
+  --teal:     #1A5B5E;
+  --teal-lt:  #2A8080;
+  --teal-pale:#D6ECEC;
+  --gold:     #C8922A;
+  --gold-lt:  #E8B84A;
+  --gold-pale:#FDF3D8;
+  --favorable:#1B6B40;
+  --favorable-bg:#D4EEDF;
+  --neutral:  #8A6A10;
+  --neutral-bg:#F5EAC0;
+  --challenging:#8B2020;
+  --challenging-bg:#FADADA;
+  --border:   rgba(26,18,9,.15);
+  --border-strong: rgba(26,18,9,.3);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Outfit',sans-serif;background:var(--deep);color:var(--text);min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,.6) 0%,transparent 100%),
-    radial-gradient(1.5px 1.5px at 40% 10%,rgba(255,255,255,.5) 0%,transparent 100%),
-    radial-gradient(1px 1px at 55% 60%,rgba(255,255,255,.3) 0%,transparent 100%),
-    radial-gradient(1px 1px at 70% 25%,rgba(255,255,255,.5) 0%,transparent 100%),
-    radial-gradient(1.5px 1.5px at 80% 70%,rgba(255,255,255,.4) 0%,transparent 100%),
-    radial-gradient(1px 1px at 15% 80%,rgba(255,255,255,.4) 0%,transparent 100%),
-    radial-gradient(1.5px 1.5px at 35% 65%,rgba(255,255,255,.5) 0%,transparent 100%),
-    radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%);}
-body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;
-  background:radial-gradient(ellipse,rgba(100,60,180,.18) 0%,transparent 70%);pointer-events:none;z-index:0;}
-.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:3rem 1.5rem 4rem;}
-.header{text-align:center;margin-bottom:3rem;animation:fadeDown .8s ease both;}
-.header-symbol{font-size:2.5rem;margin-bottom:.75rem;display:block;filter:drop-shadow(0 0 12px rgba(201,168,76,.5));}
-.header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;letter-spacing:.04em;color:var(--text);line-height:1.15;}
-.header h1 span{color:var(--gold);}
-.header .subtitle{font-size:.85rem;color:var(--text-muted);margin-top:.5rem;letter-spacing:.08em;font-weight:300;}
-.header .kannada-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-dim);margin-top:.25rem;font-style:italic;}
-.divider-ornament{display:flex;align-items:center;gap:.75rem;margin:0 auto 2.5rem;width:260px;opacity:.5;}
-.divider-ornament::before,.divider-ornament::after{content:'';flex:1;height:.5px;background:var(--gold-dim);}
-.divider-ornament span{font-size:.6rem;color:var(--gold);letter-spacing:.2em;}
-.card{width:100%;max-width:520px;background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:2rem;animation:fadeUp .8s ease .2s both;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
-.toggle-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:var(--deep3);border-radius:10px;padding:4px;}
-.tab-btn{flex:1;height:36px;background:transparent;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:400;letter-spacing:.05em;color:var(--text-muted);cursor:pointer;transition:background .2s,color .2s;}
-.tab-btn.active{background:var(--surface);color:var(--gold);border:.5px solid rgba(201,168,76,.2);}
-.birth-finder{background:rgba(201,168,76,.05);border:.5px solid rgba(201,168,76,.2);border-radius:12px;padding:1rem;margin-bottom:1.25rem;display:none;}
-.birth-finder.visible{display:block;}
-.birth-finder-title{font-size:.68rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.75rem;}
-.birth-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-.found-nak{background:var(--surface);border:.5px solid rgba(201,168,76,.25);border-radius:10px;padding:.75rem 1rem;margin-top:.75rem;display:none;}
-.found-nak.visible{display:block;}
-.found-nak-label{font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.3rem;}
-.found-nak-value{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);}
-.found-nak-kn{font-size:.85rem;color:var(--text-muted);margin-top:.1rem;}
-.find-btn{width:100%;height:38px;margin-top:.75rem;background:rgba(201,168,76,.1);border:.5px solid rgba(201,168,76,.3);border-radius:8px;color:var(--gold);font-family:'Outfit',sans-serif;font-size:.8rem;letter-spacing:.06em;cursor:pointer;transition:background .2s;}
-.find-btn:hover{background:rgba(201,168,76,.18);}
-.form-group{margin-bottom:1.25rem;}
-.form-group label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.5rem;}
-.form-group input,.form-group select{width:100%;height:44px;background:var(--deep3);border:.5px solid rgba(201,168,76,.2);border-radius:10px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:300;padding:0 1rem;transition:border-color .2s;appearance:none;-webkit-appearance:none;}
-.form-group input[type="date"],.form-group input[type="time"]{color-scheme:dark;}
-.form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A6E30' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;}
-.form-group input::placeholder{color:var(--text-dim);}
-.form-group input:focus,.form-group select:focus{outline:none;border-color:rgba(201,168,76,.5);}
-.form-group select option{background:var(--deep2);color:var(--text);}
-.btn{width:100%;height:48px;margin-top:.5rem;background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;border:none;border-radius:10px;color:var(--deep);font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background-position .4s,transform .15s;}
-.btn:hover{background-position:100% 0;}
-.btn:active{transform:scale(.98);}
-.btn:disabled{opacity:.5;cursor:not-allowed;}
-.error-box{background:var(--challenging-bg);border:.5px solid rgba(224,112,112,.3);border-radius:10px;padding:.9rem 1rem;margin-top:1rem;font-size:.82rem;color:var(--challenging);line-height:1.6;display:none;}
-.error-box.visible{display:block;}
-.result{display:none;margin-top:2rem;animation:fadeUp .5s ease both;}
-.result.visible{display:block;}
-.result-top{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;text-align:center;}
-.result-greeting{font-size:.75rem;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem;}
-.result-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--text);}
-.result-place{font-size:.8rem;color:var(--text-muted);margin-top:.2rem;}
-.nak-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem;}
-.nak-card{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:14px;padding:1rem 1.25rem;}
-.nak-card-label{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.4rem;}
-.nak-card-en{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--text);line-height:1.2;}
-.nak-card-kn{font-size:.95rem;color:var(--text-muted);margin-top:.2rem;}
-.nak-card-sub{font-size:.7rem;color:var(--text-dim);margin-top:.3rem;}
-.nak-card-end{font-size:.7rem;color:var(--gold-dim);margin-top:.4rem;}
-.relation-box{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:14px;padding:1.25rem 1.5rem;}
-.relation-header{font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.6rem;}
-.relation-text{font-size:.9rem;color:var(--text-muted);line-height:1.7;font-weight:300;}
-.badge{display:inline-block;margin-top:.75rem;padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:500;letter-spacing:.05em;}
-.badge.favorable{background:var(--favorable-bg);color:var(--favorable);border:.5px solid rgba(76,175,125,.3);}
-.badge.neutral{background:var(--neutral-bg);color:var(--neutral);border:.5px solid rgba(201,168,76,.3);}
-.badge.challenging{background:var(--challenging-bg);color:var(--challenging);border:.5px solid rgba(224,112,112,.3);}
-.source-note{font-size:.7rem;color:var(--text-dim);margin-top:.75rem;text-align:center;}
-.verify-btn{display:block;width:100%;height:40px;margin-top:1rem;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.06em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;text-decoration:none;line-height:40px;text-align:center;}
-.verify-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
 
-/* ── Kundli section ── */
-.kundli-section{width:100%;max-width:600px;margin-top:2.5rem;display:none;animation:fadeUp .6s ease both;}
-.kundli-section.visible{display:block;}
-.section-title{font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem;text-align:center;}
-.kundli-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--text);text-align:center;margin-bottom:.25rem;}
-.kundli-sub{font-size:.75rem;color:var(--text-muted);text-align:center;margin-bottom:1.25rem;}
+body {
+  font-family:'Jost',sans-serif;
+  background:var(--parchment);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-/* South Indian chart grid — 4x4 with centre 2x2 empty */
-.si-chart{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.3);border-radius:4px;overflow:hidden;aspect-ratio:1;}
-.si-cell{background:var(--deep2);padding:6px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;position:relative;}
-.si-cell.centre{background:var(--deep3);display:flex;align-items:center;justify-content:center;}
-.si-cell.lagna::after{content:'';position:absolute;top:0;left:0;width:0;height:0;border-top:18px solid rgba(201,168,76,.5);border-right:18px solid transparent;}
-.rasi-num{font-size:.62rem;color:var(--text-dim);font-weight:400;}
-.rasi-name{font-size:.6rem;color:var(--gold-dim);letter-spacing:.04em;margin-bottom:2px;}
-.planet-tag{font-size:.62rem;font-weight:500;padding:1px 4px;border-radius:3px;line-height:1.3;}
-.p-su{color:#F4C542;background:rgba(244,197,66,.12);}
-.p-mo{color:#B0C8E8;background:rgba(176,200,232,.12);}
-.p-ma{color:#E07070;background:rgba(224,112,112,.12);}
-.p-me{color:#4CAF7D;background:rgba(76,175,125,.12);}
-.p-ju{color:#E8C97A;background:rgba(232,201,122,.12);}
-.p-ve{color:#C97AE8;background:rgba(201,122,232,.12);}
-.p-sa{color:#9A8FA8;background:rgba(154,143,168,.12);}
-.p-ra{color:#8FA89A;background:rgba(143,168,154,.12);}
-.p-ke{color:#A88F9A;background:rgba(168,143,154,.12);}
-.p-as{color:var(--gold);background:rgba(201,168,76,.15);font-weight:600;}
-.centre-text{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--text-dim);text-align:center;line-height:1.6;}
+/* Grain texture overlay */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity:.5;
+}
 
-/* Planet details table */
-.planet-table-wrap{margin-top:1.25rem;border-radius:14px;border:.5px solid rgba(201,168,76,.15);overflow:hidden;}
-.planet-table{width:100%;border-collapse:collapse;font-size:.78rem;}
-.planet-table thead tr{background:var(--surface);}
-.planet-table thead th{padding:.55rem .75rem;text-align:left;font-size:.65rem;font-weight:500;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;border-bottom:.5px solid rgba(201,168,76,.15);}
-.planet-table tbody tr{border-bottom:.5px solid rgba(201,168,76,.08);}
-.planet-table tbody tr:last-child{border-bottom:none;}
-.planet-table tbody tr:hover{background:rgba(201,168,76,.04);}
-.planet-table td{padding:.5rem .75rem;color:var(--text-muted);vertical-align:middle;}
-.planet-table td:first-child{color:var(--text);font-weight:500;}
-.retro-tag{font-size:.6rem;color:var(--challenging);margin-left:4px;}
+/* Horizontal rule ornament */
+.hr-ornament {
+  display:flex;align-items:center;gap:.75rem;margin:0 auto;
+  width:100%;max-width:660px;
+}
+.hr-ornament::before,.hr-ornament::after {
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-strong),transparent);
+}
+.hr-ornament span {
+  font-size:.6rem;letter-spacing:.3em;color:var(--rust);
+  text-transform:uppercase;white-space:nowrap;
+}
+
+.page {
+  position:relative;z-index:1;
+  max-width:720px;margin:0 auto;
+  padding:0 1.25rem 5rem;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align:center;
+  padding:3.5rem 1rem 2.5rem;
+  animation:fadeDown .7s ease both;
+}
+.header-eyebrow {
+  font-family:'Jost',sans-serif;
+  font-size:.65rem;font-weight:500;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1.25rem;
+}
+.header h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,7vw,3.8rem);
+  font-weight:400;line-height:1.05;
+  color:var(--ink);margin-bottom:.5rem;
+}
+.header h1 em {
+  font-style:italic;color:var(--rust);
+}
+.header-kannada {
+  font-family:'IM Fell English',serif;
+  font-size:1rem;color:var(--ink3);
+  letter-spacing:.04em;margin-top:.4rem;
+  font-style:italic;opacity:.7;
+}
+.header-sub {
+  font-size:.72rem;letter-spacing:.18em;
+  color:var(--ink3);font-weight:400;
+  margin-top:.75rem;text-transform:uppercase;
+  opacity:.6;
+}
+
+/* ── PANCHANG BANNER ── */
+.panchang-banner {
+  background:var(--ink);
+  border-radius:2px;
+  padding:1.5rem 1.75rem 1.25rem;
+  margin-bottom:2.5rem;
+  animation:fadeUp .7s ease .1s both;
+  position:relative;overflow:hidden;
+}
+.panchang-banner::before {
+  content:'';position:absolute;
+  inset:3px;border:1px solid rgba(200,146,42,.25);
+  border-radius:1px;pointer-events:none;
+}
+.pb-date {
+  font-family:'Jost',sans-serif;
+  font-size:.6rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);text-align:center;
+  margin-bottom:1.25rem;opacity:.8;
+}
+.pb-row {
+  display:grid;gap:0;
+  border:1px solid rgba(200,146,42,.2);
+  border-radius:1px;overflow:hidden;
+}
+.pb-row-1 { grid-template-columns:repeat(3,1fr); }
+.pb-row-2 { grid-template-columns:repeat(6,1fr); margin-top:1px; }
+.pb-cell {
+  padding:.65rem .4rem;
+  border-right:1px solid rgba(200,146,42,.15);
+  text-align:center;
+}
+.pb-cell:last-child { border-right:none; }
+.pb-label {
+  font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);opacity:.6;margin-bottom:.35rem;line-height:1.3;
+}
+.pb-en {
+  font-family:'Playfair Display',serif;
+  font-size:.82rem;font-weight:400;
+  color:#F7F0E0;line-height:1.2;
+}
+.pb-kn {
+  font-size:.6rem;color:rgba(247,240,224,.45);
+  margin-top:.15rem;
+}
+.pb-divider {
+  height:1px;background:rgba(200,146,42,.15);
+  margin:.75rem 0 .6rem;
+}
+.pb-festival {
+  display:flex;align-items:center;gap:.6rem;
+  margin-top:.75rem;
+  padding:.6rem .75rem;
+  background:rgba(200,146,42,.08);
+  border:1px solid rgba(200,146,42,.2);
+  border-radius:1px;
+  font-size:.73rem;color:var(--gold-lt);
+  line-height:1.5;
+}
+.pb-festival-icon { font-size:.85rem;flex-shrink:0; }
+.pb-amrit {
+  display:flex;align-items:center;gap:.6rem;
+  margin-top:.6rem;
+  padding:.6rem .75rem;
+  background:rgba(27,107,64,.12);
+  border:1px solid rgba(27,107,64,.3);
+  border-radius:1px;
+  font-size:.73rem;color:#5DC98A;
+  line-height:1.5;
+}
+
+/* ── CARD ── */
+.card {
+  background:var(--parchment2);
+  border:1px solid var(--border-strong);
+  border-radius:2px;
+  padding:2rem 2rem 1.75rem;
+  margin-bottom:2rem;
+  animation:fadeUp .7s ease .2s both;
+  position:relative;
+}
+.card::after {
+  content:'';
+  position:absolute;bottom:-4px;left:4px;right:-4px;
+  height:100%;border:1px solid var(--border);
+  border-radius:2px;z-index:-1;
+  background:var(--parchment3);
+}
+
+.card-title {
+  font-family:'Jost',sans-serif;
+  font-size:.6rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.card-title::after {
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,var(--border-strong),transparent);
+}
+
+/* ── FORM ELEMENTS ── */
+.form-group { margin-bottom:1.25rem; }
+.form-group label {
+  display:block;
+  font-size:.6rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:.5rem;opacity:.7;
+}
+.form-group input,
+.form-group select {
+  width:100%;height:44px;
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;
+  color:var(--ink);
+  font-family:'Jost',sans-serif;
+  font-size:.92rem;font-weight:300;
+  padding:0 .9rem;
+  transition:border-color .2s, box-shadow .2s;
+  appearance:none;-webkit-appearance:none;
+}
+.form-group input[type="date"],
+.form-group input[type="time"] { color-scheme:light; }
+.form-group select {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A3210' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;
+  padding-right:2.25rem;
+}
+.form-group input::placeholder { color:rgba(26,18,9,.35); }
+.form-group input:focus,
+.form-group select:focus {
+  outline:none;
+  border-color:var(--rust);
+  box-shadow:0 0 0 3px rgba(184,76,26,.12);
+}
+.form-group select option { background:var(--parchment); color:var(--ink); }
+
+/* toggle tabs */
+.toggle-tabs {
+  display:flex;gap:0;margin-bottom:1rem;
+  border:1px solid var(--border-strong);border-radius:1px;
+  overflow:hidden;
+}
+.tab-btn {
+  flex:1;height:36px;background:transparent;
+  border:none;border-right:1px solid var(--border-strong);
+  font-family:'Jost',sans-serif;font-size:.7rem;
+  font-weight:500;letter-spacing:.08em;
+  color:var(--ink3);cursor:pointer;
+  transition:background .2s,color .2s;
+  opacity:.6;
+}
+.tab-btn:last-child { border-right:none; }
+.tab-btn.active {
+  background:var(--rust);color:#fff;opacity:1;
+}
+.tab-btn:not(.active):hover { background:var(--parchment3);opacity:1; }
+
+/* birth finder */
+.birth-finder {
+  background:var(--gold-pale);
+  border:1px solid rgba(200,146,42,.3);
+  border-radius:1px;padding:1rem;
+  margin-bottom:1rem;display:none;
+}
+.birth-finder.visible { display:block; }
+.birth-finder-title {
+  font-size:.6rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rust-dim);margin-bottom:.75rem;
+}
+.birth-row { display:grid;grid-template-columns:1fr 1fr;gap:.75rem; }
+
+.found-nak {
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;padding:.75rem 1rem;
+  margin-top:.75rem;display:none;
+}
+.found-nak.visible { display:block; }
+.found-nak-label {
+  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--rust-dim);margin-bottom:.25rem;
+}
+.found-nak-value {
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;color:var(--ink);
+}
+.found-nak-kn { font-size:.8rem;color:var(--ink3);margin-top:.1rem;opacity:.65; }
+
+.find-btn {
+  width:100%;height:38px;margin-top:.75rem;
+  background:transparent;
+  border:1px solid var(--rust);
+  border-radius:1px;color:var(--rust);
+  font-family:'Jost',sans-serif;font-size:.75rem;
+  font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,color .2s;
+}
+.find-btn:hover { background:var(--rust);color:#fff; }
+
+/* buttons */
+.btn {
+  width:100%;height:48px;margin-top:.5rem;
+  background:var(--ink);
+  border:none;border-radius:1px;
+  color:var(--parchment);
+  font-family:'Jost',sans-serif;font-size:.78rem;
+  font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s,transform .1s;
+  position:relative;overflow:hidden;
+}
+.btn::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,146,42,.08),transparent);
+}
+.btn:hover { background:var(--ink2); }
+.btn:active { transform:scale(.99); }
+.btn:disabled { opacity:.45;cursor:not-allowed; }
+.btn-secondary {
+  background:transparent;
+  border:1px solid var(--border-strong);
+  color:var(--ink3);
+}
+.btn-secondary:hover { background:var(--parchment3);background-image:none; }
+.btn-secondary.active {
+  background:var(--ink);color:var(--parchment);
+  border-color:var(--ink);
+}
+.btn-tertiary {
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--ink3);
+  font-size:.7rem;
+}
+.btn-tertiary:hover { background:var(--parchment3); }
+.btn-tertiary.active { background:var(--teal);color:#fff;border-color:var(--teal); }
+.action-row { display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem; }
+.btn-today,.btn-date { margin-top:0; }
+
+.error-box {
+  background:var(--challenging-bg);
+  border:1px solid rgba(139,32,32,.25);
+  border-radius:1px;padding:.8rem 1rem;
+  margin-top:.75rem;font-size:.8rem;
+  color:var(--challenging);line-height:1.6;display:none;
+}
+.error-box.visible { display:block; }
+
+/* inline pickers */
+.inline-date-picker { display:none;margin-top:.75rem;animation:fadeUp .3s ease both; }
+.inline-date-picker.visible { display:block; }
+.date-picker-row { display:flex;gap:.75rem;align-items:center; }
+.check-date-btn {
+  height:44px;padding:0 1.25rem;white-space:nowrap;
+  background:var(--teal);color:#fff;
+  border:none;border-radius:1px;
+  font-family:'Jost',sans-serif;font-size:.78rem;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,transform .15s;
+}
+.check-date-btn:hover { background:var(--teal-lt); }
+
+/* ── RESULT ── */
+.result { display:none;margin-top:2rem;animation:fadeUp .5s ease both; }
+.result.visible { display:block; }
+
+.result-header {
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:1.25rem;padding-bottom:.75rem;
+  border-bottom:1px solid var(--border-strong);
+  flex-wrap:wrap;gap:.5rem;
+}
+.result-label {
+  font-size:.58rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--rust);
+}
+.result-date {
+  font-family:'IM Fell English',serif;
+  font-style:italic;font-size:.88rem;color:var(--ink3);
+}
+
+.result-name-block {
+  background:var(--ink);
+  border-radius:1px;
+  padding:1rem 1.25rem;
+  margin-bottom:1rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.5rem;
+}
+.result-for { font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7; }
+.result-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:400;color:#F7F0E0;
+}
+.result-place { font-size:.75rem;color:rgba(247,240,224,.5);margin-top:.1rem; }
+
+.nak-grid { display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem; }
+.nak-card {
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;
+  padding:1rem 1.1rem;
+  position:relative;
+}
+.nak-card::before {
+  content:'';position:absolute;
+  top:0;left:0;width:3px;height:100%;
+  background:var(--rust);border-radius:1px 0 0 1px;
+}
+.nak-card-label {
+  font-size:.58rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rust-dim);
+  margin-bottom:.4rem;opacity:.7;
+}
+.nak-card-en {
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:400;color:var(--ink);line-height:1.2;
+}
+.nak-card-kn { font-size:.85rem;color:var(--ink3);margin-top:.2rem;opacity:.6; }
+.nak-card-sub { font-size:.65rem;color:var(--ink3);margin-top:.3rem;opacity:.5; }
+.nak-card-end { font-size:.65rem;color:var(--rust-dim);margin-top:.35rem; }
+
+.relation-box {
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;padding:1.1rem 1.25rem;
+}
+.relation-header {
+  font-size:.6rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink3);
+  margin-bottom:.5rem;opacity:.6;
+}
+.relation-text {
+  font-size:.88rem;color:var(--ink);line-height:1.75;
+  font-weight:300;
+}
+.badge {
+  display:inline-block;margin-top:.75rem;
+  padding:4px 14px;border-radius:1px;
+  font-size:.7rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.badge.favorable { background:var(--favorable-bg);color:var(--favorable);border:1px solid rgba(27,107,64,.25); }
+.badge.neutral   { background:var(--neutral-bg);color:var(--neutral);border:1px solid rgba(138,106,16,.25); }
+.badge.challenging { background:var(--challenging-bg);color:var(--challenging);border:1px solid rgba(139,32,32,.25); }
+
+/* Inauspicious / Amrit boxes */
+.inauspicious-box {
+  display:flex;align-items:flex-start;gap:.6rem;
+  margin-top:.75rem;padding:.75rem 1rem;border-radius:1px;
+}
+.inauspicious-box.strong { background:var(--challenging-bg);border:1px solid rgba(139,32,32,.25); }
+.inauspicious-box.mild { background:var(--neutral-bg);border:1px solid rgba(138,106,16,.25); }
+.inauspicious-icon { font-size:1rem;flex-shrink:0;margin-top:.1rem; }
+.inauspicious-box.strong .inauspicious-icon { color:var(--challenging); }
+.inauspicious-box.mild .inauspicious-icon { color:var(--neutral); }
+.inauspicious-content { flex:1; }
+.inauspicious-title { font-size:.75rem;font-weight:600;margin-bottom:.25rem; }
+.inauspicious-box.strong .inauspicious-title { color:var(--challenging); }
+.inauspicious-box.mild .inauspicious-title { color:var(--neutral); }
+.inauspicious-text { font-size:.73rem;color:var(--ink3);line-height:1.6;opacity:.8; }
+
+.amrit-box {
+  display:flex;align-items:flex-start;gap:.6rem;
+  margin-top:.75rem;padding:.75rem 1rem;
+  background:var(--favorable-bg);
+  border:1px solid rgba(27,107,64,.25);
+  border-radius:1px;
+}
+.amrit-icon { font-size:1rem;flex-shrink:0;margin-top:.1rem; }
+.amrit-content { flex:1; }
+.amrit-title { font-size:.75rem;font-weight:600;color:var(--favorable);margin-bottom:.25rem; }
+.amrit-text { font-size:.73rem;color:var(--ink3);line-height:1.6; }
+
+/* Kalam section */
+.kalam-section {
+  margin-top:.75rem;
+  background:var(--parchment);
+  border:1px solid rgba(139,32,32,.2);
+  border-radius:1px;padding:1rem 1.1rem;
+}
+.kalam-title {
+  font-size:.58rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--challenging);
+  margin-bottom:.75rem;opacity:.8;
+}
+.kalam-grid { display:grid;grid-template-columns:1fr 1fr;gap:.75rem; }
+.kalam-card {
+  background:var(--challenging-bg);
+  border:1px solid rgba(139,32,32,.15);
+  border-radius:1px;padding:.75rem 1rem;text-align:center;
+}
+.kalam-icon { font-size:1rem;margin-bottom:.2rem;opacity:.6; }
+.kalam-label { font-size:.6rem;color:var(--ink3);letter-spacing:.06em;margin-bottom:.25rem;opacity:.6; }
+.kalam-time { font-family:'Playfair Display',serif;font-size:1rem;color:var(--challenging); }
+.kalam-note { font-size:.6rem;color:var(--ink3);margin-top:.2rem;opacity:.5; }
+.kalam-note-small { font-size:.62rem;color:var(--ink3);margin-top:.5rem;text-align:center;opacity:.45; }
+
+.source-note { font-size:.65rem;color:var(--ink3);margin-top:.75rem;text-align:center;opacity:.4; }
+.verify-btn {
+  display:block;width:100%;height:38px;margin-top:.75rem;
+  background:transparent;border:1px solid var(--border-strong);
+  border-radius:1px;color:var(--ink3);
+  font-family:'Jost',sans-serif;font-size:.75rem;
+  font-weight:400;letter-spacing:.1em;cursor:pointer;
+  transition:background .2s,color .2s;text-decoration:none;
+  line-height:38px;text-align:center;opacity:.6;
+}
+.verify-btn:hover { background:var(--parchment3);opacity:1; }
+
+/* check-result */
+.check-result { display:none;margin-top:2rem;animation:fadeUp .5s ease both; }
+.check-result.visible { display:block; }
+.result-section-header {
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:1rem;padding-bottom:.65rem;
+  border-bottom:1px solid var(--border-strong);
+  flex-wrap:wrap;gap:.5rem;
+}
+.result-section-label {
+  font-size:.58rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rust);
+}
+.result-section-date {
+  font-family:'IM Fell English',serif;
+  font-style:italic;font-size:.88rem;color:var(--ink3);
+}
+.day-info-box {
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;padding:.85rem 1rem;margin-bottom:.75rem;
+}
+.day-info-row { display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem; }
+.day-info-item { text-align:center; }
+.day-info-label { font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dim);margin-bottom:.2rem;opacity:.7; }
+.day-info-value { font-family:'Playfair Display',serif;font-size:.88rem;color:var(--ink);line-height:1.2; }
+.day-info-kn { font-size:.65rem;color:var(--ink3);margin-top:.1rem;opacity:.5; }
+.day-info-summary {
+  font-family:'IM Fell English',serif;
+  font-size:.82rem;font-style:italic;
+  color:var(--rust-dim);text-align:center;
+  margin-top:.6rem;padding-top:.5rem;
+  border-top:1px solid var(--border);line-height:1.5;
+}
+.festival-box {
+  display:flex;align-items:flex-start;gap:.5rem;
+  margin-top:.6rem;padding:.6rem .75rem;
+  background:var(--gold-pale);
+  border:1px solid rgba(200,146,42,.3);border-radius:1px;
+}
+.festival-icon { font-size:1rem;flex-shrink:0;margin-top:.1rem; }
+.festival-content { font-size:.75rem;color:var(--ink);line-height:1.5; }
+.festival-name { font-weight:600;font-size:.8rem;color:var(--gold);margin-bottom:.1rem; }
+
+/* Tithi Finder */
+.tithi-finder-result { display:none;margin-top:1.25rem; }
+.tithi-finder-result.visible { display:block; }
+.tf-panchang-row { display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.75rem; }
+.tf-panchang-item {
+  background:var(--parchment);
+  border:1px solid var(--border-strong);
+  border-radius:1px;padding:.6rem .75rem;text-align:center;
+}
+.tf-panchang-label { font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dim);margin-bottom:.25rem;opacity:.7; }
+.tf-panchang-val { font-family:'Playfair Display',serif;font-size:.88rem;color:var(--ink);line-height:1.2; }
+.tf-panchang-kn { font-size:.65rem;color:var(--ink3);margin-top:.1rem;opacity:.5; }
+.tf-occ-grid { display:grid;grid-template-columns:1fr 1fr;gap:.75rem; }
+.tf-occurrence-card { border-radius:1px;padding:.9rem 1rem;text-align:center; }
+.tf-prev { background:var(--parchment3);border:1px solid var(--border-strong); }
+.tf-next { background:var(--favorable-bg);border:1px solid rgba(27,107,64,.2); }
+.tf-occ-label { font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem; }
+.tf-prev .tf-occ-label { color:var(--ink3);opacity:.5; }
+.tf-next .tf-occ-label { color:var(--favorable); }
+.tf-occ-date { font-family:'Playfair Display',serif;font-size:.95rem;color:var(--ink);line-height:1.3;margin-bottom:.2rem; }
+.tf-occ-sub { font-size:.65rem;color:var(--ink3);opacity:.5; }
+
+/* ── KUNDLI ── */
+.kundli-section {
+  width:100%;max-width:660px;
+  margin:2rem auto 0;display:none;
+  animation:fadeUp .6s ease both;
+}
+.kundli-section.visible { display:block; }
+
+.kundli-card {
+  background:var(--parchment2);
+  border:1px solid var(--border-strong);
+  border-radius:2px;padding:2rem;
+  position:relative;
+}
+.kundli-card::after {
+  content:'';position:absolute;
+  bottom:-4px;left:4px;right:-4px;
+  height:100%;border:1px solid var(--border);
+  border-radius:2px;z-index:-1;background:var(--parchment3);
+}
+
+.section-title {
+  font-size:.6rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:1.25rem;
+  text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.section-title::before,.section-title::after {
+  content:'';width:40px;height:1px;
+  background:var(--border-strong);
+}
+
+.kundli-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:400;color:var(--ink);
+  text-align:center;margin-bottom:.2rem;
+}
+.kundli-sub { font-size:.72rem;color:var(--ink3);text-align:center;margin-bottom:1.25rem;opacity:.55; }
+
+.kundli-trio {
+  display:flex;justify-content:center;gap:0;
+  margin-bottom:1.5rem;
+  border:1px solid var(--border-strong);border-radius:1px;overflow:hidden;
+}
+.kundli-trio-item {
+  flex:1;padding:.7rem .5rem;text-align:center;
+  border-right:1px solid var(--border-strong);
+}
+.kundli-trio-item:last-child { border-right:none; }
+.kundli-trio-label {
+  font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--rust-dim);margin-bottom:.3rem;opacity:.7;
+}
+.kundli-trio-val {
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;color:var(--ink);
+}
+
+/* South Indian chart */
+.si-chart {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border-strong);
+  border:1px solid var(--border-strong);
+  border-radius:1px;overflow:hidden;aspect-ratio:1;
+  margin-bottom:1.25rem;
+}
+.si-cell {
+  background:var(--parchment);
+  padding:5px;min-height:70px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;
+  gap:2px;position:relative;
+}
+.si-cell.centre {
+  background:var(--parchment3);
+  display:flex;align-items:center;justify-content:center;
+}
+.si-cell.lagna::after {
+  content:'';position:absolute;top:0;left:0;width:0;height:0;
+  border-top:18px solid var(--rust);
+  border-right:18px solid transparent;
+  opacity:.5;
+}
+.rasi-num { font-size:.55rem;color:var(--ink3);font-weight:400;opacity:.4; }
+.rasi-name { font-size:.55rem;color:var(--rust-dim);letter-spacing:.03em;margin-bottom:1px;opacity:.7; }
+.planet-tag {
+  font-size:.6rem;font-weight:600;
+  padding:1px 4px;border-radius:1px;line-height:1.3;
+}
+.p-su{color:#92620A;background:rgba(146,98,10,.12);}
+.p-mo{color:#2E6A8A;background:rgba(46,106,138,.12);}
+.p-ma{color:#8B2020;background:rgba(139,32,32,.12);}
+.p-me{color:#1B6B40;background:rgba(27,107,64,.12);}
+.p-ju{color:#7A5A0A;background:rgba(122,90,10,.12);}
+.p-ve{color:#6A2080;background:rgba(106,32,128,.12);}
+.p-sa{color:#3A3050;background:rgba(58,48,80,.12);}
+.p-ra{color:#2A5A40;background:rgba(42,90,64,.12);}
+.p-ke{color:#5A3A3A;background:rgba(90,58,58,.12);}
+.p-as{color:var(--rust);background:rgba(184,76,26,.12);font-weight:700;}
+.centre-text {
+  font-family:'IM Fell English',serif;
+  font-size:.78rem;font-style:italic;
+  color:var(--ink3);text-align:center;
+  line-height:1.6;opacity:.5;
+}
+.retro-tag { font-size:.55rem;color:var(--challenging);margin-left:2px; }
+
+/* Planet table */
+.planet-table-wrap {
+  border:1px solid var(--border-strong);
+  border-radius:1px;overflow:hidden;
+}
+.planet-table {
+  width:100%;border-collapse:collapse;font-size:.75rem;
+}
+.planet-table thead tr { background:var(--ink); }
+.planet-table thead th {
+  padding:.5rem .75rem;text-align:left;
+  font-size:.55rem;font-weight:600;letter-spacing:.12em;
+  color:var(--gold);text-transform:uppercase;
+  border-bottom:1px solid rgba(200,146,42,.2);
+}
+.planet-table tbody tr { border-bottom:1px solid var(--border); }
+.planet-table tbody tr:last-child { border-bottom:none; }
+.planet-table tbody tr:hover { background:var(--parchment3); }
+.planet-table td { padding:.5rem .75rem;color:var(--ink3);vertical-align:middle; }
+.planet-table td:first-child { color:var(--ink);font-weight:500; }
 
 /* History */
-.history{width:100%;max-width:900px;margin-top:2.5rem;animation:fadeUp .6s ease both;display:none;}
-.history.visible{display:block;}
-.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
-.history-title{font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;}
-.history-clear{font-size:.72rem;color:var(--text-dim);background:none;border:none;cursor:pointer;letter-spacing:.06em;padding:0;}
-.history-clear:hover{color:var(--challenging);}
-.table-wrap{overflow-x:auto;border-radius:14px;border:.5px solid rgba(201,168,76,.15);}
-table{width:100%;border-collapse:collapse;font-size:.8rem;}
-thead tr{background:var(--surface);}
-thead th{padding:.65rem 1rem;text-align:left;font-size:.68rem;font-weight:500;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;white-space:nowrap;border-bottom:.5px solid rgba(201,168,76,.15);}
-tbody tr{border-bottom:.5px solid rgba(201,168,76,.08);transition:background .15s;}
-tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:rgba(201,168,76,.04);}
-tbody td{padding:.65rem 1rem;color:var(--text-muted);vertical-align:middle;white-space:nowrap;}
-tbody td:first-child{color:var(--text);font-weight:400;}
-.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:500;}
-.pill.favorable{background:var(--favorable-bg);color:var(--favorable);}
-.pill.neutral{background:var(--neutral-bg);color:var(--neutral);}
-.pill.challenging{background:var(--challenging-bg);color:var(--challenging);}
-.footer{margin-top:3rem;text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;animation:fadeUp .8s ease .4s both;}
-.download-btn{margin-top:1.25rem;padding:0 1.75rem;height:44px;background:transparent;border:.5px solid rgba(201,168,76,.3);border-radius:10px;color:var(--gold-dim);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:400;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
-.download-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.5);color:var(--gold);}
-.tithi-finder-section{width:100%;max-width:520px;margin-top:2.5rem;animation:fadeUp .6s ease both;}
-.tithi-finder-card{background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:20px;padding:1.75rem 2rem;position:relative;overflow:hidden;}
-.tithi-finder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
-.tithi-finder-intro{font-size:.8rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6;}
-.tithi-finder-result{display:none;margin-top:1.25rem;}
-.tithi-finder-result.visible{display:block;}
-.tf-section-header{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);text-align:center;margin-bottom:.75rem;}
-.tf-panchang-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1rem;}
-.tf-panchang-item{background:var(--surface);border:.5px solid rgba(201,168,76,.15);border-radius:10px;padding:.65rem .75rem;text-align:center;}
-.tf-panchang-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.3rem;}
-.tf-panchang-val{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);line-height:1.2;}
-.tf-panchang-kn{font-size:.72rem;color:var(--text-muted);margin-top:.1rem;}
-.tf-occ-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-.tf-occurrence-card{border-radius:12px;padding:.9rem 1rem;text-align:center;}
-.tf-prev{background:rgba(154,143,168,.08);border:.5px solid rgba(154,143,168,.2);}
-.tf-next{background:rgba(76,175,125,.08);border:.5px solid rgba(76,175,125,.2);}
-.tf-occ-label{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem;}
-.tf-prev .tf-occ-label{color:var(--text-dim);}
-.tf-next .tf-occ-label{color:var(--favorable);}
-.tf-occ-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);line-height:1.3;margin-bottom:.25rem;}
-.tf-occ-sub{font-size:.7rem;color:var(--text-dim);}
-.kalam-section{margin-top:1rem;background:var(--surface);border:.5px solid rgba(224,112,112,.2);border-radius:14px;padding:1rem 1.25rem;}
-.kalam-title{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--challenging);margin-bottom:.75rem;}
-.kalam-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-.kalam-card{background:var(--deep3);border:.5px solid rgba(224,112,112,.15);border-radius:10px;padding:.75rem 1rem;text-align:center;}
-.kalam-icon{font-size:1.1rem;margin-bottom:.25rem;opacity:.7;}
-.kalam-label{font-size:.65rem;color:var(--text-dim);letter-spacing:.06em;margin-bottom:.3rem;}
-.kalam-time{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--challenging);}
-.kalam-note{font-size:.62rem;color:var(--text-dim);margin-top:.25rem;}
-.kalam-note-small{font-size:.65rem;color:var(--text-dim);margin-top:.6rem;text-align:center;}
-.action-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem;}
-.btn-today{margin-top:0;}
-.btn-date{margin-top:0;background:var(--deep3);background-size:unset;border:.5px solid rgba(201,168,76,.3);color:var(--gold-dim);}
-.btn-date:hover{background:rgba(201,168,76,.08);color:var(--gold);}
-.btn-date.active{background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;color:var(--deep);border:none;}
-.btn-tithi{background:var(--deep3);border:.5px solid rgba(201,168,76,.3);color:var(--gold-dim);font-size:.8rem;letter-spacing:.05em;}
-.btn-tithi:hover{background:rgba(201,168,76,.08);color:var(--gold);}
-.btn-tithi.active{background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;color:var(--deep);border:none;}
-.inline-date-picker{display:none;margin-top:.75rem;animation:fadeUp .3s ease both;}
-.inline-date-picker.visible{display:block;}
-.date-picker-row{display:flex;gap:.75rem;align-items:center;}
-.check-date-btn{height:44px;padding:0 1.25rem;white-space:nowrap;background:linear-gradient(135deg,#8A6E30,#C9A84C,#8A6E30);background-size:200% 100%;border:none;border-radius:10px;color:var(--deep);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.06em;cursor:pointer;transition:background-position .4s,transform .15s;}
-.check-date-btn:hover{background-position:100% 0;}
-.check-date-btn:active{transform:scale(.98);}
-.check-result{display:none;margin-top:1rem;}
-.check-result.visible{display:block;}
-.check-result-divider{font-size:.68rem;font-weight:500;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase;text-align:center;margin:.75rem 0 .5rem;border-top:.5px solid rgba(201,168,76,.15);padding-top:.75rem;}
-.check-result-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);text-align:center;margin-bottom:.5rem;}
-.result-section-header{background:var(--deep3);border:.5px solid rgba(201,168,76,.25);border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
-.result-section-label{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);white-space:nowrap;}
-.result-section-date{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);text-align:right;}
-.day-info-box{background:var(--deep3);border:.5px solid rgba(201,168,76,.15);border-radius:12px;padding:.85rem 1rem;margin-bottom:.75rem;}
-.day-info-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;}
-.day-info-item{text-align:center;}
-.day-info-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.2rem;}
-.day-info-value{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);line-height:1.2;}
-.day-info-kn{font-size:.72rem;color:var(--text-muted);margin-top:.1rem;}
-.day-info-summary{font-size:.78rem;color:var(--gold-light);text-align:center;margin-top:.65rem;padding-top:.6rem;border-top:.5px solid rgba(201,168,76,.12);font-style:italic;line-height:1.5;}
-.festival-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.65rem;padding:.6rem .75rem;background:rgba(201,168,76,.08);border:.5px solid rgba(201,168,76,.25);border-radius:8px;}
-.festival-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
-.festival-content{font-size:.78rem;color:var(--gold-light);line-height:1.5;}
-.festival-name{font-weight:500;font-size:.85rem;color:var(--gold);}
-.amrit-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;padding:.75rem 1rem;background:rgba(76,175,125,.08);border:.5px solid rgba(76,175,125,.3);border-radius:10px;}
-.amrit-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
-.amrit-content{flex:1;}
-.amrit-title{font-size:.8rem;font-weight:500;color:#2E9B57;margin-bottom:.25rem;}
-.amrit-text{font-size:.76rem;color:var(--text-muted);line-height:1.6;}
-.inauspicious-box{display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:10px;}
-.inauspicious-box.strong{background:rgba(224,112,112,.08);border:.5px solid rgba(224,112,112,.3);}
-.inauspicious-box.mild{background:rgba(201,168,76,.06);border:.5px solid rgba(201,168,76,.2);}
-.inauspicious-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
-.inauspicious-box.strong .inauspicious-icon{color:var(--challenging);}
-.inauspicious-box.mild .inauspicious-icon{color:var(--gold-dim);}
-.inauspicious-content{flex:1;}
-.inauspicious-title{font-size:.78rem;font-weight:500;margin-bottom:.25rem;}
-.inauspicious-box.strong .inauspicious-title{color:var(--challenging);}
-.inauspicious-box.mild .inauspicious-title{color:var(--gold-dim);}
-.inauspicious-text{font-size:.74rem;color:var(--text-dim);line-height:1.6;}
-.today-banner{width:100%;max-width:520px;background:var(--deep2);border:.5px solid rgba(201,168,76,.2);border-radius:16px;padding:1.1rem 1.5rem 1rem;margin-bottom:1.5rem;animation:fadeUp .6s ease .1s both;position:relative;overflow:hidden;}
-.today-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
-.today-banner-date{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:.75rem;}
-.today-banner-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;}
-.today-banner-item{text-align:center;padding:.4rem .2rem;border-right:.5px solid rgba(201,168,76,.1);}
-.today-banner-item:last-child{border-right:none;}
-.today-banner-label{font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.25rem;}
-.today-banner-en{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--text);line-height:1.2;}
-.today-banner-kn{font-size:.68rem;color:var(--text-muted);margin-top:.15rem;}
-.today-banner-festival{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;padding-top:.6rem;border-top:.5px solid rgba(201,168,76,.12);font-size:.75rem;color:var(--gold-light);}
-.today-banner-festival-icon{font-size:.9rem;flex-shrink:0;}
-.today-banner-divider{height:.5px;background:rgba(201,168,76,.15);margin:.6rem 0 .25rem;}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:480px){.page{padding:2rem 1rem 3rem;}.card{padding:1.5rem 1.25rem;}.nak-grid{grid-template-columns:1fr;}.birth-row{grid-template-columns:1fr;}.si-cell{min-height:60px;padding:4px;}.day-info-row{grid-template-columns:repeat(2,1fr);}.action-row{grid-template-columns:1fr;}.today-banner-grid{grid-template-columns:repeat(3,1fr) !important;}.today-banner-item{border-right:none;border-bottom:.5px solid rgba(201,168,76,.1);}.tf-occ-grid{grid-template-columns:1fr;}.tf-panchang-row{grid-template-columns:1fr 1fr 1fr;}}
+.history {
+  width:100%;max-width:900px;
+  margin:2rem auto 0;
+  animation:fadeUp .6s ease both;display:none;
+}
+.history.visible { display:block; }
+.history-header {
+  display:flex;align-items:center;
+  justify-content:space-between;margin-bottom:.75rem;
+}
+.history-title {
+  font-size:.6rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rust-dim);opacity:.7;
+}
+.history-clear {
+  font-size:.68rem;color:var(--ink3);background:none;
+  border:none;cursor:pointer;letter-spacing:.06em;
+  padding:0;opacity:.5;
+}
+.history-clear:hover { color:var(--challenging);opacity:1; }
+.table-wrap {
+  overflow-x:auto;
+  border:1px solid var(--border-strong);border-radius:1px;
+}
+table { width:100%;border-collapse:collapse;font-size:.78rem; }
+thead tr { background:var(--ink); }
+thead th {
+  padding:.6rem 1rem;text-align:left;
+  font-size:.58rem;font-weight:600;letter-spacing:.12em;
+  color:var(--gold);text-transform:uppercase;white-space:nowrap;
+  border-bottom:1px solid rgba(200,146,42,.2);
+}
+tbody tr { border-bottom:1px solid var(--border);transition:background .15s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:var(--parchment3); }
+tbody td { padding:.6rem 1rem;color:var(--ink3);vertical-align:middle;white-space:nowrap; }
+tbody td:first-child { color:var(--ink);font-weight:400; }
+.pill {
+  display:inline-block;padding:2px 8px;
+  border-radius:1px;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+}
+.pill.favorable { background:var(--favorable-bg);color:var(--favorable); }
+.pill.neutral   { background:var(--neutral-bg);color:var(--neutral); }
+.pill.challenging { background:var(--challenging-bg);color:var(--challenging); }
+
+.footer {
+  margin-top:3rem;text-align:center;
+  font-size:.65rem;color:var(--ink3);
+  letter-spacing:.1em;opacity:.35;
+  animation:fadeUp .8s ease .4s both;
+}
+.download-btn {
+  display:block;margin:1.25rem auto 0;
+  padding:0 1.75rem;height:40px;
+  background:transparent;
+  border:1px solid var(--border-strong);
+  border-radius:1px;color:var(--ink3);
+  font-family:'Jost',sans-serif;font-size:.75rem;
+  font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,color .2s;
+  opacity:.6;
+}
+.download-btn:hover { background:var(--parchment3);opacity:1; }
+
+/* Tithi finder inline btn */
+.btn-tithi {
+  margin-top:.6rem;font-size:.7rem;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--ink3);opacity:.7;
+}
+.btn-tithi:hover { background:var(--parchment3);opacity:1; }
+.btn-tithi.active { background:var(--teal);color:#fff;border-color:var(--teal);opacity:1; }
+.btn-tithi::after { display:none; }
+
+/* check-result extra */
+.check-result-date {
+  font-family:'IM Fell English',serif;
+  font-style:italic;font-size:.88rem;color:var(--ink3);
+}
+
+@keyframes fadeDown {
+  from{opacity:0;transform:translateY(-14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@media(max-width:500px){
+  .page{padding:0 1rem 4rem;}
+  .card{padding:1.5rem 1.25rem;}
+  .nak-grid{grid-template-columns:1fr;}
+  .birth-row{grid-template-columns:1fr;}
+  .si-cell{min-height:52px;padding:3px;}
+  .day-info-row{grid-template-columns:1fr 1fr;}
+  .action-row{grid-template-columns:1fr;}
+  .pb-row-2{grid-template-columns:repeat(3,1fr)!important;}
+  .pb-cell{border-right:none;border-bottom:1px solid rgba(200,146,42,.1);}
+  .tf-occ-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 <div class="page">
-  <header class="header">
-    <span class="header-symbol">✦</span>
-    <h1>Nakshatra <span>& Kundli</span></h1>
-    <p class="kannada-title">ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</p>
-    <p class="subtitle">Daily guide · Birth chart · Vedic astrology</p>
-  </header>
-  <div class="divider-ornament"><span>✦</span></div>
 
-  <!-- Today's panchang banner — auto-populated on load -->
-  <div class="today-banner" id="todayBanner">
-    <div class="today-banner-date" id="tb-date"></div>
-    <!-- Row 1: Samvatsara, Ayana, Ruthu -->
-    <div class="today-banner-grid" style="grid-template-columns:repeat(3,1fr);">
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಸಂವತ್ಸರ / Samvatsara</div>
-        <div class="today-banner-en" id="tb-samvatsara-en"></div>
-        <div class="today-banner-kn" id="tb-samvatsara-kn"></div>
+  <!-- HEADER -->
+  <header class="header">
+    <p class="header-eyebrow">Vedic Tara Bala · Lahiri Ayanamsha</p>
+    <h1>Nakshatra<br/><em>&amp; Kundli</em></h1>
+    <p class="header-kannada">ನಕ್ಷತ್ರ ದೈನಂದಿನ ಮಾರ್ಗದರ್ಶಿ</p>
+    <p class="header-sub">Daily guide · Birth chart · 27 Nakshatras</p>
+  </header>
+
+  <div class="hr-ornament" style="margin-bottom:2rem;"><span>✦ ಪಂಚಾಂಗ ✦</span></div>
+
+  <!-- PANCHANG BANNER -->
+  <div class="panchang-banner" id="todayBanner">
+    <div class="pb-date" id="tb-date"></div>
+    <div class="pb-row pb-row-1">
+      <div class="pb-cell">
+        <div class="pb-label">ಸಂವತ್ಸರ / Samvatsara</div>
+        <div class="pb-en" id="tb-samvatsara-en"></div>
+        <div class="pb-kn" id="tb-samvatsara-kn"></div>
       </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಅಯನ / Ayana</div>
-        <div class="today-banner-en" id="tb-ayana-en"></div>
-        <div class="today-banner-kn" id="tb-ayana-kn"></div>
+      <div class="pb-cell">
+        <div class="pb-label">ಅಯನ / Ayana</div>
+        <div class="pb-en" id="tb-ayana-en"></div>
+        <div class="pb-kn" id="tb-ayana-kn"></div>
       </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಋತು / Ruthu</div>
-        <div class="today-banner-en" id="tb-ruthu-en"></div>
-        <div class="today-banner-kn" id="tb-ruthu-kn"></div>
-      </div>
-    </div>
-    <div class="today-banner-divider"></div>
-    <!-- Row 2: Chandramana, Souramana, Paksha, Tithi, Vara, Nakshatra -->
-    <div class="today-banner-grid" style="grid-template-columns:repeat(6,1fr);margin-top:.5rem;">
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಚಾಂದ್ರಮಾನ ಮಾಸ</div>
-        <div class="today-banner-en" id="tb-masa-en"></div>
-        <div class="today-banner-kn" id="tb-masa-kn"></div>
-      </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಸೌರಮಾನ ಮಾಸ</div>
-        <div class="today-banner-en" id="tb-souramana-en"></div>
-        <div class="today-banner-kn" id="tb-souramana-kn"></div>
-      </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ಪಕ್ಷ / Paksha</div>
-        <div class="today-banner-en" id="tb-paksha"></div>
-        <div class="today-banner-kn" id="tb-paksha-kn"></div>
-      </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ತಿಥಿ / Tithi</div>
-        <div class="today-banner-en" id="tb-tithi-en"></div>
-        <div class="today-banner-kn" id="tb-tithi-kn"></div>
-      </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ವಾರ / Vara</div>
-        <div class="today-banner-en" id="tb-vara-en"></div>
-        <div class="today-banner-kn" id="tb-vara-kn"></div>
-      </div>
-      <div class="today-banner-item">
-        <div class="today-banner-label">ನಕ್ಷತ್ರ / Nakshatra</div>
-        <div class="today-banner-en" id="tb-nak-en"></div>
-        <div class="today-banner-kn" id="tb-nak-kn"></div>
+      <div class="pb-cell">
+        <div class="pb-label">ಋತು / Ruthu</div>
+        <div class="pb-en" id="tb-ruthu-en"></div>
+        <div class="pb-kn" id="tb-ruthu-kn"></div>
       </div>
     </div>
-    <div class="today-banner-festival" id="tb-festival" style="display:none;">
-      <span class="today-banner-festival-icon">🪔</span>
+    <div class="pb-divider"></div>
+    <div class="pb-row pb-row-2" style="grid-template-columns:repeat(6,1fr);">
+      <div class="pb-cell">
+        <div class="pb-label">ಚಾಂದ್ರಮಾನ</div>
+        <div class="pb-en" id="tb-masa-en"></div>
+        <div class="pb-kn" id="tb-masa-kn"></div>
+      </div>
+      <div class="pb-cell">
+        <div class="pb-label">ಸೌರಮಾನ</div>
+        <div class="pb-en" id="tb-souramana-en"></div>
+        <div class="pb-kn" id="tb-souramana-kn"></div>
+      </div>
+      <div class="pb-cell">
+        <div class="pb-label">ಪಕ್ಷ</div>
+        <div class="pb-en" id="tb-paksha"></div>
+        <div class="pb-kn" id="tb-paksha-kn"></div>
+      </div>
+      <div class="pb-cell">
+        <div class="pb-label">ತಿಥಿ</div>
+        <div class="pb-en" id="tb-tithi-en"></div>
+        <div class="pb-kn" id="tb-tithi-kn"></div>
+      </div>
+      <div class="pb-cell">
+        <div class="pb-label">ವಾರ</div>
+        <div class="pb-en" id="tb-vara-en"></div>
+        <div class="pb-kn" id="tb-vara-kn"></div>
+      </div>
+      <div class="pb-cell">
+        <div class="pb-label">ನಕ್ಷತ್ರ</div>
+        <div class="pb-en" id="tb-nak-en"></div>
+        <div class="pb-kn" id="tb-nak-kn"></div>
+      </div>
+    </div>
+    <div class="pb-festival" id="tb-festival" style="display:none;">
+      <span class="pb-festival-icon">🪔</span>
       <span id="tb-festival-text"></span>
     </div>
-    <div class="today-banner-festival" id="tb-amrit-banner" style="display:none;background:rgba(76,175,125,.06);border-top:.5px solid rgba(76,175,125,.2);">
-      <span class="today-banner-festival-icon">🪷</span>
-      <span id="tb-amrit-banner-text" style="color:#2E9B57;"></span>
+    <div class="pb-amrit" id="tb-amrit-banner" style="display:none;">
+      <span class="pb-festival-icon">🪷</span>
+      <span id="tb-amrit-banner-text"></span>
     </div>
   </div>
 
+  <div class="hr-ornament" style="margin-bottom:2rem;"><span>✦ ತಾರಾ ಬಲ ✦</span></div>
+
+  <!-- MAIN CARD -->
   <div class="card">
+    <div class="card-title">Your Details</div>
+
     <div class="form-group">
       <label>Your name</label>
       <input type="text" id="name" placeholder="e.g. Priya" autocomplete="off"/>
@@ -334,7 +909,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
       <input type="text" id="place" placeholder="e.g. Bengaluru, Seattle, Mumbai" autocomplete="off"/>
     </div>
     <div class="form-group">
-      <label>Birth nakshatra — ಜನ್ಮ ನಕ್ಷತ್ರ</label>
+      <label>Birth Nakshatra — ಜನ್ಮ ನಕ್ಷತ್ರ</label>
       <div class="toggle-tabs">
         <button class="tab-btn active" id="tab-know" onclick="switchTab('know')">I know my nakshatra</button>
         <button class="tab-btn" id="tab-find" onclick="switchTab('find')">Find from birth details</button>
@@ -346,16 +921,16 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="birth-finder-title">Enter birth details · also generates your Kundli</div>
         <div class="birth-row">
           <div>
-            <label style="display:block;font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.4rem;">Date of birth</label>
+            <label style="display:block;font-size:.58rem;letter-spacing:.1em;color:var(--ink3);margin-bottom:.35rem;opacity:.6;text-transform:uppercase;font-weight:600;">Date of birth</label>
             <input type="date" id="birth-date" style="height:40px;font-size:.85rem;"/>
           </div>
           <div>
-            <label style="display:block;font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.4rem;">Time of birth</label>
+            <label style="display:block;font-size:.58rem;letter-spacing:.1em;color:var(--ink3);margin-bottom:.35rem;opacity:.6;text-transform:uppercase;font-weight:600;">Time of birth</label>
             <input type="time" id="birth-time" style="height:40px;font-size:.85rem;"/>
           </div>
         </div>
         <div style="margin-top:.75rem;">
-          <label style="display:block;font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.4rem;">Place of birth</label>
+          <label style="display:block;font-size:.58rem;letter-spacing:.1em;color:var(--ink3);margin-bottom:.35rem;opacity:.6;text-transform:uppercase;font-weight:600;">Place of birth</label>
           <input type="text" id="birth-place" placeholder="e.g. Mysuru, London, New York" autocomplete="off" style="height:40px;font-size:.85rem;"/>
         </div>
         <button class="find-btn" onclick="findBirthNakshatra()">Calculate nakshatra & generate Kundli ✦</button>
@@ -376,17 +951,17 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="error-box" id="birthErrorBox"></div>
       </div>
     </div>
+
     <div class="action-row">
       <button class="btn btn-today" id="submitBtn" onclick="calculate()">Is Today Auspicious?</button>
-      <button class="btn btn-date" id="checkDateBtn" onclick="toggleDatePicker()">Check a Date</button>
+      <button class="btn btn-secondary btn-date" id="checkDateBtn" onclick="toggleDatePicker()">Check a Date</button>
     </div>
-    <!-- Tithi Finder button — full width below -->
-    <button class="btn btn-tithi" id="tithiBtnInline" onclick="toggleTithiFinder()" style="width:100%;margin-top:.6rem;">ತಿಥಿ ಹುಡುಕಾಟ / Tithi Finder</button>
+    <button class="btn btn-tertiary btn-tithi" id="tithiBtnInline" onclick="toggleTithiFinder()" style="width:100%;">ತಿಥಿ ಹುಡುಕಾಟ / Tithi Finder</button>
 
-    <!-- Inline date picker (hidden until Check a Date clicked) -->
+    <!-- Inline date picker -->
     <div class="inline-date-picker" id="inlineDatePicker">
       <div class="date-picker-row">
-        <input type="date" id="check-date" style="flex:1;height:44px;font-size:.9rem;color-scheme:dark;"/>
+        <input type="date" id="check-date" style="flex:1;height:44px;font-size:.9rem;"/>
         <button class="check-date-btn" onclick="checkDate()">Check ↗</button>
       </div>
     </div>
@@ -394,13 +969,13 @@ tbody td:first-child{color:var(--text);font-weight:400;}
     <!-- Inline Tithi Finder panel -->
     <div class="inline-date-picker" id="inlineTithiFinder">
       <div class="date-picker-row">
-        <input type="date" id="tithi-finder-date" style="flex:1;height:44px;font-size:.9rem;color-scheme:dark;"/>
+        <input type="date" id="tithi-finder-date" style="flex:1;height:44px;font-size:.9rem;"/>
         <button class="check-date-btn" onclick="findTithi()">Find ↗</button>
       </div>
-      <div style="font-size:.65rem;color:var(--text-dim);margin-top:.4rem;">Enter date in YYYY-MM-DD format (e.g. 2026-10-05 for 5 Oct 2026)</div>
+      <div style="font-size:.62rem;color:var(--ink3);margin-top:.35rem;opacity:.45;">Enter date in YYYY-MM-DD format (e.g. 2026-10-05 for 5 Oct 2026)</div>
     </div>
 
-    <!-- Tithi Finder result — inline inside card -->
+    <!-- Tithi Finder result -->
     <div class="tithi-finder-result" id="tithiFinderResult">
       <div class="result-section-header">
         <div class="result-section-label">ತಿಥಿ ಹುಡುಕಾಟ / Tithi Finder</div>
@@ -426,7 +1001,7 @@ tbody td:first-child{color:var(--text);font-weight:400;}
     <div class="error-box" id="errorBox"></div>
     <div class="error-box" id="checkDateError"></div>
 
-    <!-- Check a Date result — outside result div so it shows independently -->
+    <!-- Check a Date result -->
     <div class="check-result" id="checkResult">
       <div class="result-section-header">
         <div class="result-section-label">ದಿನ ಶುಭಾಶುಭ / Date Check</div>
@@ -478,8 +1053,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="relation-text" id="check-relation"></div>
         <div id="check-badge"></div>
       </div>
-
-      <!-- Inauspicious nakshatra warning for check-date -->
       <div class="inauspicious-box" id="check-inauspicious" style="display:none;">
         <div class="inauspicious-icon" id="check-inauspicious-icon">⚠</div>
         <div class="inauspicious-content">
@@ -487,8 +1060,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
           <div class="inauspicious-text" id="check-inauspicious-text"></div>
         </div>
       </div>
-
-      <!-- Amrit Siddhi Yoga -->
       <div class="amrit-box" id="check-amrit" style="display:none;">
         <div class="amrit-icon">🪷</div>
         <div class="amrit-content">
@@ -497,15 +1068,19 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         </div>
       </div>
     </div>
+
+    <!-- Today's result -->
     <div class="result" id="result">
-      <div class="result-section-header">
-        <div class="result-section-label">ಇಂದಿನ ಶುಭಾಶುಭ / Today's Reading</div>
-        <div class="result-section-date" id="res-section-date"></div>
+      <div class="result-header">
+        <div class="result-label">ಇಂದಿನ ಶುಭಾಶುಭ / Today's Reading</div>
+        <div class="result-date" id="res-section-date"></div>
       </div>
-      <div class="result-top">
-        <div class="result-greeting">Reading for</div>
-        <div class="result-name" id="res-name"></div>
-        <div class="result-place" id="res-place"></div>
+      <div class="result-name-block">
+        <div>
+          <div class="result-for">Reading for</div>
+          <div class="result-name" id="res-name"></div>
+          <div class="result-place" id="res-place"></div>
+        </div>
       </div>
       <div class="nak-grid">
         <div class="nak-card">
@@ -527,8 +1102,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         <div class="relation-text" id="res-relation"></div>
         <div id="res-badge"></div>
       </div>
-
-      <!-- Inauspicious nakshatra warning -->
       <div class="inauspicious-box" id="res-inauspicious" style="display:none;">
         <div class="inauspicious-icon" id="res-inauspicious-icon">⚠</div>
         <div class="inauspicious-content">
@@ -536,8 +1109,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
           <div class="inauspicious-text" id="res-inauspicious-text"></div>
         </div>
       </div>
-
-      <!-- Amrit Siddhi Yoga -->
       <div class="amrit-box" id="res-amrit" style="display:none;">
         <div class="amrit-icon">🪷</div>
         <div class="amrit-content">
@@ -545,8 +1116,6 @@ tbody td:first-child{color:var(--text);font-weight:400;}
           <div class="amrit-text" id="res-amrit-text"></div>
         </div>
       </div>
-
-      <!-- Rahu Kalam & Gulika Kalam -->
       <div class="kalam-section">
         <div class="kalam-title">ಇಂದಿನ ಅಶುಭ ಕಾಲ / Inauspicious timings today</div>
         <div class="kalam-grid">
@@ -565,43 +1134,48 @@ tbody td:first-child{color:var(--text);font-weight:400;}
         </div>
         <div class="kalam-note-small" id="kalam-place-note"></div>
       </div>
-
       <p class="source-note">Calculated using Lahiri ayanamsha · Same method as drikpanchang.com</p>
       <a class="verify-btn" id="drikBtn" href="https://www.drikpanchang.com/panchang/day-panchang.html" target="_blank">Verify on Drikpanchang ↗</a>
     </div>
-  </div>
+  </div><!-- /card -->
 
-  <!-- Kundli Section -->
+  <!-- KUNDLI SECTION -->
   <div class="kundli-section" id="kundliSection">
-    <div class="section-title">✦ &nbsp; Janma Kundli &nbsp; · &nbsp; ಜನ್ಮ ಕುಂಡಲಿ &nbsp; ✦</div>
-    <div class="kundli-name" id="kundli-name"></div>
-    <div class="kundli-sub" id="kundli-sub"></div>
-    <div style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಜನ್ಮ ನಕ್ಷತ್ರ / Nakshatra</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-nak"></div>
+    <div class="kundli-card">
+      <div class="section-title">Janma Kundli · ಜನ್ಮ ಕುಂಡಲಿ</div>
+      <div class="kundli-name" id="kundli-name"></div>
+      <div class="kundli-sub" id="kundli-sub"></div>
+      <div class="kundli-trio">
+        <div class="kundli-trio-item">
+          <div class="kundli-trio-label">ಜನ್ಮ ನಕ್ಷತ್ರ / Nakshatra</div>
+          <div class="kundli-trio-val" id="kundli-nak"></div>
+        </div>
+        <div class="kundli-trio-item">
+          <div class="kundli-trio-label">ಜನ್ಮ ರಾಶಿ / Rashi</div>
+          <div class="kundli-trio-val" id="kundli-rashi"></div>
+        </div>
+        <div class="kundli-trio-item">
+          <div class="kundli-trio-label">ಲಗ್ನ / Lagna</div>
+          <div class="kundli-trio-val" id="kundli-lagna"></div>
+        </div>
       </div>
-      <div style="color:var(--text-dim);font-size:1.2rem;align-self:center;">·</div>
-      <div style="text-align:center;">
-        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಜನ್ಮ ರಾಶಿ / Rashi</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-rashi"></div>
+      <div class="si-chart" id="siChart"></div>
+      <div class="planet-table-wrap">
+        <table class="planet-table">
+          <thead><tr>
+            <th>ಗ್ರಹ / Graha</th>
+            <th>ರಾಶಿ / Rasi</th>
+            <th>ಅಂಶ / Degrees</th>
+            <th>ನಕ್ಷತ್ರ / Nakshatra</th>
+            <th>ಪಾದ / Pada</th>
+          </tr></thead>
+          <tbody id="planetTableBody"></tbody>
+        </table>
       </div>
-      <div style="color:var(--text-dim);font-size:1.2rem;align-self:center;">·</div>
-      <div style="text-align:center;">
-        <div style="font-size:.65rem;letter-spacing:.1em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:.2rem;">ಲಗ್ನ / Lagna</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);" id="kundli-lagna"></div>
-      </div>
-    </div>
-    <div class="si-chart" id="siChart"></div>
-    <div class="planet-table-wrap">
-      <table class="planet-table">
-        <thead><tr><th>ಗ್ರಹ / Graha</th><th>ರಾಶಿ / Rasi</th><th>ಅಂಶ / Degrees</th><th>ನಕ್ಷತ್ರ / Nakshatra</th><th>ಪಾದ / Pada</th></tr></thead>
-        <tbody id="planetTableBody"></tbody>
-      </table>
     </div>
   </div>
 
-  <footer class="footer">Powered by Vedic Tara Bala · Lahiri Ayanamsha · ೨೭ ನಕ್ಷತ್ರಗಳು</footer>
+  <footer class="footer" style="margin-top:3rem;">Powered by Vedic Tara Bala · Lahiri Ayanamsha · ೨೭ ನಕ್ಷತ್ರಗಳು</footer>
 
   <button class="download-btn" id="downloadBtn" onclick="downloadPage()" style="display:none;">⬇ Download this page</button>
 
@@ -612,12 +1186,17 @@ tbody td:first-child{color:var(--text);font-weight:400;}
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>#</th><th>Name</th><th>Place</th><th>Birth nakshatra</th><th>Today's nakshatra</th><th>Tara Bala</th><th>Status</th><th>Time</th></tr></thead>
+        <thead><tr>
+          <th>#</th><th>Name</th><th>Place</th>
+          <th>Birth nakshatra</th><th>Today's nakshatra</th>
+          <th>Tara Bala</th><th>Status</th><th>Time</th>
+        </tr></thead>
         <tbody id="historyBody"></tbody>
       </table>
     </div>
   </div>
-</div>
+
+</div><!-- /page -->
 
 <script>
 // ═══════════════════════════════════════════════════════════
@@ -707,47 +1286,31 @@ function planetaryLongitudes(date){
   const ayanamsha=23.85267+(JD-2451545.0)/365.25*(50.27796/3600);
   const sid=lon=>n(n(lon)-ayanamsha);
 
-  // Sun (tropical longitude)
   const L_sun=n(280.46646+36000.76983*T+0.0003032*T*T);
   const M_sun=n(357.52911+35999.05029*T-0.0001537*T*T);
   const C_sun=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(r*M_sun)
               +(0.019993-0.000101*T)*Math.sin(r*2*M_sun)+0.000289*Math.sin(r*3*M_sun);
   const sun=sid(L_sun+C_sun);
-
-  // Moon
   const moon=moonLongitude(date);
-
-  // Mercury (mean elements)
   const L_me=n(252.2509+149474.0722*T);
   const M_me=n(174.7948+1516.6478*T);
   const me=sid(L_me+2.452*Math.sin(r*M_me)+0.555*Math.sin(r*2*M_me));
-
-  // Venus
   const L_ve=n(181.9798+58519.2130*T);
   const M_ve=n(50.4161+2145.5437*T);
   const ve=sid(L_ve+0.7758*Math.sin(r*M_ve)+0.0033*Math.sin(r*2*M_ve));
-
-  // Mars
   const L_ma=n(355.4330+19140.2993*T);
   const M_ma=n(19.3730+191.4483*T);
   const ma=sid(L_ma+10.6912*Math.sin(r*M_ma)+0.6228*Math.sin(r*2*M_ma)+0.0503*Math.sin(r*3*M_ma));
-
-  // Jupiter
   const L_ju=n(34.3515+3036.3027*T);
   const M_ju=n(20.9306+30.3479*T);
   const ju=sid(L_ju+5.5549*Math.sin(r*M_ju)+0.1683*Math.sin(r*2*M_ju));
-
-  // Saturn
   const L_sa=n(50.0774+1223.5110*T);
   const M_sa=n(316.9670+12.2312*T);
   const sa=sid(L_sa+6.3585*Math.sin(r*M_sa)+0.2204*Math.sin(r*2*M_sa));
-
-  // Rahu (True node) — mean node
   const rahu=sid(n(125.0445-1934.1362*T+0.0020754*T*T));
-  const ketu=sid(n(rahu+180+ayanamsha)); // opposite of Rahu (already sid adjusted)
+  const ketu=sid(n(rahu+180+ayanamsha));
 
-  // Ascendant — requires lat/lon; use stored birth geo if available
-  let asc=sun; // fallback
+  let asc=sun;
   if(lastBirthGeo){
     const lat=lastBirthGeo.lat*r;
     const LST=localSiderealTime(JD, lastBirthGeo.lon);
@@ -756,9 +1319,6 @@ function planetaryLongitudes(date){
     const ascTrop=Math.atan2(Math.cos(H),(-(Math.sin(H)*Math.cos(e)+Math.tan(lat)*Math.sin(e))))/r;
     asc=sid(n(ascTrop));
   }
-
-  // Retrograde check (simplified: planet behind sun in elongation for inner; neg speed for outer)
-  const isRetro=p=>false; // simplified — full retrograde needs 2-day comparison
 
   return [
     {name:"Asc (Lagna)", nameKn:"ಲಗ್ನ",    abbr:"As", abbrKn:"ಲ",  lon:asc,  retro:false, cls:"p-as"},
@@ -778,7 +1338,7 @@ function localSiderealTime(JD, lonDeg){
   const T=(JD-2451545)/36525;
   const GMST=280.46061837+360.98564736629*(JD-2451545)+0.000387933*T*T-T*T*T/38710000;
   const n=v=>{v=v%360;return v<0?v+360:v;};
-  return n(GMST+lonDeg)/15; // hours
+  return n(GMST+lonDeg)/15;
 }
 
 function rasiFn(lon){return Math.floor(lon/30);}
@@ -787,11 +1347,6 @@ function padaFn(lon){return Math.floor((lon%(360/27))/(360/108))+1;}
 
 // ═══════════════════════════════════════════════════════════
 // SOUTH INDIAN CHART
-// South Indian layout — fixed rasi positions in 4x4 grid:
-// Pi Ar Ta Ge
-// Aq ** ** Ca
-// Cp ** ** Le
-// Sg Sc Li Vi
 // ═══════════════════════════════════════════════════════════
 const SI_LAYOUT=[
   {rasi:11},{rasi:0},{rasi:1},{rasi:2},
@@ -810,7 +1365,6 @@ function buildSIChart(planets){
     byRasi[r].push(p);
   });
   const lagnaRasi=rasiFn(planets[0].lon);
-
   SI_LAYOUT.forEach(cell=>{
     const div=document.createElement('div');
     if(cell.centre){
@@ -818,19 +1372,13 @@ function buildSIChart(planets){
       div.innerHTML='<div class="centre-text">ಜನ್ಮ<br/>ಕುಂಡಲಿ</div>';
     } else {
       div.className='si-cell'+(cell.rasi===lagnaRasi?' lagna':'');
-      const rn=document.createElement('div');
-      rn.className='rasi-name';
-      rn.textContent=RASI_SHORT_KN[cell.rasi]+' / '+RASI_SHORT[cell.rasi];
-      div.appendChild(rn);
-      const rnum=document.createElement('div');
-      rnum.className='rasi-num';
-      rnum.textContent=cell.rasi+1;
-      div.appendChild(rnum);
+      const rn=document.createElement('div');rn.className='rasi-name';
+      rn.textContent=RASI_SHORT_KN[cell.rasi]+' / '+RASI_SHORT[cell.rasi];div.appendChild(rn);
+      const rnum=document.createElement('div');rnum.className='rasi-num';
+      rnum.textContent=cell.rasi+1;div.appendChild(rnum);
       (byRasi[cell.rasi]||[]).forEach(p=>{
-        const tag=document.createElement('span');
-        tag.className='planet-tag '+p.cls;
-        tag.textContent=p.abbrKn+(p.retro?'℞':'');
-        tag.title=p.nameKn+' / '+p.name;
+        const tag=document.createElement('span');tag.className='planet-tag '+p.cls;
+        tag.textContent=p.abbrKn+(p.retro?'℞':'');tag.title=p.nameKn+' / '+p.name;
         div.appendChild(tag);
       });
     }
@@ -839,19 +1387,14 @@ function buildSIChart(planets){
 }
 
 function buildPlanetTable(planets){
-  const tbody=document.getElementById('planetTableBody');
-  tbody.innerHTML='';
+  const tbody=document.getElementById('planetTableBody');tbody.innerHTML='';
   planets.forEach(p=>{
-    const rasi=rasiFn(p.lon);
-    const nak=nakFn(p.lon);
-    const pada=padaFn(p.lon);
-    const deg=(p.lon%30).toFixed(2)+'°';
+    const rasi=rasiFn(p.lon);const nak=nakFn(p.lon);const pada=padaFn(p.lon);const deg=(p.lon%30).toFixed(2)+'°';
     const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td><span class="planet-tag ${p.cls}" style="font-size:.72rem;">${p.abbrKn}</span> ${p.nameKn} <span style="color:var(--text-dim);font-size:.72rem;">/ ${p.name}</span>${p.retro?'<span class="retro-tag">℞</span>':''}</td>
-      <td>${RASIS_KN[rasi]} <span style="color:var(--text-dim);font-size:.72rem;">/ ${RASIS[rasi]}</span></td>
+    tr.innerHTML=`<td><span class="planet-tag ${p.cls}" style="font-size:.65rem;">${p.abbrKn}</span> ${p.nameKn} <span style="color:var(--ink3);font-size:.65rem;opacity:.5;">/ ${p.name}</span>${p.retro?'<span class="retro-tag">℞</span>':''}</td>
+      <td>${RASIS_KN[rasi]} <span style="color:var(--ink3);font-size:.65rem;opacity:.5;">/ ${RASIS[rasi]}</span></td>
       <td>${deg}</td>
-      <td>${nakshatras[nak].kn} <span style="color:var(--text-dim);font-size:.72rem;">/ ${nakshatras[nak].en}</span></td>
+      <td>${nakshatras[nak].kn} <span style="color:var(--ink3);font-size:.65rem;opacity:.5;">/ ${nakshatras[nak].en}</span></td>
       <td>${pada}</td>`;
     tbody.appendChild(tr);
   });
@@ -878,327 +1421,145 @@ async function findBirthNakshatra(){
   const errBox=document.getElementById('birthErrorBox');
   const foundBox=document.getElementById('foundNak');
   errBox.className='error-box'; foundBox.className='found-nak';
-
   if(!dateVal) return showBirthError('Please enter your date of birth.');
   if(!timeVal) return showBirthError('Please enter your time of birth.');
   if(!placeVal) return showBirthError('Please enter your place of birth.');
-
   const findBtn=document.querySelector('.find-btn');
   findBtn.textContent='Calculating...'; findBtn.disabled=true;
-
   try{
-    const geo=await geocode(placeVal);
-    lastBirthGeo=geo;
-
-    // Get timezone offset for birth place using Intl API (more accurate than lon/15)
-    // We estimate the IANA timezone from coordinates using longitude approximation
-    // then use the actual DST-aware offset from the JS Date object for the birth date
+    const geo=await geocode(placeVal);lastBirthGeo=geo;
     const [year,month,day]=dateVal.split('-').map(Number);
     const [hour,min]=timeVal.split(':').map(Number);
-
-    // Approximate timezone offset from longitude (±30min accuracy — good enough for nakshatra)
     const tzOffsetHours = geo.lon / 15;
-
     const localMs=Date.UTC(year,month-1,day,hour,min,0);
-    const birthUTC=new Date(localMs-tzOffsetHours*3600000);
-    lastBirthUTC=birthUTC;
-
-    const birthLon=moonLongitude(birthUTC);
-    foundBirthIdx=Math.floor(birthLon/(360/27));
-    const nak=nakshatras[foundBirthIdx];
-    const birthRasiIdx=Math.floor(birthLon/30);
-
-    // Found nakshatra + rashi box
-    document.getElementById('found-en').textContent=nak.en;
-    document.getElementById('found-kn').textContent=nak.kn;
-    document.getElementById('found-rashi-en').textContent=RASIS[birthRasiIdx];
-    document.getElementById('found-rashi-kn').textContent=RASIS_KN[birthRasiIdx];
+    const birthUTC=new Date(localMs-tzOffsetHours*3600000);lastBirthUTC=birthUTC;
+    const birthLon=moonLongitude(birthUTC);foundBirthIdx=Math.floor(birthLon/(360/27));
+    const nak=nakshatras[foundBirthIdx];const birthRasiIdx=Math.floor(birthLon/30);
+    document.getElementById('found-en').textContent=nak.en;document.getElementById('found-kn').textContent=nak.kn;
+    document.getElementById('found-rashi-en').textContent=RASIS[birthRasiIdx];document.getElementById('found-rashi-kn').textContent=RASIS_KN[birthRasiIdx];
     foundBox.classList.add('visible');
-
-    // Generate kundli
-    const planets=planetaryLongitudes(birthUTC);
-    const lagnaRasiIdx=Math.floor(planets[0].lon/30);
+    const planets=planetaryLongitudes(birthUTC);const lagnaRasiIdx=Math.floor(planets[0].lon/30);
     const name=document.getElementById('name').value.trim()||'Birth Chart';
     const dateDisplay=new Date(dateVal+'T'+timeVal).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-
     document.getElementById('kundli-name').textContent=name;
     document.getElementById('kundli-sub').textContent=`${timeVal} · ${geo.label} · ${dateDisplay}`;
     document.getElementById('kundli-nak').textContent=`${nak.kn} / ${nak.en}`;
     document.getElementById('kundli-rashi').textContent=`${RASIS_KN[birthRasiIdx]} / ${RASIS[birthRasiIdx]}`;
     document.getElementById('kundli-lagna').textContent=`${RASIS_KN[lagnaRasiIdx]} / ${RASIS[lagnaRasiIdx]}`;
-    buildSIChart(planets);
-    buildPlanetTable(planets);
+    buildSIChart(planets);buildPlanetTable(planets);
     document.getElementById('kundliSection').classList.add('visible');
     document.getElementById('kundliSection').scrollIntoView({behavior:'smooth',block:'start'});
-    document.getElementById('downloadBtn').style.display='inline-block';
-
-  }catch(err){
-    showBirthError(err.message||'Could not calculate. Please check your inputs.');
-    foundBirthIdx=-1;
-  }finally{
-    findBtn.textContent='Calculate nakshatra & generate Kundli ✦'; findBtn.disabled=false;
-  }
+    document.getElementById('downloadBtn').style.display='block';
+  }catch(err){showBirthError(err.message||'Could not calculate. Please check your inputs.');foundBirthIdx=-1;}
+  finally{findBtn.textContent='Calculate nakshatra & generate Kundli ✦'; findBtn.disabled=false;}
 }
-
-function showBirthError(msg){
-  const e=document.getElementById('birthErrorBox');
-  e.textContent=msg; e.classList.add('visible');
-  const fb=document.querySelector('.find-btn');
-  fb.textContent='Calculate nakshatra & generate Kundli ✦'; fb.disabled=false;
-}
+function showBirthError(msg){const e=document.getElementById('birthErrorBox');e.textContent=msg;e.classList.add('visible');const fb=document.querySelector('.find-btn');fb.textContent='Calculate nakshatra & generate Kundli ✦';fb.disabled=false;}
 
 // ═══════════════════════════════════════════════════════════
 // AMRIT SIDDHI YOGA
-// Formed when a specific weekday coincides with a specific nakshatra
-// vara: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
 // ═══════════════════════════════════════════════════════════
 const AMRIT_SIDDHI_COMBOS = {
-  0: { nak:'Hasta',      vara:'Sunday',    note:'Sunday + Hasta — excellent for new ventures, investments, health-related activities and buying property.' },
-  1: { nak:'Mrigashira', vara:'Monday',    note:'Monday + Mrigashira — highly auspicious for starting new work, travel, education and buying vehicles.' },
-  2: { nak:'Ashwini',    vara:'Tuesday',   note:'Tuesday + Ashwini — powerful for health, medicine, new beginnings and courage-based endeavours.' },
-  3: { nak:'Anuradha',   vara:'Wednesday', note:'Wednesday + Anuradha — ideal for business partnerships, commerce, signing agreements and investments.' },
-  4: { nak:'Pushya',     vara:'Thursday',  note:'Thursday + Pushya (Guru Pushya Yoga) — the most auspicious of all Amrit Siddhi combinations. Exceptional for buying gold, property, starting businesses and long-term investments.' },
-  5: { nak:'Revati',     vara:'Friday',    note:'Friday + Revati — very favourable for buying jewellery, luxury items, starting creative work and spiritual practices.' },
-  6: { nak:'Rohini',     vara:'Saturday',  note:'Saturday + Rohini — auspicious for agriculture, land purchases, long-term growth investments and laying foundations.' }
+  0:{nak:'Hasta',vara:'Sunday',note:'Sunday + Hasta — excellent for new ventures, investments, health-related activities and buying property.'},
+  1:{nak:'Mrigashira',vara:'Monday',note:'Monday + Mrigashira — highly auspicious for starting new work, travel, education and buying vehicles.'},
+  2:{nak:'Ashwini',vara:'Tuesday',note:'Tuesday + Ashwini — powerful for health, medicine, new beginnings and courage-based endeavours.'},
+  3:{nak:'Anuradha',vara:'Wednesday',note:'Wednesday + Anuradha — ideal for business partnerships, commerce, signing agreements and investments.'},
+  4:{nak:'Pushya',vara:'Thursday',note:'Thursday + Pushya (Guru Pushya Yoga) — the most auspicious of all Amrit Siddhi combinations. Exceptional for buying gold, property, starting businesses and long-term investments.'},
+  5:{nak:'Revati',vara:'Friday',note:'Friday + Revati — very favourable for buying jewellery, luxury items, starting creative work and spiritual practices.'},
+  6:{nak:'Rohini',vara:'Saturday',note:'Saturday + Rohini — auspicious for agriculture, land purchases, long-term growth investments and laying foundations.'}
 };
-
-function checkAmritSiddhi(varaNum, nakEn){
-  const combo = AMRIT_SIDDHI_COMBOS[varaNum];
-  if(combo && combo.nak === nakEn) return combo;
-  return null;
-}
-
-function applyAmritSiddhi(varaNum, nakEn, boxId, textId){
-  const box   = document.getElementById(boxId);
-  const textEl= document.getElementById(textId);
-  const yoga  = checkAmritSiddhi(varaNum, nakEn);
-  if(yoga){
-    const isGuru = varaNum === 4;
-    textEl.textContent = yoga.note + (isGuru ? '' : ' Works best for long-term investments and growth. Note: some astrologers advise against marriages during this yoga.');
-    box.style.display = 'flex';
-  } else {
-    box.style.display = 'none';
-  }
+function checkAmritSiddhi(varaNum,nakEn){const combo=AMRIT_SIDDHI_COMBOS[varaNum];if(combo&&combo.nak===nakEn)return combo;return null;}
+function applyAmritSiddhi(varaNum,nakEn,boxId,textId){
+  const box=document.getElementById(boxId);const textEl=document.getElementById(textId);
+  const yoga=checkAmritSiddhi(varaNum,nakEn);
+  if(yoga){const isGuru=varaNum===4;textEl.textContent=yoga.note+(isGuru?'':' Works best for long-term investments and growth. Note: some astrologers advise against marriages during this yoga.');box.style.display='flex';}
+  else{box.style.display='none';}
 }
 
 // ═══════════════════════════════════════════════════════════
 // INAUSPICIOUS NAKSHATRA CHECK
-// Bharani and Krittika are Ugra (fierce) nakshatras —
-// considered inauspicious for new beginnings and ceremonies.
-// Ardra, Ashlesha, Jyeshtha, Mula are also Ugra/Tikshna
-// but to a lesser degree — shown with a subdued note.
 // ═══════════════════════════════════════════════════════════
-const INAUSPICIOUS_NAKSHATRAS = {
-  "Bharani": {
-    level: "strong",
-    title: "Bharani — ಭರಣಿ · Inauspicious Nakshatra",
-    text: "Bharani is an Ugra (fierce) nakshatra ruled by Yama, the lord of death. This day is considered inauspicious for starting new ventures, marriages, travel, ceremonies or auspicious events. Suitable for tasks requiring courage, confrontation, or completion of difficult work."
-  },
-  "Krittika": {
-    level: "strong",
-    title: "Krittika — ಕೃತ್ತಿಕಾ · Inauspicious Nakshatra",
-    text: "Krittika is an Ugra-Misra (fierce-mixed) nakshatra associated with fire and sharp energy. It is generally avoided for auspicious ceremonies, new beginnings, and weddings. Activities involving fire rituals, purification, or cutting are acceptable."
-  },
-  "Ardra": {
-    level: "mild",
-    title: "Ardra — ಆರ್ದ್ರಾ · Use with caution",
-    text: "Ardra is a Tikshna (sharp/dreadful) nakshatra ruled by Rahu. It carries intense, turbulent energy. Generally avoided for auspicious events and new beginnings, though it is useful for activities involving research, destruction of obstacles, or bold action."
-  },
-  "Ashlesha": {
-    level: "mild",
-    title: "Ashlesha — ಆಶ್ಲೇಷಾ · Use with caution",
-    text: "Ashlesha is a Tikshna nakshatra ruled by Mercury with serpentine energy. It is typically avoided for auspicious activities, travel, or new endeavors. However it can be good for activities involving secrecy, research, or dealing with hidden matters."
-  },
-  "Jyeshtha": {
-    level: "mild",
-    title: "Jyeshtha — ಜ್ಯೇಷ್ಠಾ · Use with caution",
-    text: "Jyeshtha is a Tikshna nakshatra ruled by Mercury, associated with authority and power but also pride and conflict. Exercise caution for new ventures and ceremonies. Suitable for asserting authority or handling competitive situations."
-  },
-  "Mula": {
-    level: "mild",
-    title: "Mula — ಮೂಲ · Use with caution",
-    text: "Mula is a Tikshna (sharp) nakshatra ruled by Ketu, associated with roots and destruction before renewal. Often avoided for marriages, new ventures, and auspicious events — particularly the first three days. Good for research, introspection, and breaking old patterns."
-  }
+const INAUSPICIOUS_NAKSHATRAS={
+  "Bharani":{level:"strong",title:"Bharani — ಭರಣಿ · Inauspicious Nakshatra",text:"Bharani is an Ugra (fierce) nakshatra ruled by Yama, the lord of death. This day is considered inauspicious for starting new ventures, marriages, travel, ceremonies or auspicious events. Suitable for tasks requiring courage, confrontation, or completion of difficult work."},
+  "Krittika":{level:"strong",title:"Krittika — ಕೃತ್ತಿಕಾ · Inauspicious Nakshatra",text:"Krittika is an Ugra-Misra (fierce-mixed) nakshatra associated with fire and sharp energy. It is generally avoided for auspicious ceremonies, new beginnings, and weddings. Activities involving fire rituals, purification, or cutting are acceptable."},
+  "Ardra":{level:"mild",title:"Ardra — ಆರ್ದ್ರಾ · Use with caution",text:"Ardra is a Tikshna (sharp/dreadful) nakshatra ruled by Rahu. It carries intense, turbulent energy. Generally avoided for auspicious events and new beginnings, though it is useful for activities involving research, destruction of obstacles, or bold action."},
+  "Ashlesha":{level:"mild",title:"Ashlesha — ಆಶ್ಲೇಷಾ · Use with caution",text:"Ashlesha is a Tikshna nakshatra ruled by Mercury with serpentine energy. It is typically avoided for auspicious activities, travel, or new endeavors. However it can be good for activities involving secrecy, research, or dealing with hidden matters."},
+  "Jyeshtha":{level:"mild",title:"Jyeshtha — ಜ್ಯೇಷ್ಠಾ · Use with caution",text:"Jyeshtha is a Tikshna nakshatra ruled by Mercury, associated with authority and power but also pride and conflict. Exercise caution for new ventures and ceremonies. Suitable for asserting authority or handling competitive situations."},
+  "Mula":{level:"mild",title:"Mula — ಮೂಲ · Use with caution",text:"Mula is a Tikshna (sharp) nakshatra ruled by Ketu, associated with roots and destruction before renewal. Often avoided for marriages, new ventures, and auspicious events — particularly the first three days. Good for research, introspection, and breaking old patterns."}
 };
-
-function applyInauspiciousWarning(nakEn, boxId, titleId, textId){
-  const box = document.getElementById(boxId);
-  const info = INAUSPICIOUS_NAKSHATRAS[nakEn];
-  if(info){
-    document.getElementById(titleId).textContent = info.title;
-    document.getElementById(textId).textContent  = info.text;
-    box.style.display = 'flex';
-    // Strong = red warning, mild = amber subdued note
-    box.className = info.level === 'strong' ? 'inauspicious-box strong' : 'inauspicious-box mild';
-    // Set icon — ⚠ for strong, ℹ for mild
-    const iconEl = box.querySelector('.inauspicious-icon');
-    if(iconEl) iconEl.textContent = info.level === 'strong' ? '⚠' : 'ℹ';
-  } else {
-    box.style.display = 'none';
-  }
+function applyInauspiciousWarning(nakEn,boxId,titleId,textId){
+  const box=document.getElementById(boxId);const info=INAUSPICIOUS_NAKSHATRAS[nakEn];
+  if(info){document.getElementById(titleId).textContent=info.title;document.getElementById(textId).textContent=info.text;box.style.display='flex';box.className=info.level==='strong'?'inauspicious-box strong':'inauspicious-box mild';const iconEl=box.querySelector('.inauspicious-icon');if(iconEl)iconEl.textContent=info.level==='strong'?'⚠':'ℹ';}
+  else{box.style.display='none';}
 }
 
 // ═══════════════════════════════════════════════════════════
 // RAHU KALAM & GULIKA KALAM
-// Both are calculated from sunrise/sunset for the day.
-// Each day is split into 8 equal parts from sunrise to sunset.
-// Rahu Kalam and Gulika occupy one part each, varying by weekday.
 // ═══════════════════════════════════════════════════════════
-// Rahu Kalam slot index by weekday (Sun=0 … Sat=6)
-const RAHU_SLOTS  = [8,2,7,5,6,4,3]; // which 1/8th slot (1-based)
-const GULIKA_SLOTS= [6,5,4,3,2,1,7];
-
-function getSunriseSunset(lat, lon, date){
-  // Accurate sunrise/sunset using NOAA algorithm
-  const JD=date.getTime()/86400000+2440587.5;
-  const T=(JD-2451545)/36525;
-  const n=v=>{v=v%360;return v<0?v+360:v;};
-  const r=Math.PI/180;
-  const L0=n(280.46646+36000.76983*T);
-  const M =n(357.52911+35999.05029*T);
-  const C =(1.914602-0.004817*T)*Math.sin(r*M)+(0.019993-0.000101*T)*Math.sin(r*2*M);
-  const sunLon=n(L0+C);
-  const e=23.4397-0.0000004*T;
+const RAHU_SLOTS=[8,2,7,5,6,4,3];const GULIKA_SLOTS=[6,5,4,3,2,1,7];
+function getSunriseSunset(lat,lon,date){
+  const JD=date.getTime()/86400000+2440587.5,T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};const r=Math.PI/180;
+  const L0=n(280.46646+36000.76983*T),M=n(357.52911+35999.05029*T);
+  const C=(1.914602-0.004817*T)*Math.sin(r*M)+(0.019993-0.000101*T)*Math.sin(r*2*M);
+  const sunLon=n(L0+C);const e=23.4397-0.0000004*T;
   const decl=Math.asin(Math.sin(r*e)*Math.sin(r*sunLon))/r;
-  const cosH=( Math.cos(r*90.833) - Math.sin(r*lat)*Math.sin(r*decl) ) / ( Math.cos(r*lat)*Math.cos(r*decl) );
-  if(cosH>1||cosH<-1) return null; // polar day/night
+  const cosH=(Math.cos(r*90.833)-Math.sin(r*lat)*Math.sin(r*decl))/(Math.cos(r*lat)*Math.cos(r*decl));
+  if(cosH>1||cosH<-1)return null;
   const H=Math.acos(cosH)/r;
-  // Solar noon in UTC hours
-  const GMST=n(280.46061837+360.98564736629*(JD-2451545))/15;
-  const solarNoon=12+(lon<0?Math.abs(lon):- lon)/15 - (C*4/60);
-  const sunriseUTC=solarNoon - H/15;
-  const sunsetUTC =solarNoon + H/15;
-  return {sunrise:sunriseUTC, sunset:sunsetUTC};
+  const solarNoon=12+(lon<0?Math.abs(lon):-lon)/15-(C*4/60);
+  return{sunrise:solarNoon-H/15,sunset:solarNoon+H/15};
 }
-
-function formatHoursToTime(utcHours, tzOffsetHours){
-  const localH=(utcHours+tzOffsetHours+24)%24;
-  const h=Math.floor(localH);
-  const m=Math.round((localH-h)*60);
-  const hh=String(h%12||12).padStart(2,'0');
-  const mm=String(m).padStart(2,'0');
-  const ampm=h<12?'AM':'PM';
-  return `${hh}:${mm} ${ampm}`;
+function formatHoursToTime(utcHours,tzOffsetHours){
+  const localH=(utcHours+tzOffsetHours+24)%24;const h=Math.floor(localH);const m=Math.round((localH-h)*60);
+  const hh=String(h%12||12).padStart(2,'0');const mm=String(m).padStart(2,'0');const ampm=h<12?'AM':'PM';return`${hh}:${mm} ${ampm}`;
 }
-
-function computeKalamTimings(lat, lon, tzOffsetHours, date){
-  const ss=getSunriseSunset(lat,lon,date);
-  if(!ss) return null;
-  const {sunrise,sunset}=ss;
-  const dayLen=(sunset-sunrise)/8; // each slot in hours (UTC)
-  const dow=date.getDay(); // 0=Sun
-  const rahuSlot =RAHU_SLOTS[dow]-1;
-  const guliSlot =GULIKA_SLOTS[dow]-1;
-  const rahuStart =sunrise+rahuSlot*dayLen;
-  const rahuEnd   =rahuStart+dayLen;
-  const guliStart =sunrise+guliSlot*dayLen;
-  const guliEnd   =guliStart+dayLen;
-  return{
-    rahu:`${formatHoursToTime(rahuStart,tzOffsetHours)} – ${formatHoursToTime(rahuEnd,tzOffsetHours)}`,
-    guli:`${formatHoursToTime(guliStart,tzOffsetHours)} – ${formatHoursToTime(guliEnd,tzOffsetHours)}`
-  };
+function computeKalamTimings(lat,lon,tzOffsetHours,date){
+  const ss=getSunriseSunset(lat,lon,date);if(!ss)return null;
+  const{sunrise,sunset}=ss;const dayLen=(sunset-sunrise)/8;const dow=date.getDay();
+  const rahuSlot=RAHU_SLOTS[dow]-1;const guliSlot=GULIKA_SLOTS[dow]-1;
+  const rahuStart=sunrise+rahuSlot*dayLen,rahuEnd=rahuStart+dayLen;
+  const guliStart=sunrise+guliSlot*dayLen,guliEnd=guliStart+dayLen;
+  return{rahu:`${formatHoursToTime(rahuStart,tzOffsetHours)} – ${formatHoursToTime(rahuEnd,tzOffsetHours)}`,guli:`${formatHoursToTime(guliStart,tzOffsetHours)} – ${formatHoursToTime(guliEnd,tzOffsetHours)}`};
 }
 
 // ═══════════════════════════════════════════════════════════
 // TODAY'S NAKSHATRA CALCULATE
 // ═══════════════════════════════════════════════════════════
-function estimateNakshatraEnd(date,currentIdx){
-  const nakSize=360/27,currentLon=moonLongitude(date);
-  const nextBoundary=(currentIdx+1)*nakSize;
-  const remaining=((nextBoundary-currentLon)%nakSize+nakSize)%nakSize;
-  return new Date(date.getTime()+remaining/0.55*3600000);
-}
+function estimateNakshatraEnd(date,currentIdx){const nakSize=360/27,currentLon=moonLongitude(date);const nextBoundary=(currentIdx+1)*nakSize;const remaining=((nextBoundary-currentLon)%nakSize+nakSize)%nakSize;return new Date(date.getTime()+remaining/0.55*3600000);}
 
 async function calculate(){
-  const name=document.getElementById('name').value.trim();
-  const place=document.getElementById('place').value.trim();
-  const errBox=document.getElementById('errorBox');
-  const result=document.getElementById('result');
-  const btn=document.getElementById('submitBtn');
-  errBox.className='error-box'; result.className='result';
-
-  if(!name) return showError('Please enter your name.');
-  if(!place) return showError('Please enter your current city or place.');
-
+  const name=document.getElementById('name').value.trim();const place=document.getElementById('place').value.trim();
+  const errBox=document.getElementById('errorBox');const result=document.getElementById('result');const btn=document.getElementById('submitBtn');
+  errBox.className='error-box';result.className='result';
+  if(!name)return showError('Please enter your name.');if(!place)return showError('Please enter your current city or place.');
   let birthIdx=-1;
-  if(activeTab==='know'){
-    const v=document.getElementById('nakshatra').value;
-    if(v==='') return showError('Please select your birth nakshatra.');
-    birthIdx=parseInt(v);
-  } else {
-    if(foundBirthIdx===-1) return showError('Please use "Calculate nakshatra & generate Kundli" above first.');
-    birthIdx=foundBirthIdx;
-  }
-
-  btn.textContent='Looking up location...'; btn.disabled=true;
-
+  if(activeTab==='know'){const v=document.getElementById('nakshatra').value;if(v==='')return showError('Please select your birth nakshatra.');birthIdx=parseInt(v);}
+  else{if(foundBirthIdx===-1)return showError('Please use "Calculate nakshatra & generate Kundli" above first.');birthIdx=foundBirthIdx;}
+  btn.textContent='Looking up location...';btn.disabled=true;
   try{
-    const geo=await geocode(place);
-    let drikUrl='https://www.drikpanchang.com/panchang/day-panchang.html';
-    try{
-      const dr=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1&extratags=1`,{headers:{'Accept-Language':'en'}});
-      const dd=await dr.json();
-      if(dd.length){const tags=dd[0].extratags||{};const gid=tags['geonames:ref']||tags['geonames_id']||tags['geonames:id'];
-        drikUrl=gid?`https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=${gid}`:`https://www.drikpanchang.com/location/panchang-city-finder.html`;}
-    }catch(e){}
+    const geo=await geocode(place);let drikUrl='https://www.drikpanchang.com/panchang/day-panchang.html';
+    try{const dr=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1&extratags=1`,{headers:{'Accept-Language':'en'}});const dd=await dr.json();if(dd.length){const tags=dd[0].extratags||{};const gid=tags['geonames:ref']||tags['geonames_id']||tags['geonames:id'];drikUrl=gid?`https://www.drikpanchang.com/panchang/day-panchang.html?geoname-id=${gid}`:`https://www.drikpanchang.com/location/panchang-city-finder.html`;}}catch(e){}
     document.getElementById('drikBtn').href=drikUrl;
-
-    const now=new Date();
-    const moonLon=moonLongitude(now);
-    const todayIdx=Math.floor(moonLon/(360/27));
-    const endDate=estimateNakshatraEnd(now,todayIdx);
-    const endTimeStr=endDate.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    const now=new Date();const moonLon=moonLongitude(now);const todayIdx=Math.floor(moonLon/(360/27));
+    const endDate=estimateNakshatraEnd(now,todayIdx);const endTimeStr=endDate.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
     const dateStr=now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
     const tara=taras[((todayIdx-birthIdx+27)%27)%9];
-
-    document.getElementById('res-name').textContent=name;
-    document.getElementById('res-place').textContent=geo.label;
-    document.getElementById('res-section-date').textContent=dateStr;
-    document.getElementById('res-today-en').textContent=nakshatras[todayIdx].en;
-    document.getElementById('res-today-kn').textContent=nakshatras[todayIdx].kn;
-    document.getElementById('res-date').textContent=dateStr;
+    document.getElementById('res-name').textContent=name;document.getElementById('res-place').textContent=geo.label;
+    document.getElementById('res-section-date').textContent=dateStr;document.getElementById('res-today-en').textContent=nakshatras[todayIdx].en;
+    document.getElementById('res-today-kn').textContent=nakshatras[todayIdx].kn;document.getElementById('res-date').textContent=dateStr;
     document.getElementById('res-ends').textContent=`Ends approx. ${endTimeStr}`;
-    document.getElementById('res-birth-en').textContent=nakshatras[birthIdx].en;
-    document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
-
-    // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
-    const nakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[todayIdx].en];
-    if(nakInfo && nakInfo.level === 'strong'){
-      document.getElementById('res-relation').textContent = 'This day falls on ' + nakshatras[todayIdx].en + ', an Ugra (fierce) nakshatra. Regardless of your Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
-      document.getElementById('res-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
-    } else {
-      document.getElementById('res-relation').textContent=tara.d;
-      document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
-    }
-
-    // Inauspicious nakshatra check
-    applyInauspiciousWarning(nakshatras[todayIdx].en, 'res-inauspicious', 'res-inauspicious-title', 'res-inauspicious-text');
-
-    // Amrit Siddhi Yoga check
-    applyAmritSiddhi(now.getDay(), nakshatras[todayIdx].en, 'res-amrit', 'res-amrit-text');
-
-    // Rahu Kalam & Gulika Kalam
-    const tzOffsetHours = -now.getTimezoneOffset()/60;
-    const kalamGeo = geo; // use current place for timings
-    const kalams = computeKalamTimings(kalamGeo.lat, kalamGeo.lon, tzOffsetHours, now);
-    if(kalams){
-      document.getElementById('rahu-time').textContent = kalams.rahu;
-      document.getElementById('guli-time').textContent  = kalams.guli;
-      document.getElementById('kalam-place-note').textContent = `Timings for ${kalamGeo.label}`;
-    } else {
-      document.getElementById('rahu-time').textContent = 'N/A';
-      document.getElementById('guli-time').textContent  = 'N/A';
-    }
-
-    result.classList.add('visible');
-    result.scrollIntoView({behavior:'smooth',block:'nearest'});
-    document.getElementById('downloadBtn').style.display='inline-block';
-
-    addToHistory({name,place:geo.label,
-      birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,
-      todayNak:`${nakshatras[todayIdx].en} (${nakshatras[todayIdx].kn})`,
-      taraName:tara.name,status:tara.s});
-
+    document.getElementById('res-birth-en').textContent=nakshatras[birthIdx].en;document.getElementById('res-birth-kn').textContent=nakshatras[birthIdx].kn;
+    const nakInfo=INAUSPICIOUS_NAKSHATRAS[nakshatras[todayIdx].en];
+    if(nakInfo&&nakInfo.level==='strong'){document.getElementById('res-relation').textContent='This day falls on '+nakshatras[todayIdx].en+', an Ugra (fierce) nakshatra. Regardless of your Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';document.getElementById('res-badge').innerHTML=`<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;}
+    else{document.getElementById('res-relation').textContent=tara.d;document.getElementById('res-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;}
+    applyInauspiciousWarning(nakshatras[todayIdx].en,'res-inauspicious','res-inauspicious-title','res-inauspicious-text');
+    applyAmritSiddhi(now.getDay(),nakshatras[todayIdx].en,'res-amrit','res-amrit-text');
+    const tzOffsetHours=-now.getTimezoneOffset()/60;const kalams=computeKalamTimings(geo.lat,geo.lon,tzOffsetHours,now);
+    if(kalams){document.getElementById('rahu-time').textContent=kalams.rahu;document.getElementById('guli-time').textContent=kalams.guli;document.getElementById('kalam-place-note').textContent=`Timings for ${geo.label}`;}
+    else{document.getElementById('rahu-time').textContent='N/A';document.getElementById('guli-time').textContent='N/A';}
+    result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'nearest'});
+    document.getElementById('downloadBtn').style.display='block';
+    addToHistory({name,place:geo.label,birthNak:`${nakshatras[birthIdx].en} (${nakshatras[birthIdx].kn})`,todayNak:`${nakshatras[todayIdx].en} (${nakshatras[todayIdx].kn})`,taraName:tara.name,status:tara.s});
   }catch(err){showError(err.message||'Something went wrong. Please try again.');}
   finally{btn.textContent='Is Today Auspicious for you?';btn.disabled=false;}
 }
@@ -1206,401 +1567,154 @@ async function calculate(){
 // ═══════════════════════════════════════════════════════════
 // TITHI, MASA, PAKSHA, VARA CALCULATION
 // ═══════════════════════════════════════════════════════════
-const TITHIS_EN = [
-  "Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami",
-  "Shashthi","Saptami","Ashtami","Navami","Dashami",
-  "Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima/Amavasya"
-];
-const TITHIS_KN = [
-  "ಪ್ರತಿಪದ","ದ್ವಿತೀಯ","ತೃತೀಯ","ಚತುರ್ಥಿ","ಪಂಚಮಿ",
-  "ಷಷ್ಠಿ","ಸಪ್ತಮಿ","ಅಷ್ಟಮಿ","ನವಮಿ","ದಶಮಿ",
-  "ಏಕಾದಶಿ","ದ್ವಾದಶಿ","ತ್ರಯೋದಶಿ","ಚತುರ್ದಶಿ","ಪೂರ್ಣಿಮಾ/ಅಮಾವಾಸ್ಯೆ"
-];
+const TITHIS_EN=["Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami","Shashthi","Saptami","Ashtami","Navami","Dashami","Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima/Amavasya"];
+const TITHIS_KN=["ಪ್ರತಿಪದ","ದ್ವಿತೀಯ","ತೃತೀಯ","ಚತುರ್ಥಿ","ಪಂಚಮಿ","ಷಷ್ಠಿ","ಸಪ್ತಮಿ","ಅಷ್ಟಮಿ","ನವಮಿ","ದಶಮಿ","ಏಕಾದಶಿ","ದ್ವಾದಶಿ","ತ್ರಯೋದಶಿ","ಚತುರ್ದಶಿ","ಪೂರ್ಣಿಮಾ/ಅಮಾವಾಸ್ಯೆ"];
+const MASAS_EN=["Chaitra","Vaishakha","Jyeshtha","Ashadha","Shravana","Bhadrapada","Ashwin","Kartika","Margashirsha","Pausha","Magha","Phalguna"];
+const MASAS_KN=["ಚೈತ್ರ","ವೈಶಾಖ","ಜ್ಯೇಷ್ಠ","ಆಷಾಢ","ಶ್ರಾವಣ","ಭಾದ್ರಪದ","ಆಶ್ವಿನ","ಕಾರ್ತಿಕ","ಮಾರ್ಗಶಿರ","ಪೌಷ","ಮಾಘ","ಫಾಲ್ಗುಣ"];
+const VARAS_EN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const VARAS_KN=["ಭಾನುವಾರ","ಸೋಮವಾರ","ಮಂಗಳವಾರ","ಬುಧವಾರ","ಗುರುವಾರ","ಶುಕ್ರವಾರ","ಶನಿವಾರ"];
+const SPECIAL_TITHIS={"Ekadashi":"Ekadashi — a sacred day for fasting and devotion to Vishnu","Purnima/Amavasya":null,"Chaturthi":"Chaturthi — auspicious for Ganesha worship","Ashtami":"Ashtami — significant for Durga and Shiva worship","Navami":"Navami — auspicious for Devi worship","Chaturdashi":"Chaturdashi — associated with Shiva and ancestral rites","Dwadashi":"Dwadashi — auspicious, follows Ekadashi fast-breaking"};
 
-const MASAS_EN = [
-  "Chaitra","Vaishakha","Jyeshtha","Ashadha","Shravana","Bhadrapada",
-  "Ashwin","Kartika","Margashirsha","Pausha","Magha","Phalguna"
+const FESTIVALS=[
+  {masa:0,p:'S',t:1,nak:null,vara:null,en:"Ugadi / Gudi Padwa",kn:"ಯುಗಾದಿ",note:"Telugu & Kannada New Year — marks the beginning of a new Samvatsara."},
+  {masa:0,p:'S',t:9,nak:"Punarvasu",vara:null,en:"Rama Navami",kn:"ರಾಮ ನವಮಿ",note:"Birthday of Lord Rama — observed with fasting and Ramayana recitation."},
+  {masa:1,p:'S',t:3,nak:null,vara:null,en:"Akshaya Tritiya",kn:"ಅಕ್ಷಯ ತೃತೀಯ",note:"The imperishable third — auspicious for new beginnings, gold purchases and charity."},
+  {masa:2,p:'S',t:11,nak:null,vara:null,en:"Nirjala Ekadashi",kn:"ನಿರ್ಜಲ ಏಕಾದಶಿ",note:"The strictest Ekadashi fast — observed without even water."},
+  {masa:3,p:'S',t:2,nak:null,vara:null,en:"Ratha Yatra",kn:"ರಥ ಯಾತ್ರೆ",note:"Chariot festival of Lord Jagannath — one of the largest Hindu processions."},
+  {masa:4,p:'S',t:5,nak:null,vara:null,en:"Naga Panchami",kn:"ನಾಗ ಪಂಚಮಿ",note:"Worship of serpent deities — milk offerings and prayers for protection."},
+  {masa:4,p:'S',t:15,nak:"Shravana",vara:null,en:"Shravana Purnima / Raksha Bandhan",kn:"ರಕ್ಷಾ ಬಂಧನ",note:"Festival of the sacred thread — sisters tie rakhi to brothers for protection."},
+  {masa:4,p:'K',t:8,nak:"Rohini",vara:null,en:"Krishna Janmashtami",kn:"ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ",note:"Birthday of Lord Krishna — celebrated with midnight worship, fasting and devotional singing."},
+  {masa:5,p:'S',t:4,nak:null,vara:null,en:"Ganesh Chaturthi",kn:"ಗಣೇಶ ಚತುರ್ಥಿ",note:"Birth of Lord Ganesha — 10-day festival with clay idol installation and immersion."},
+  {masa:5,p:'K',t:8,nak:null,vara:null,en:"Radha Ashtami",kn:"ರಾಧಾ ಅಷ್ಟಮಿ",note:"Birthday of Radha — celebrated with devotional music and fasting."},
+  {masa:6,p:'S',t:1,nak:null,vara:null,en:"Navratri begins",kn:"ನವರಾತ್ರಿ ಆರಂಭ",note:"Nine nights of Devi worship — each night dedicated to a form of Durga."},
+  {masa:6,p:'S',t:10,nak:null,vara:null,en:"Vijayadashami / Dasara",kn:"ವಿಜಯದಶಮಿ / ದಸರಾ",note:"Victory of good over evil — celebrates Rama's victory over Ravana and Durga over Mahishasura."},
+  {masa:6,p:'K',t:13,nak:null,vara:null,en:"Dhanteras",kn:"ಧನ್ತೇರಸ್",note:"First day of Diwali — auspicious for purchasing gold, silver and new utensils."},
+  {masa:6,p:'K',t:14,nak:null,vara:null,en:"Naraka Chaturdashi / Choti Diwali",kn:"ನರಕ ಚತುರ್ದಶಿ",note:"Celebrates Krishna's victory over Narakasura — early morning oil bath is traditional."},
+  {masa:6,p:'K',t:15,nak:null,vara:null,en:"Diwali / Deepavali",kn:"ದೀಪಾವಳಿ",note:"Festival of lights — Lakshmi puja, fireworks and exchange of sweets."},
+  {masa:6,p:'S',t:2,nak:null,vara:null,en:"Bhai Dooj / Yama Dwitiya",kn:"ಭಾಯಿ ದೂಜ್",note:"Brothers and sisters celebrate their bond — sisters pray for brothers' long life."},
+  {masa:7,p:'S',t:6,nak:null,vara:null,en:"Skanda Sashti",kn:"ಸ್ಕಂದ ಷಷ್ಠಿ",note:"Six-day fast culminating in worship of Lord Murugan / Kartikeya."},
+  {masa:7,p:'S',t:12,nak:null,vara:null,en:"Tulasi Vivah",kn:"ತುಲಸಿ ವಿವಾಹ",note:"Symbolic marriage of Tulasi plant to Lord Vishnu — marks the start of the wedding season."},
+  {masa:7,p:'S',t:15,nak:null,vara:null,en:"Kartika Purnima / Dev Diwali",kn:"ಕಾರ್ತಿಕ ಪೂರ್ಣಿಮಾ",note:"The most sacred Purnima — bathing in holy rivers is considered equivalent to all pilgrimages."},
+  {masa:8,p:'S',t:3,nak:null,vara:null,en:"Vivah Panchami",kn:"ವಿವಾಹ ಪಂಚಮಿ",note:"Commemorates the wedding of Rama and Sita — auspicious for marriages."},
+  {masa:9,p:'S',t:1,nak:null,vara:null,en:"Makar Sankranti",kn:"ಮಕರ ಸಂಕ್ರಾಂತಿ",note:"Sun's entry into Capricorn — harvest festival, kite flying, sesame sweets."},
+  {masa:10,p:'S',t:5,nak:null,vara:null,en:"Vasant Panchami / Saraswati Puja",kn:"ವಸಂತ ಪಂಚಮಿ",note:"Marks the onset of spring — worship of Goddess Saraswati, goddess of knowledge."},
+  {masa:10,p:'K',t:14,nak:"Shatabhisha",vara:null,en:"Maha Shivaratri",kn:"ಮಹಾ ಶಿವರಾತ್ರಿ",note:"The great night of Shiva — night-long vigil, fasting and Shiva puja with bael leaves."},
+  {masa:11,p:'S',t:1,nak:null,vara:null,en:"Ugadi / Holi (Dhuleti)",kn:"ಹೋಳಿ",note:"Festival of colours — marks the end of winter and triumph of good over evil."},
+  {masa:11,p:'S',t:15,nak:null,vara:null,en:"Holi Purnima",kn:"ಹೋಳಿ ಹುಣ್ಣಿಮೆ",note:"Full moon before Holi — Holika Dahan bonfire ritual performed this night."},
+  {masa:null,p:'K',t:14,nak:null,vara:null,en:"Masik Shivaratri",kn:"ಮಾಸಿಕ ಶಿವರಾತ್ರಿ",note:"Monthly Shivaratri — Krishna Chaturdashi observed with Shiva worship and fasting each month."},
+  {masa:null,p:null,t:null,nak:null,vara:1,en:"Soma Pradosh / Mondays",kn:"ಸೋಮವಾರ",note:"Mondays are especially sacred to Lord Shiva — fasting on this day is auspicious."},
+  {masa:null,p:null,t:null,nak:"Pushya",vara:null,en:"Pushya Nakshatra",kn:"ಪುಷ್ಯ ನಕ್ಷತ್ರ",note:"One of the most auspicious nakshatras — ideal for starting new ventures, education and purchases."},
+  {masa:null,p:null,t:null,nak:"Rohini",vara:null,en:"Rohini Nakshatra",kn:"ರೋಹಿಣಿ ನಕ್ಷತ್ರ",note:"Beloved nakshatra of the Moon — favourable for all auspicious activities."},
 ];
-const MASAS_KN = [
-  "ಚೈತ್ರ","ವೈಶಾಖ","ಜ್ಯೇಷ್ಠ","ಆಷಾಢ","ಶ್ರಾವಣ","ಭಾದ್ರಪದ",
-  "ಆಶ್ವಿನ","ಕಾರ್ತಿಕ","ಮಾರ್ಗಶಿರ","ಪೌಷ","ಮಾಘ","ಫಾಲ್ಗುಣ"
-];
-
-const VARAS_EN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const VARAS_KN = ["ಭಾನುವಾರ","ಸೋಮವಾರ","ಮಂಗಳವಾರ","ಬುಧವಾರ","ಗುರುವಾರ","ಶುಕ್ರವಾರ","ಶನಿವಾರ"];
-
-// Special tithi names
-const SPECIAL_TITHIS = {
-  "Ekadashi": "Ekadashi — a sacred day for fasting and devotion to Vishnu",
-  "Purnima/Amavasya": null, // handled separately
-  "Chaturthi": "Chaturthi — auspicious for Ganesha worship",
-  "Ashtami": "Ashtami — significant for Durga and Shiva worship",
-  "Navami": "Navami — auspicious for Devi worship",
-  "Chaturdashi": "Chaturdashi — associated with Shiva and ancestral rites",
-  "Dwadashi": "Dwadashi — auspicious, follows Ekadashi fast-breaking"
-};
-
-// ═══════════════════════════════════════════════════════════
-// FESTIVAL LOOKUP
-// Each festival defined by: masa (0–11), paksha (S=Shukla, K=Krishna),
-// tithi (1–15, where 15 = Purnima for S or Amavasya for K),
-// and optionally nakshatra or vara. null = any.
-// ═══════════════════════════════════════════════════════════
-const FESTIVALS = [
-  // masa, paksha, tithi, nakshatra(en or null), vara(0-6 or null), name_en, name_kn, note
-  {masa:0, p:'S', t:1,  nak:null, vara:null, en:"Ugadi / Gudi Padwa",           kn:"ಯುಗಾದಿ",            note:"Telugu & Kannada New Year — marks the beginning of a new Samvatsara."},
-  {masa:0, p:'S', t:9,  nak:"Punarvasu", vara:null, en:"Rama Navami",            kn:"ರಾಮ ನವಮಿ",          note:"Birthday of Lord Rama — observed with fasting and Ramayana recitation."},
-  {masa:1, p:'S', t:3,  nak:null, vara:null, en:"Akshaya Tritiya",               kn:"ಅಕ್ಷಯ ತೃತೀಯ",       note:"The imperishable third — auspicious for new beginnings, gold purchases and charity."},
-  {masa:2, p:'S', t:11, nak:null, vara:null, en:"Nirjala Ekadashi",              kn:"ನಿರ್ಜಲ ಏಕಾದಶಿ",      note:"The strictest Ekadashi fast — observed without even water."},
-  {masa:3, p:'S', t:2,  nak:null, vara:null, en:"Ratha Yatra",                   kn:"ರಥ ಯಾತ್ರೆ",          note:"Chariot festival of Lord Jagannath — one of the largest Hindu processions."},
-  {masa:4, p:'S', t:5,  nak:null, vara:null, en:"Naga Panchami",                 kn:"ನಾಗ ಪಂಚಮಿ",         note:"Worship of serpent deities — milk offerings and prayers for protection."},
-  {masa:4, p:'S', t:15, nak:"Shravana", vara:null, en:"Shravana Purnima / Raksha Bandhan", kn:"ರಕ್ಷಾ ಬಂಧನ", note:"Festival of the sacred thread — sisters tie rakhi to brothers for protection."},
-  {masa:4, p:'K', t:8,  nak:"Rohini",   vara:null, en:"Krishna Janmashtami",     kn:"ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ",   note:"Birthday of Lord Krishna — celebrated with midnight worship, fasting and devotional singing."},
-  {masa:5, p:'S', t:4,  nak:null, vara:null, en:"Ganesh Chaturthi",              kn:"ಗಣೇಶ ಚತುರ್ಥಿ",      note:"Birth of Lord Ganesha — 10-day festival with clay idol installation and immersion."},
-  {masa:5, p:'K', t:8,  nak:null, vara:null, en:"Radha Ashtami",                 kn:"ರಾಧಾ ಅಷ್ಟಮಿ",        note:"Birthday of Radha — celebrated with devotional music and fasting."},
-  {masa:6, p:'S', t:1,  nak:null, vara:null, en:"Navratri begins",               kn:"ನವರಾತ್ರಿ ಆರಂಭ",      note:"Nine nights of Devi worship — each night dedicated to a form of Durga."},
-  {masa:6, p:'S', t:10, nak:null, vara:null, en:"Vijayadashami / Dasara",        kn:"ವಿಜಯದಶಮಿ / ದಸರಾ",   note:"Victory of good over evil — celebrates Rama's victory over Ravana and Durga over Mahishasura."},
-  {masa:6, p:'K', t:13, nak:null, vara:null, en:"Dhanteras",                     kn:"ಧನ್ತೇರಸ್",           note:"First day of Diwali — auspicious for purchasing gold, silver and new utensils."},
-  {masa:6, p:'K', t:14, nak:null, vara:null, en:"Naraka Chaturdashi / Choti Diwali", kn:"ನರಕ ಚತುರ್ದಶಿ",  note:"Celebrates Krishna's victory over Narakasura — early morning oil bath is traditional."},
-  {masa:6, p:'K', t:15, nak:null, vara:null, en:"Diwali / Deepavali",            kn:"ದೀಪಾವಳಿ",            note:"Festival of lights — Lakshmi puja, fireworks and exchange of sweets."},
-  {masa:6, p:'S', t:2,  nak:null, vara:null, en:"Bhai Dooj / Yama Dwitiya",      kn:"ಭಾಯಿ ದೂಜ್",          note:"Brothers and sisters celebrate their bond — sisters pray for brothers' long life."},
-  {masa:7, p:'S', t:6,  nak:null, vara:null, en:"Skanda Sashti",                 kn:"ಸ್ಕಂದ ಷಷ್ಠಿ",        note:"Six-day fast culminating in worship of Lord Murugan / Kartikeya."},
-  {masa:7, p:'S', t:12, nak:null, vara:null, en:"Tulasi Vivah",                  kn:"ತುಲಸಿ ವಿವಾಹ",        note:"Symbolic marriage of Tulasi plant to Lord Vishnu — marks the start of the wedding season."},
-  {masa:7, p:'S', t:15, nak:null, vara:null, en:"Kartika Purnima / Dev Diwali",  kn:"ಕಾರ್ತಿಕ ಪೂರ್ಣಿಮಾ",   note:"The most sacred Purnima — bathing in holy rivers is considered equivalent to all pilgrimages."},
-  {masa:8, p:'S', t:3,  nak:null, vara:null, en:"Vivah Panchami",                kn:"ವಿವಾಹ ಪಂಚಮಿ",        note:"Commemorates the wedding of Rama and Sita — auspicious for marriages."},
-  {masa:9, p:'S', t:1,  nak:null, vara:null, en:"Makar Sankranti",               kn:"ಮಕರ ಸಂಕ್ರಾಂತಿ",      note:"Sun's entry into Capricorn — harvest festival, kite flying, sesame sweets."},
-  {masa:10,p:'S', t:5,  nak:null, vara:null, en:"Vasant Panchami / Saraswati Puja", kn:"ವಸಂತ ಪಂಚಮಿ",      note:"Marks the onset of spring — worship of Goddess Saraswati, goddess of knowledge."},
-  {masa:10,p:'K', t:14, nak:"Shatabhisha", vara:null, en:"Maha Shivaratri",      kn:"ಮಹಾ ಶಿವರಾತ್ರಿ",      note:"The great night of Shiva — night-long vigil, fasting and Shiva puja with bael leaves."},
-  {masa:11,p:'S', t:1,  nak:null, vara:null, en:"Ugadi / Holi (Dhuleti)",        kn:"ಹೋಳಿ",               note:"Festival of colours — marks the end of winter and triumph of good over evil."},
-  {masa:11,p:'S', t:15, nak:null, vara:null, en:"Holi Purnima",                  kn:"ಹೋಳಿ ಹುಣ್ಣಿಮೆ",       note:"Full moon before Holi — Holika Dahan bonfire ritual performed this night."},
-  // Recurring every month
-  {masa:null,p:'K', t:14, nak:null, vara:null, en:"Masik Shivaratri",            kn:"ಮಾಸಿಕ ಶಿವರಾತ್ರಿ",      note:"Monthly Shivaratri — Krishna Chaturdashi observed with Shiva worship and fasting each month."},
-  // Recurring weekly/nakshatra festivals
-  {masa:null,p:null,t:null,nak:null,vara:1,  en:"Soma Pradosh / Mondays",        kn:"ಸೋಮವಾರ",             note:"Mondays are especially sacred to Lord Shiva — fasting on this day is auspicious."},
-  {masa:null,p:null,t:null,nak:"Pushya",vara:null, en:"Pushya Nakshatra",        kn:"ಪುಷ್ಯ ನಕ್ಷತ್ರ",       note:"One of the most auspicious nakshatras — ideal for starting new ventures, education and purchases."},
-  {masa:null,p:null,t:null,nak:"Rohini",vara:null, en:"Rohini Nakshatra",        kn:"ರೋಹಿಣಿ ನಕ್ಷತ್ರ",      note:"Beloved nakshatra of the Moon — favourable for all auspicious activities."},
-];
-
-function getFestivals(masaIdx, paksha, tithiNum, nakEn, varaNum){
-  const p = paksha === 'Shukla' ? 'S' : 'K';
-  // tithi in 1-based for comparison
-  const t = (tithiNum % 15) + 1;
-  const found = [];
+function getFestivals(masaIdx,paksha,tithiNum,nakEn,varaNum){
+  const p=paksha==='Shukla'?'S':'K';const t=(tithiNum%15)+1;const found=[];
   for(const f of FESTIVALS){
-    const masaMatch  = f.masa  === null || f.masa  === masaIdx;
-    const pakshaMatch= f.p     === null || f.p     === p;
-    const tithiMatch = f.t     === null || f.t     === t;
-    const nakMatch   = f.nak   === null || f.nak   === nakEn;
-    const varaMatch  = f.vara  === null || f.vara  === varaNum;
-    // For entries with nakshatra or vara, tithi/masa must also match or be null
-    if(masaMatch && pakshaMatch && tithiMatch && nakMatch && varaMatch){
-      // Skip generic weekly entries unless no festival-specific match
-      found.push(f);
-    }
+    const masaMatch=f.masa===null||f.masa===masaIdx;const pakshaMatch=f.p===null||f.p===p;const tithiMatch=f.t===null||f.t===t;const nakMatch=f.nak===null||f.nak===nakEn;const varaMatch=f.vara===null||f.vara===varaNum;
+    if(masaMatch&&pakshaMatch&&tithiMatch&&nakMatch&&varaMatch)found.push(f);
   }
-  // Prefer specific (masa+tithi) matches over generic (vara/nak only)
-  const specific = found.filter(f => f.masa !== null || f.t !== null);
-  return specific.length > 0 ? specific : found.filter(f => f.nak !== null || f.vara !== null);
+  const specific=found.filter(f=>f.masa!==null||f.t!==null);return specific.length>0?specific:found.filter(f=>f.nak!==null||f.vara!==null);
 }
 
 function sunLongitude(date){
-  const JD=date.getTime()/86400000+2440587.5, T=(JD-2451545)/36525;
-  const n=v=>{v=v%360;return v<0?v+360:v;};
-  const r=Math.PI/180;
-  const L0=n(280.46646+36000.76983*T);
-  const M=n(357.52911+35999.05029*T);
+  const JD=date.getTime()/86400000+2440587.5,T=(JD-2451545)/36525;
+  const n=v=>{v=v%360;return v<0?v+360:v;};const r=Math.PI/180;
+  const L0=n(280.46646+36000.76983*T),M=n(357.52911+35999.05029*T);
   const C=(1.914602-0.004817*T)*Math.sin(r*M)+(0.019993-0.000101*T)*Math.sin(r*2*M);
   const ayanamsha=23.85267+(JD-2451545.0)/365.25*(50.27796/3600);
   return n(n(L0+C)-ayanamsha);
 }
 
 function getPanchangDetails(date){
-  const moonLon = moonLongitude(date);
-  const sunLon  = sunLongitude(date);
-
-  // Tithi: every 12° of Moon-Sun elongation = 1 tithi
-  const elongation = ((moonLon - sunLon) + 360) % 360;
-  const tithiNum   = Math.floor(elongation / 12); // 0–29
-  const paksha     = tithiNum < 15 ? 'Shukla' : 'Krishna';
-  const paksha_kn  = tithiNum < 15 ? 'ಶುಕ್ಲ ಪಕ್ಷ' : 'ಕೃಷ್ಣ ಪಕ್ಷ';
-  const tithiIdx   = tithiNum % 15;
-
-  // Special names for Purnima (15) and Amavasya (30/0)
-  let tithiName_en, tithiName_kn;
-  if(tithiNum === 14){ tithiName_en='Purnima'; tithiName_kn='ಪೂರ್ಣಿಮಾ'; }
-  else if(tithiNum === 29){ tithiName_en='Amavasya'; tithiName_kn='ಅಮಾವಾಸ್ಯೆ'; }
-  else { tithiName_en=TITHIS_EN[tithiIdx]; tithiName_kn=TITHIS_KN[tithiIdx]; }
-
-  // Chandramana Masa (Amanta system):
-  // The lunar month is named after the Sun's rasi at the most recent Amavasya (new moon).
-  // Mesha(0)=Chaitra, Vrishabha(1)=Vaishakha, ... Meena(11)=Phalguna
-  // We find the most recent new moon by stepping back from the given date.
-  let masaIdx;
-  const elongation0 = ((moonLon - sunLon) + 360) % 360;
-  if(elongation0 < 1 || elongation0 > 359){
-    // We are AT the new moon — use current Sun rasi + 1
-    masaIdx = (Math.floor(sunLon / 30) + 1) % 12;
-  } else {
-    // Step back in 6-hour increments to find recent new moon (max 30 days)
-    let prevElong = elongation0;
-    let searchDate = new Date(date.getTime());
-    let foundMasaIdx = (Math.floor(sunLon / 30) + 1) % 12; // fallback
-    for(let i = 1; i <= 120; i++){
-      searchDate = new Date(searchDate.getTime() - 6*3600000);
-      const ml = moonLongitude(searchDate);
-      const sl = sunLongitude(searchDate);
-      const elong = ((ml - sl) + 360) % 360;
-      // New moon crossed: elongation jumped from near 0 to near 360 as we go back
-      if(elong > 350 && prevElong < 10){
-        foundMasaIdx = (Math.floor(sl / 30) + 1) % 12;
-        break;
-      }
-      prevElong = elong;
-    }
-    masaIdx = foundMasaIdx;
-  }
-
-  // Vara (weekday)
-  const vara_en = VARAS_EN[date.getDay()];
-  const vara_kn = VARAS_KN[date.getDay()];
-
-  // Build a human-readable summary line
-  let special = SPECIAL_TITHIS[tithiName_en] || null;
-  if(tithiName_en==='Purnima') special='Purnima — full moon, auspicious for all good deeds';
-  if(tithiName_en==='Amavasya') special='Amavasya — new moon, observe ancestral rites (Pitru Tarpana)';
-
-  const summary = `This is ${tithiName_en} of ${paksha} Paksha in ${MASAS_EN[masaIdx]} Masa (${MASAS_KN[masaIdx]} ಮಾಸ).`
-    + (special ? `\n${special}.` : '');
-
-  return { tithiName_en, tithiName_kn, paksha, paksha_kn, masaIdx, vara_en, vara_kn, summary, tithiNum, varaNum: date.getDay() };
+  const moonLon=moonLongitude(date);const sunLon=sunLongitude(date);
+  const elongation=((moonLon-sunLon)+360)%360;const tithiNum=Math.floor(elongation/12);
+  const paksha=tithiNum<15?'Shukla':'Krishna';const paksha_kn=tithiNum<15?'ಶುಕ್ಲ ಪಕ್ಷ':'ಕೃಷ್ಣ ಪಕ್ಷ';const tithiIdx=tithiNum%15;
+  let tithiName_en,tithiName_kn;
+  if(tithiNum===14){tithiName_en='Purnima';tithiName_kn='ಪೂರ್ಣಿಮಾ';}
+  else if(tithiNum===29){tithiName_en='Amavasya';tithiName_kn='ಅಮಾವಾಸ್ಯೆ';}
+  else{tithiName_en=TITHIS_EN[tithiIdx];tithiName_kn=TITHIS_KN[tithiIdx];}
+  let masaIdx;const elongation0=((moonLon-sunLon)+360)%360;
+  if(elongation0<1||elongation0>359){masaIdx=(Math.floor(sunLon/30)+1)%12;}
+  else{let prevElong=elongation0;let searchDate=new Date(date.getTime());let foundMasaIdx=(Math.floor(sunLon/30)+1)%12;for(let i=1;i<=120;i++){searchDate=new Date(searchDate.getTime()-6*3600000);const ml=moonLongitude(searchDate);const sl=sunLongitude(searchDate);const elong=((ml-sl)+360)%360;if(elong>350&&prevElong<10){foundMasaIdx=(Math.floor(sl/30)+1)%12;break;}prevElong=elong;}masaIdx=foundMasaIdx;}
+  const vara_en=VARAS_EN[date.getDay()];const vara_kn=VARAS_KN[date.getDay()];
+  let special=SPECIAL_TITHIS[tithiName_en]||null;
+  if(tithiName_en==='Purnima')special='Purnima — full moon, auspicious for all good deeds';
+  if(tithiName_en==='Amavasya')special='Amavasya — new moon, observe ancestral rites (Pitru Tarpana)';
+  const summary=`This is ${tithiName_en} of ${paksha} Paksha in ${MASAS_EN[masaIdx]} Masa (${MASAS_KN[masaIdx]} ಮಾಸ).`+(special?`\n${special}.`:'');
+  return{tithiName_en,tithiName_kn,paksha,paksha_kn,masaIdx,vara_en,vara_kn,summary,tithiNum,varaNum:date.getDay()};
 }
 
 // ═══════════════════════════════════════════════════════════
 // DATE AUSPICIOUSNESS CHECKER
 // ═══════════════════════════════════════════════════════════
 function toggleTithiFinder(){
-  const panel = document.getElementById('inlineTithiFinder');
-  const btn   = document.getElementById('tithiBtnInline');
-  const isOpen = panel.classList.contains('visible');
-  // Close date picker if open
-  document.getElementById('inlineDatePicker').classList.remove('visible');
-  document.getElementById('checkDateBtn').classList.remove('active');
-  panel.classList.toggle('visible', !isOpen);
-  btn.classList.toggle('active', !isOpen);
-  if(!isOpen) document.getElementById('tithi-finder-date').focus();
+  const panel=document.getElementById('inlineTithiFinder');const btn=document.getElementById('tithiBtnInline');const isOpen=panel.classList.contains('visible');
+  document.getElementById('inlineDatePicker').classList.remove('visible');document.getElementById('checkDateBtn').classList.remove('active');
+  panel.classList.toggle('visible',!isOpen);btn.classList.toggle('active',!isOpen);if(!isOpen)document.getElementById('tithi-finder-date').focus();
 }
-
 function toggleDatePicker(){
-  const picker = document.getElementById('inlineDatePicker');
-  const btn    = document.getElementById('checkDateBtn');
-  const isOpen = picker.classList.contains('visible');
-  // Close tithi finder if open
-  document.getElementById('inlineTithiFinder').classList.remove('visible');
-  document.getElementById('tithiBtnInline').classList.remove('active');
-  picker.classList.toggle('visible', !isOpen);
-  btn.classList.toggle('active', !isOpen);
-  if(!isOpen) document.getElementById('check-date').focus();
+  const picker=document.getElementById('inlineDatePicker');const btn=document.getElementById('checkDateBtn');const isOpen=picker.classList.contains('visible');
+  document.getElementById('inlineTithiFinder').classList.remove('visible');document.getElementById('tithiBtnInline').classList.remove('active');
+  picker.classList.toggle('visible',!isOpen);btn.classList.toggle('active',!isOpen);if(!isOpen)document.getElementById('check-date').focus();
 }
 
 function checkDate(){
-  const dateVal = document.getElementById('check-date').value;
-  const errBox  = document.getElementById('checkDateError');
-  const result  = document.getElementById('checkResult');
-  errBox.className='error-box'; result.className='check-result';
-
-  if(!dateVal) { errBox.textContent='Please select a date.'; errBox.classList.add('visible'); return; }
-
+  const dateVal=document.getElementById('check-date').value;const errBox=document.getElementById('checkDateError');const result=document.getElementById('checkResult');
+  errBox.className='error-box';result.className='check-result';
+  if(!dateVal){errBox.textContent='Please select a date.';errBox.classList.add('visible');return;}
   let birthIdx=-1;
-  if(activeTab==='know'){
-    const v=document.getElementById('nakshatra').value;
-    if(v!=='') birthIdx=parseInt(v);
-  } else {
-    birthIdx=foundBirthIdx;
+  if(activeTab==='know'){const v=document.getElementById('nakshatra').value;if(v!=='')birthIdx=parseInt(v);}else{birthIdx=foundBirthIdx;}
+  const[y,m,d]=dateVal.split('-').map(Number);const localNoon=new Date(y,m-1,d,12,0,0);
+  const moonLon=moonLongitude(localNoon);const dayNakIdx=Math.floor(moonLon/(360/27));
+  const tara=birthIdx!==-1?taras[((dayNakIdx-birthIdx+27)%27)%9]:null;
+  const dateDisplay=localNoon.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const pd=getPanchangDetails(localNoon);
+  document.getElementById('check-result-date').textContent=dateDisplay;
+  document.getElementById('di-tithi').textContent=pd.tithiName_en;document.getElementById('di-tithi-kn').textContent=pd.tithiName_kn;
+  document.getElementById('di-paksha').textContent=pd.paksha;document.getElementById('di-paksha-kn').textContent=pd.paksha_kn;
+  document.getElementById('di-masa').textContent=MASAS_EN[pd.masaIdx];document.getElementById('di-masa-kn').textContent=MASAS_KN[pd.masaIdx];
+  document.getElementById('di-vara').textContent=pd.vara_en;document.getElementById('di-vara-kn').textContent=pd.vara_kn;
+  document.getElementById('di-summary').textContent=pd.summary;
+  const festivals=getFestivals(pd.masaIdx,pd.paksha,pd.tithiNum,nakshatras[dayNakIdx].en,pd.varaNum);
+  const festBox=document.getElementById('festivalBox');const festContent=document.getElementById('festivalContent');
+  if(festivals.length>0){festContent.innerHTML=festivals.map(f=>`<div style="margin-bottom:${festivals.length>1?'.5rem':'0'};"><div class="festival-name">${f.en} &nbsp;<span style="font-size:.65rem;color:var(--gold);opacity:.7;">${f.kn}</span></div><div style="margin-top:.15rem;">${f.note}</div></div>`).join('');festBox.style.display='flex';}
+  else{festBox.style.display='none';}
+  document.getElementById('check-nak-en').textContent=nakshatras[dayNakIdx].en;document.getElementById('check-nak-kn').textContent=nakshatras[dayNakIdx].kn;
+  if(birthIdx===-1){document.getElementById('check-birth-en').textContent='—';document.getElementById('check-birth-kn').textContent='Select birth nakshatra for Tara Bala';document.getElementById('check-relation').textContent='Enter your birth nakshatra above to see Tara Bala compatibility for this date.';document.getElementById('check-badge').innerHTML='';}
+  else{
+    document.getElementById('check-birth-en').textContent=nakshatras[birthIdx].en;document.getElementById('check-birth-kn').textContent=nakshatras[birthIdx].kn;
+    const checkNakInfo=INAUSPICIOUS_NAKSHATRAS[nakshatras[dayNakIdx].en];
+    if(checkNakInfo&&checkNakInfo.level==='strong'){document.getElementById('check-relation').textContent='This date falls on '+nakshatras[dayNakIdx].en+', an Ugra (fierce) nakshatra. Regardless of Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';document.getElementById('check-badge').innerHTML=`<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;}
+    else{document.getElementById('check-relation').textContent=tara.d;document.getElementById('check-badge').innerHTML=`<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;}
   }
-  // Note: birthIdx === -1 is allowed — Tara Bala section will be hidden,
-  // but Panchang, festival, Amrit Siddhi Yoga etc. still show.
-
-  const [y,m,d] = dateVal.split('-').map(Number);
-  const localNoon = new Date(y, m-1, d, 12, 0, 0);
-  const moonLon = moonLongitude(localNoon);
-  const dayNakIdx = Math.floor(moonLon/(360/27));
-
-  // Tara Bala only calculated if birth nakshatra is known
-  const tara = birthIdx !== -1 ? taras[((dayNakIdx - birthIdx + 27) % 27) % 9] : null;
-
-  const dateDisplay = localNoon.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-  // Panchang details
-  const pd = getPanchangDetails(localNoon);
-
-  document.getElementById('check-result-date').textContent = dateDisplay;
-
-  // Populate day-info
-  document.getElementById('di-tithi').textContent    = pd.tithiName_en;
-  document.getElementById('di-tithi-kn').textContent = pd.tithiName_kn;
-  document.getElementById('di-paksha').textContent   = pd.paksha;
-  document.getElementById('di-paksha-kn').textContent= pd.paksha_kn;
-  document.getElementById('di-masa').textContent     = MASAS_EN[pd.masaIdx];
-  document.getElementById('di-masa-kn').textContent  = MASAS_KN[pd.masaIdx];
-  document.getElementById('di-vara').textContent     = pd.vara_en;
-  document.getElementById('di-vara-kn').textContent  = pd.vara_kn;
-  document.getElementById('di-summary').textContent  = pd.summary;
-
-  // Festival lookup
-  const festivals = getFestivals(pd.masaIdx, pd.paksha, pd.tithiNum, nakshatras[dayNakIdx].en, pd.varaNum);
-  const festBox = document.getElementById('festivalBox');
-  const festContent = document.getElementById('festivalContent');
-  if(festivals.length > 0){
-    festContent.innerHTML = festivals.map(f =>
-      `<div style="margin-bottom:${festivals.length>1?'.5rem':'0'};">
-        <div class="festival-name">${f.en} &nbsp;<span style="font-size:.72rem;color:var(--gold-dim);">${f.kn}</span></div>
-        <div style="margin-top:.2rem;">${f.note}</div>
-      </div>`
-    ).join('');
-    festBox.style.display='flex';
-  } else {
-    festBox.style.display='none';
-  }
-
-  document.getElementById('check-nak-en').textContent  = nakshatras[dayNakIdx].en;
-  document.getElementById('check-nak-kn').textContent  = nakshatras[dayNakIdx].kn;
-
-  // Tara Bala section — only show if birth nakshatra is known
-  const taraSection = document.querySelector('.relation-box[style="margin-top:.75rem;"]');
-  if(birthIdx === -1){
-    document.getElementById('check-birth-en').textContent = '—';
-    document.getElementById('check-birth-kn').textContent = 'Select birth nakshatra for Tara Bala';
-    document.getElementById('check-relation').textContent = 'Enter your birth nakshatra above to see Tara Bala compatibility for this date.';
-    document.getElementById('check-badge').innerHTML = '';
-  } else {
-    document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
-    document.getElementById('check-birth-kn').textContent = nakshatras[birthIdx].kn;
-
-    // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
-    const checkNakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[dayNakIdx].en];
-    if(checkNakInfo && checkNakInfo.level === 'strong'){
-      document.getElementById('check-relation').textContent = 'This date falls on ' + nakshatras[dayNakIdx].en + ', an Ugra (fierce) nakshatra. Regardless of Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
-      document.getElementById('check-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
-    } else {
-      document.getElementById('check-relation').textContent = tara.d;
-      document.getElementById('check-badge').innerHTML =
-        `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
-    }
-  }
-
-  // Inauspicious nakshatra check
-  applyInauspiciousWarning(nakshatras[dayNakIdx].en, 'check-inauspicious', 'check-inauspicious-title', 'check-inauspicious-text');
-
-  // Amrit Siddhi Yoga check
-  applyAmritSiddhi(localNoon.getDay(), nakshatras[dayNakIdx].en, 'check-amrit', 'check-amrit-text');
-
-  result.classList.add('visible');
-  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+  applyInauspiciousWarning(nakshatras[dayNakIdx].en,'check-inauspicious','check-inauspicious-title','check-inauspicious-text');
+  applyAmritSiddhi(localNoon.getDay(),nakshatras[dayNakIdx].en,'check-amrit','check-amrit-text');
+  result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 // ═══════════════════════════════════════════════════════════
 // TITHI FINDER
 // ═══════════════════════════════════════════════════════════
 function findTithi(){
-  const dateVal = document.getElementById('tithi-finder-date').value;
-  const errBox  = document.getElementById('tithiFinderError');
-  const result  = document.getElementById('tithiFinderResult');
-  errBox.className='error-box';
-  result.className='tithi-finder-result';
-
-  if(!dateVal){ errBox.textContent='Please select a date.'; errBox.classList.add('visible'); return; }
-
-  const [y,m,d] = dateVal.split('-').map(Number);
-  const inputDate = new Date(y, m-1, d, 12, 0, 0);
-
-  // Get panchang for input date
-  const pd = getPanchangDetails(inputDate);
-
-  // Display input date details
-  const dateDisplay = inputDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('tf-input-header').textContent = dateDisplay;
-
-  // Build panchang row
-  document.getElementById('tf-panchang').innerHTML = `
-    <div class="tf-panchang-item">
-      <div class="tf-panchang-label">ತಿಥಿ / Tithi</div>
-      <div class="tf-panchang-val">${pd.tithiName_en}</div>
-      <div class="tf-panchang-kn">${pd.tithiName_kn}</div>
-    </div>
-    <div class="tf-panchang-item">
-      <div class="tf-panchang-label">ಪಕ್ಷ / Paksha</div>
-      <div class="tf-panchang-val">${pd.paksha}</div>
-      <div class="tf-panchang-kn">${pd.paksha_kn}</div>
-    </div>
-    <div class="tf-panchang-item">
-      <div class="tf-panchang-label">ಮಾಸ / Masa</div>
-      <div class="tf-panchang-val">${MASAS_EN[pd.masaIdx]}</div>
-      <div class="tf-panchang-kn">${MASAS_KN[pd.masaIdx]}</div>
-    </div>`;
-
-  // Search for same Tithi+Masa+Paksha in previous year and next year relative to input date
-  const inputYear = y;
-  const prevYear  = inputYear - 1;
-  const nextYear  = inputYear + 1;
-
-  const lastYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, prevYear, null);
-  const nextYearMatch = searchTithiInYear(pd.tithiNum, pd.masaIdx, pd.paksha, nextYear, null);
-
-  // Display previous year result
-  document.getElementById('tf-prev-label').textContent = prevYear + ' occurrence';
-
-  if(lastYearMatch){
-    const lpd = getPanchangDetails(lastYearMatch);
-    document.getElementById('tf-prev-date').textContent =
-      lastYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
-    document.getElementById('tf-prev-sub').textContent =
-      `${lpd.tithiName_en} · ${lpd.paksha} Paksha · ${MASAS_EN[lpd.masaIdx]} Masa`;
-  } else {
-    document.getElementById('tf-prev-date').textContent = 'Not found in ' + prevYear;
-    document.getElementById('tf-prev-sub').textContent = 'May fall in Adhika (leap) lunar month';
-  }
-
-  // Display next year result
-  document.getElementById('tf-next-label').textContent = nextYear + ' occurrence';
-
-  if(nextYearMatch){
-    const tpd = getPanchangDetails(nextYearMatch);
-    document.getElementById('tf-next-date').textContent =
-      nextYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
-    document.getElementById('tf-next-sub').textContent =
-      `${tpd.tithiName_en} · ${tpd.paksha} Paksha · ${MASAS_EN[tpd.masaIdx]} Masa`;
-  } else {
-    document.getElementById('tf-next-date').textContent = 'Not found in ' + nextYear;
-    document.getElementById('tf-next-sub').textContent = 'May fall in Adhika (leap) lunar month';
-  }
-
-  result.classList.add('visible');
-  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+  const dateVal=document.getElementById('tithi-finder-date').value;const errBox=document.getElementById('tithiFinderError');const result=document.getElementById('tithiFinderResult');
+  errBox.className='error-box';result.className='tithi-finder-result';
+  if(!dateVal){errBox.textContent='Please select a date.';errBox.classList.add('visible');return;}
+  const[y,m,d]=dateVal.split('-').map(Number);const inputDate=new Date(y,m-1,d,12,0,0);
+  const pd=getPanchangDetails(inputDate);const dateDisplay=inputDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('tf-input-header').textContent=dateDisplay;
+  document.getElementById('tf-panchang').innerHTML=`<div class="tf-panchang-item"><div class="tf-panchang-label">ತಿಥಿ / Tithi</div><div class="tf-panchang-val">${pd.tithiName_en}</div><div class="tf-panchang-kn">${pd.tithiName_kn}</div></div><div class="tf-panchang-item"><div class="tf-panchang-label">ಪಕ್ಷ / Paksha</div><div class="tf-panchang-val">${pd.paksha}</div><div class="tf-panchang-kn">${pd.paksha_kn}</div></div><div class="tf-panchang-item"><div class="tf-panchang-label">ಮಾಸ / Masa</div><div class="tf-panchang-val">${MASAS_EN[pd.masaIdx]}</div><div class="tf-panchang-kn">${MASAS_KN[pd.masaIdx]}</div></div>`;
+  const inputYear=y;const prevYear=inputYear-1;const nextYear=inputYear+1;
+  const lastYearMatch=searchTithiInYear(pd.tithiNum,pd.masaIdx,pd.paksha,prevYear,null);const nextYearMatch=searchTithiInYear(pd.tithiNum,pd.masaIdx,pd.paksha,nextYear,null);
+  document.getElementById('tf-prev-label').textContent=prevYear+' occurrence';
+  if(lastYearMatch){const lpd=getPanchangDetails(lastYearMatch);document.getElementById('tf-prev-date').textContent=lastYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});document.getElementById('tf-prev-sub').textContent=`${lpd.tithiName_en} · ${lpd.paksha} Paksha · ${MASAS_EN[lpd.masaIdx]} Masa`;}
+  else{document.getElementById('tf-prev-date').textContent='Not found in '+prevYear;document.getElementById('tf-prev-sub').textContent='May fall in Adhika (leap) lunar month';}
+  document.getElementById('tf-next-label').textContent=nextYear+' occurrence';
+  if(nextYearMatch){const tpd=getPanchangDetails(nextYearMatch);document.getElementById('tf-next-date').textContent=nextYearMatch.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric'});document.getElementById('tf-next-sub').textContent=`${tpd.tithiName_en} · ${tpd.paksha} Paksha · ${MASAS_EN[tpd.masaIdx]} Masa`;}
+  else{document.getElementById('tf-next-date').textContent='Not found in '+nextYear;document.getElementById('tf-next-sub').textContent='May fall in Adhika (leap) lunar month';}
+  result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-// Search every day of a given Gregorian year for matching Tithi+Masa+Paksha
-function searchTithiInYear(targetTithiNum, targetMasaIdx, targetPaksha, year, excludeDate){
-  // Iterate using a day counter to avoid Date mutation bugs
-  const msPerDay = 86400000;
-  const yearStart = new Date(year, 0, 1, 12, 0, 0).getTime();
-  const yearEnd   = new Date(year, 11, 31, 12, 0, 0).getTime();
-
-  for(let ms = yearStart; ms <= yearEnd; ms += msPerDay){
-    const candidate = new Date(ms);
-
-    // Skip the exact input date if provided
-    if(excludeDate &&
-       candidate.getFullYear() === excludeDate.getFullYear() &&
-       candidate.getMonth()    === excludeDate.getMonth()    &&
-       candidate.getDate()     === excludeDate.getDate()) continue;
-
-    const pd = getPanchangDetails(candidate);
-    if(pd.tithiNum === targetTithiNum &&
-       pd.masaIdx  === targetMasaIdx  &&
-       pd.paksha   === targetPaksha){
-      return candidate;
-    }
-  }
+function searchTithiInYear(targetTithiNum,targetMasaIdx,targetPaksha,year,excludeDate){
+  const msPerDay=86400000;const yearStart=new Date(year,0,1,12,0,0).getTime();const yearEnd=new Date(year,11,31,12,0,0).getTime();
+  for(let ms=yearStart;ms<=yearEnd;ms+=msPerDay){const candidate=new Date(ms);if(excludeDate&&candidate.getFullYear()===excludeDate.getFullYear()&&candidate.getMonth()===excludeDate.getMonth()&&candidate.getDate()===excludeDate.getDate())continue;const pd=getPanchangDetails(candidate);if(pd.tithiNum===targetTithiNum&&pd.masaIdx===targetMasaIdx&&pd.paksha===targetPaksha)return candidate;}
   return null;
 }
 
@@ -1609,217 +1723,60 @@ function searchTithiInYear(targetTithiNum, targetMasaIdx, targetPaksha, year, ex
 // ═══════════════════════════════════════════════════════════
 const historyLog=[];
 function addToHistory(entry){
-  historyLog.push(entry);
-  const tbody=document.getElementById('historyBody');
-  const row=document.createElement('tr');
-  const timeStr=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  historyLog.push(entry);const tbody=document.getElementById('historyBody');const row=document.createElement('tr');const timeStr=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
   row.innerHTML=`<td>${historyLog.length}</td><td>${entry.name}</td><td>${entry.place}</td><td>${entry.birthNak}</td><td>${entry.todayNak}</td><td>${entry.taraName}</td><td><span class="pill ${entry.status}">${entry.status.charAt(0).toUpperCase()+entry.status.slice(1)}</span></td><td>${timeStr}</td>`;
-  tbody.appendChild(row);
-  document.getElementById('historySection').classList.add('visible');
+  tbody.appendChild(row);document.getElementById('historySection').classList.add('visible');
 }
 function clearHistory(){historyLog.length=0;document.getElementById('historyBody').innerHTML='';document.getElementById('historySection').classList.remove('visible');}
 function downloadPage(){
-  const name = document.getElementById('name').value.trim() || 'kundli';
-  const safeName = name.replace(/[^a-z0-9]/gi,'_').toLowerCase();
-  const now = new Date();
-  const day = String(now.getDate()).padStart(2,'0');
-  const month = now.toLocaleString('en-IN',{month:'short'});
-  const year = now.getFullYear();
-  const dateStr = `${day}${month}${year}`;
-  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url;
-  a.download = `${safeName}_${dateStr}_kundli.html`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const name=document.getElementById('name').value.trim()||'kundli';const safeName=name.replace(/[^a-z0-9]/gi,'_').toLowerCase();const now=new Date();const day=String(now.getDate()).padStart(2,'0');const month=now.toLocaleString('en-IN',{month:'short'});const year=now.getFullYear();const dateStr=`${day}${month}${year}`;
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${safeName}_${dateStr}_kundli.html`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
-// Souramana Masa — based on Sun's sidereal rasi (solar month)
-// Mesha=0, Vrishabha=1 ... Mina=11 (same rasi order)
-const SOURAMANA_EN = [
-  "Mesha","Vrishabha","Mithuna","Karka","Simha","Kanya",
-  "Tula","Vrischika","Dhanu","Makara","Kumbha","Mina"
-];
-const SOURAMANA_KN = [
-  "ಮೇಷ","ವೃಷಭ","ಮಿಥುನ","ಕರ್ಕ","ಸಿಂಹ","ಕನ್ಯಾ",
-  "ತುಲಾ","ವೃಶ್ಚಿಕ","ಧನು","ಮಕರ","ಕುಂಭ","ಮೀನ"
-];
+// ─── Souramana Masa ───────────────────────────────────────────────────────────
+const SOURAMANA_EN=["Mesha","Vrishabha","Mithuna","Karka","Simha","Kanya","Tula","Vrischika","Dhanu","Makara","Kumbha","Mina"];
+const SOURAMANA_KN=["ಮೇಷ","ವೃಷಭ","ಮಿಥುನ","ಕರ್ಕ","ಸಿಂಹ","ಕನ್ಯಾ","ತುಲಾ","ವೃಶ್ಚಿಕ","ಧನು","ಮಕರ","ಕುಂಭ","ಮೀನ"];
+function getSouramanaMasa(date){const sunLon=sunLongitude(date);const rasaIdx=Math.floor(sunLon/30);return{en:SOURAMANA_EN[rasaIdx],kn:SOURAMANA_KN[rasaIdx]};}
 
-function getSouramanaMasa(date){
-  const sunLon = sunLongitude(date);
-  const rasaIdx = Math.floor(sunLon / 30);
-  return { en: SOURAMANA_EN[rasaIdx], kn: SOURAMANA_KN[rasaIdx] };
-}
-
-// ─── Samvatsara (60-year Jupiter cycle) ──────────────────────────────────────
-// Each Samvatsara lasts ~1 Jupiter year (~361 days sidereal)
-// Cycle starts from Prabhava. Reference: Prabhava started ~1987 CE
-// Vishwavasu = year 2025-2026 (Ugadi Mar 19 2026 to next Ugadi)
-const SAMVATSARA_EN = [
-  "Prabhava","Vibhava","Shukla","Pramoda","Prajapati",
-  "Angirasa","Shrimukha","Bhava","Yuva","Dhatru",
-  "Ishvara","Bahudhanya","Pramathi","Vikrama","Vrisha",
-  "Chitrabhanu","Subhanu","Tarana","Parthiva","Vyaya",
-  "Sarvajit","Sarvadharin","Virodhi","Vikruti","Khara",
-  "Nandana","Vijaya","Jaya","Manmatha","Durmukhi",
-  "Hevilambi","Vilambi","Vikari","Sharvari","Plava",
-  "Shubhakrut","Shobhana","Krodhi","Vishvavasu","Parabhava",
-  "Plavanga","Kilaka","Saumya","Sadharana","Virodhakrut",
-  "Paridhavi","Pramadi","Ananda","Rakshasa","Nala",
-  "Pingala","Kalayukti","Siddharthi","Raudra","Durmati",
-  "Dundubhi","Rudhirodgari","Raktakshi","Krodhana","Akshaya"
-];
-const SAMVATSARA_KN = [
-  "ಪ್ರಭವ","ವಿಭವ","ಶುಕ್ಲ","ಪ್ರಮೋದ","ಪ್ರಜಾಪತಿ",
-  "ಅಂಗಿರಸ","ಶ್ರೀಮುಖ","ಭವ","ಯುವ","ಧಾತ್ರು",
-  "ಈಶ್ವರ","ಬಹುಧಾನ್ಯ","ಪ್ರಮಾಥಿ","ವಿಕ್ರಮ","ವೃಷ",
-  "ಚಿತ್ರಭಾನು","ಸುಭಾನು","ತಾರಣ","ಪಾರ್ಥಿವ","ವ್ಯಯ",
-  "ಸರ್ವಜಿತ್","ಸರ್ವಧಾರಿ","ವಿರೋಧಿ","ವಿಕೃತಿ","ಖರ",
-  "ನಂದನ","ವಿಜಯ","ಜಯ","ಮನ್ಮಥ","ದುರ್ಮುಖಿ",
-  "ಹೇವಿಳಂಬಿ","ವಿಳಂಬಿ","ವಿಕಾರಿ","ಶಾರ್ವರಿ","ಪ್ಲವ",
-  "ಶುಭಕೃತ್","ಶೋಭನ","ಕ್ರೋಧಿ","ವಿಶ್ವಾವಸು","ಪರಾಭವ",
-  "ಪ್ಲವಂಗ","ಕೀಲಕ","ಸೌಮ್ಯ","ಸಾಧಾರಣ","ವಿರೋಧಕೃತ್",
-  "ಪರಿಧಾವಿ","ಪ್ರಮಾದಿ","ಆನಂದ","ರಾಕ್ಷಸ","ನಳ",
-  "ಪಿಂಗಳ","ಕಾಲಯುಕ್ತಿ","ಸಿದ್ಧಾರ್ಥಿ","ರೌದ್ರ","ದುರ್ಮತಿ",
-  "ದುಂದುಭಿ","ರುಧಿರೋದ್ಗಾರಿ","ರಕ್ತಾಕ್ಷಿ","ಕ್ರೋಧನ","ಅಕ್ಷಯ"
-];
-
-// Reference: Vishwavasu (39th) started at Ugadi 2025 (Mar 30 2025)
-// Parabhava (40th) started at Ugadi 2026 (Mar 19 2026)
+// ─── Samvatsara ───────────────────────────────────────────────────────────────
+const SAMVATSARA_EN=["Prabhava","Vibhava","Shukla","Pramoda","Prajapati","Angirasa","Shrimukha","Bhava","Yuva","Dhatru","Ishvara","Bahudhanya","Pramathi","Vikrama","Vrisha","Chitrabhanu","Subhanu","Tarana","Parthiva","Vyaya","Sarvajit","Sarvadharin","Virodhi","Vikruti","Khara","Nandana","Vijaya","Jaya","Manmatha","Durmukhi","Hevilambi","Vilambi","Vikari","Sharvari","Plava","Shubhakrut","Shobhana","Krodhi","Vishvavasu","Parabhava","Plavanga","Kilaka","Saumya","Sadharana","Virodhakrut","Paridhavi","Pramadi","Ananda","Rakshasa","Nala","Pingala","Kalayukti","Siddharthi","Raudra","Durmati","Dundubhi","Rudhirodgari","Raktakshi","Krodhana","Akshaya"];
+const SAMVATSARA_KN=["ಪ್ರಭವ","ವಿಭವ","ಶುಕ್ಲ","ಪ್ರಮೋದ","ಪ್ರಜಾಪತಿ","ಅಂಗಿರಸ","ಶ್ರೀಮುಖ","ಭವ","ಯುವ","ಧಾತ್ರು","ಈಶ್ವರ","ಬಹುಧಾನ್ಯ","ಪ್ರಮಾಥಿ","ವಿಕ್ರಮ","ವೃಷ","ಚಿತ್ರಭಾನು","ಸುಭಾನು","ತಾರಣ","ಪಾರ್ಥಿವ","ವ್ಯಯ","ಸರ್ವಜಿತ್","ಸರ್ವಧಾರಿ","ವಿರೋಧಿ","ವಿಕೃತಿ","ಖರ","ನಂದನ","ವಿಜಯ","ಜಯ","ಮನ್ಮಥ","ದುರ್ಮುಖಿ","ಹೇವಿಳಂಬಿ","ವಿಳಂಬಿ","ವಿಕಾರಿ","ಶಾರ್ವರಿ","ಪ್ಲವ","ಶುಭಕೃತ್","ಶೋಭನ","ಕ್ರೋಧಿ","ವಿಶ್ವಾವಸು","ಪರಾಭವ","ಪ್ಲವಂಗ","ಕೀಲಕ","ಸೌಮ್ಯ","ಸಾಧಾರಣ","ವಿರೋಧಕೃತ್","ಪರಿಧಾವಿ","ಪ್ರಮಾದಿ","ಆನಂದ","ರಾಕ್ಷಸ","ನಳ","ಪಿಂಗಳ","ಕಾಲಯುಕ್ತಿ","ಸಿದ್ಧಾರ್ಥಿ","ರೌದ್ರ","ದುರ್ಮತಿ","ದುಂದುಭಿ","ರುಧಿರೋದ್ಗಾರಿ","ರಕ್ತಾಕ್ಷಿ","ಕ್ರೋಧನ","ಅಕ್ಷಯ"];
 function getSamvatsara(date){
-  // Samvatsara changes at Ugadi (Chaitra Shukla Pratipada) each year
-  // Use Chandramana new year: find which Ugadi has most recently passed
-  // Simple approach: map Gregorian year to Samvatsara
-  // 2025 CE = Vishwavasu (index 38, 0-based), 2026 = Parabhava (index 39)
-  // Ugadi 2026 was Mar 19 2026 — before that date still Vishwavasu
-  const ugadi2026 = new Date(2026, 2, 19, 6, 0, 0); // Mar 19 2026
-  const ugadi2025 = new Date(2025, 2, 30, 6, 0, 0); // Mar 30 2025
-  const ugadi2027 = new Date(2027, 3, 7,  6, 0, 0); // Apr 7 2027 (approx)
-
-  let idx;
-  if(date >= ugadi2027)      idx = 40; // Plavanga
-  else if(date >= ugadi2026) idx = 39; // Parabhava
-  else if(date >= ugadi2025) idx = 38; // Vishwavasu
-  else {
-    // Approximate for other years: each year advances by 1
-    const yearsSince2026 = date.getFullYear() - 2026;
-    idx = ((39 + yearsSince2026) % 60 + 60) % 60;
-  }
-  idx = idx % 60;
-  return { en: SAMVATSARA_EN[idx], kn: SAMVATSARA_KN[idx] };
+  const ugadi2026=new Date(2026,2,19,6,0,0);const ugadi2025=new Date(2025,2,30,6,0,0);const ugadi2027=new Date(2027,3,7,6,0,0);
+  let idx;if(date>=ugadi2027)idx=40;else if(date>=ugadi2026)idx=39;else if(date>=ugadi2025)idx=38;else{const yearsSince2026=date.getFullYear()-2026;idx=((39+yearsSince2026)%60+60)%60;}
+  idx=idx%60;return{en:SAMVATSARA_EN[idx],kn:SAMVATSARA_KN[idx]};
 }
 
-// ─── Ayana (Uttarayana / Dakshinayana) ───────────────────────────────────────
-// Uttarayana: Sun in Makara through Mithuna (sidereal lon 270–90°, i.e. Capricorn–Gemini)
-// Dakshinayana: Sun in Karka through Dhanu (sidereal lon 90–270°, i.e. Cancer–Sagittarius)
-function getAyana(date){
-  const sunLon = sunLongitude(date);
-  // Uttarayana: Makara Sankranti (~Jan 14) to Karka Sankranti (~Jul 16)
-  // Sidereal: Makara=270°, Mithuna ends at 90° → Uttarayana when lon 270–360 or 0–90
-  if(sunLon >= 270 || sunLon < 90){
-    return { en:'Uttarayana', kn:'ಉತ್ತರಾಯಣ' };
-  } else {
-    return { en:'Dakshinayana', kn:'ದಕ್ಷಿಣಾಯಣ' };
-  }
-}
+// ─── Ayana ────────────────────────────────────────────────────────────────────
+function getAyana(date){const sunLon=sunLongitude(date);if(sunLon>=270||sunLon<90){return{en:'Uttarayana',kn:'ಉತ್ತರಾಯಣ'};}else{return{en:'Dakshinayana',kn:'ದಕ್ಷಿಣಾಯನ'};}}
 
-// ─── Ruthu (Season) — 6 seasons of 2 months each ─────────────────────────────
-// Based on Souramana (solar) masa:
-// Vasanta (Spring):   Mesha + Vrishabha (0,1)
-// Grishma (Summer):   Mithuna + Karka   (2,3)
-// Varsha (Monsoon):   Simha + Kanya     (4,5)
-// Sharad (Autumn):    Tula + Vrischika  (6,7)
-// Hemanta (Pre-winter):Dhanu + Makara   (8,9)
-// Shishira (Winter):  Kumbha + Mina     (10,11)
-const RUTHU_EN = ["Vasanta","Grishma","Varsha","Sharad","Hemanta","Shishira"];
-const RUTHU_KN = ["ವಸಂತ","ಗ್ರೀಷ್ಮ","ವರ್ಷ","ಶರತ್","ಹೇಮಂತ","ಶಿಶಿರ"];
-const RUTHU_DESC_EN = ["Spring","Summer","Monsoon","Autumn","Pre-winter","Winter"];
-
-function getRuthu(date){
-  const sunLon = sunLongitude(date);
-  const rasaIdx = Math.floor(sunLon / 30); // 0–11
-  const ruthuIdx = Math.floor(rasaIdx / 2);
-  return {
-    en: RUTHU_EN[ruthuIdx],
-    kn: RUTHU_KN[ruthuIdx],
-    desc: RUTHU_DESC_EN[ruthuIdx]
-  };
-}
+// ─── Ruthu ────────────────────────────────────────────────────────────────────
+const RUTHU_EN=["Vasanta","Grishma","Varsha","Sharad","Hemanta","Shishira"];
+const RUTHU_KN=["ವಸಂತ","ಗ್ರೀಷ್ಮ","ವರ್ಷ","ಶರತ್","ಹೇಮಂತ","ಶಿಶಿರ"];
+const RUTHU_DESC_EN=["Spring","Summer","Monsoon","Autumn","Pre-winter","Winter"];
+function getRuthu(date){const sunLon=sunLongitude(date);const rasaIdx=Math.floor(sunLon/30);const ruthuIdx=Math.floor(rasaIdx/2);return{en:RUTHU_EN[ruthuIdx],kn:RUTHU_KN[ruthuIdx],desc:RUTHU_DESC_EN[ruthuIdx]};}
 
 // ═══════════════════════════════════════════════════════════
-// TODAY'S BANNER — auto-populate on page load
+// TODAY'S BANNER
 // ═══════════════════════════════════════════════════════════
 function populateTodayBanner(){
-  // new Date() gives the current UTC moment from the device clock.
-  // All astronomical functions (moonLongitude, sunLongitude etc.) work in UTC internally,
-  // so passing new Date() always gives the correct celestial positions for right now.
-  const now = new Date();
-  const pd  = getPanchangDetails(now);
-  const nakIdx = Math.floor(moonLongitude(now) / (360/27));
-
-  document.getElementById('tb-date').textContent =
-    now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-  document.getElementById('tb-nak-en').textContent  = nakshatras[nakIdx].en;
-  document.getElementById('tb-nak-kn').textContent  = nakshatras[nakIdx].kn;
-  document.getElementById('tb-tithi-en').textContent = pd.tithiName_en;
-  document.getElementById('tb-tithi-kn').textContent = pd.tithiName_kn;
-  document.getElementById('tb-paksha').textContent   = pd.paksha;
-  document.getElementById('tb-paksha-kn').textContent= pd.paksha_kn;
-  document.getElementById('tb-masa-en').textContent  = MASAS_EN[pd.masaIdx];
-  document.getElementById('tb-masa-kn').textContent  = MASAS_KN[pd.masaIdx];
-  document.getElementById('tb-vara-en').textContent  = pd.vara_en;
-  document.getElementById('tb-vara-kn').textContent  = pd.vara_kn;
-
-  // Souramana Masa
-  const sm = getSouramanaMasa(now);
-  document.getElementById('tb-souramana-en').textContent = sm.en;
-  document.getElementById('tb-souramana-kn').textContent = sm.kn;
-
-  // Samvatsara
-  const sv = getSamvatsara(now);
-  document.getElementById('tb-samvatsara-en').textContent = sv.en;
-  document.getElementById('tb-samvatsara-kn').textContent = sv.kn;
-
-  // Ayana
-  const ay = getAyana(now);
-  document.getElementById('tb-ayana-en').textContent = ay.en;
-  document.getElementById('tb-ayana-kn').textContent = ay.kn;
-
-  // Ruthu
-  const rt = getRuthu(now);
-  document.getElementById('tb-ruthu-en').textContent = rt.en + ' (' + rt.desc + ')';
-  document.getElementById('tb-ruthu-kn').textContent = rt.kn;
-
-  // Festival check for today
-  const festivals = getFestivals(pd.masaIdx, pd.paksha, pd.tithiNum, nakshatras[nakIdx].en, pd.varaNum);
-  const fbEl = document.getElementById('tb-festival');
-  if(festivals.length > 0){
-    document.getElementById('tb-festival-text').textContent =
-      festivals.map(f => `${f.en} (${f.kn})`).join(' · ');
-    fbEl.style.display = 'flex';
-  } else {
-    fbEl.style.display = 'none';
-  }
-
-  // Amrit Siddhi Yoga check for banner
-  const amritBanner = document.getElementById('tb-amrit-banner');
-  const amritYoga = checkAmritSiddhi(now.getDay(), nakshatras[nakIdx].en);
-  if(amritYoga){
-    const isGuru = now.getDay() === 4;
-    document.getElementById('tb-amrit-banner-text').textContent =
-      (isGuru ? 'Guru Pushya Yoga · ' : '') + 'ಅಮೃತ ಸಿದ್ಧಿ ಯೋಗ — ' + amritYoga.vara + ' + ' + amritYoga.nak + ' · Highly auspicious for new ventures and investments';
-    amritBanner.style.display = 'flex';
-  } else {
-    amritBanner.style.display = 'none';
-  }
+  const now=new Date();const pd=getPanchangDetails(now);const nakIdx=Math.floor(moonLongitude(now)/(360/27));
+  document.getElementById('tb-date').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('tb-nak-en').textContent=nakshatras[nakIdx].en;document.getElementById('tb-nak-kn').textContent=nakshatras[nakIdx].kn;
+  document.getElementById('tb-tithi-en').textContent=pd.tithiName_en;document.getElementById('tb-tithi-kn').textContent=pd.tithiName_kn;
+  document.getElementById('tb-paksha').textContent=pd.paksha;document.getElementById('tb-paksha-kn').textContent=pd.paksha_kn;
+  document.getElementById('tb-masa-en').textContent=MASAS_EN[pd.masaIdx];document.getElementById('tb-masa-kn').textContent=MASAS_KN[pd.masaIdx];
+  document.getElementById('tb-vara-en').textContent=pd.vara_en;document.getElementById('tb-vara-kn').textContent=pd.vara_kn;
+  const sm=getSouramanaMasa(now);document.getElementById('tb-souramana-en').textContent=sm.en;document.getElementById('tb-souramana-kn').textContent=sm.kn;
+  const sv=getSamvatsara(now);document.getElementById('tb-samvatsara-en').textContent=sv.en;document.getElementById('tb-samvatsara-kn').textContent=sv.kn;
+  const ay=getAyana(now);document.getElementById('tb-ayana-en').textContent=ay.en;document.getElementById('tb-ayana-kn').textContent=ay.kn;
+  const rt=getRuthu(now);document.getElementById('tb-ruthu-en').textContent=rt.en+' ('+rt.desc+')';document.getElementById('tb-ruthu-kn').textContent=rt.kn;
+  const festivals=getFestivals(pd.masaIdx,pd.paksha,pd.tithiNum,nakshatras[nakIdx].en,pd.varaNum);const fbEl=document.getElementById('tb-festival');
+  if(festivals.length>0){document.getElementById('tb-festival-text').textContent=festivals.map(f=>`${f.en} (${f.kn})`).join(' · ');fbEl.style.display='flex';}else{fbEl.style.display='none';}
+  const amritBanner=document.getElementById('tb-amrit-banner');const amritYoga=checkAmritSiddhi(now.getDay(),nakshatras[nakIdx].en);
+  if(amritYoga){const isGuru=now.getDay()===4;document.getElementById('tb-amrit-banner-text').textContent=(isGuru?'Guru Pushya Yoga · ':'')+'ಅಮೃತ ಸಿದ್ಧಿ ಯೋಗ — '+amritYoga.vara+' + '+amritYoga.nak+' · Highly auspicious for new ventures and investments';amritBanner.style.display='flex';}else{amritBanner.style.display='none';}
 }
 
-// Run on load
 populateTodayBanner();
 
 function showError(msg){const e=document.getElementById('errorBox');e.textContent=msg;e.classList.add('visible');document.getElementById('submitBtn').textContent='Is Today Auspicious for you?';document.getElementById('submitBtn').disabled=false;}
