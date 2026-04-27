@@ -1417,15 +1417,16 @@ function checkDate(){
   } else {
     birthIdx=foundBirthIdx;
   }
-  if(birthIdx===-1){ errBox.textContent='Please enter your birth details or select your birth nakshatra first.'; errBox.classList.add('visible'); return; }
+  // Note: birthIdx === -1 is allowed — Tara Bala section will be hidden,
+  // but Panchang, festival, Amrit Siddhi Yoga etc. still show.
 
   const [y,m,d] = dateVal.split('-').map(Number);
-  // Use local noon on the selected date (device timezone)
-  // This ensures nakshatra/tithi are calculated for local midday, not UTC midnight
-  const localNoon = new Date(y, m-1, d, 12, 0, 0); // local noon via device timezone
+  const localNoon = new Date(y, m-1, d, 12, 0, 0);
   const moonLon = moonLongitude(localNoon);
   const dayNakIdx = Math.floor(moonLon/(360/27));
-  const tara = taras[((dayNakIdx - birthIdx + 27) % 27) % 9];
+
+  // Tara Bala only calculated if birth nakshatra is known
+  const tara = birthIdx !== -1 ? taras[((dayNakIdx - birthIdx + 27) % 27) % 9] : null;
 
   const dateDisplay = localNoon.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
@@ -1463,18 +1464,28 @@ function checkDate(){
 
   document.getElementById('check-nak-en').textContent  = nakshatras[dayNakIdx].en;
   document.getElementById('check-nak-kn').textContent  = nakshatras[dayNakIdx].kn;
-  document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
-  document.getElementById('check-birth-kn').textContent = nakshatras[birthIdx].kn;
 
-  // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
-  const checkNakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[dayNakIdx].en];
-  if(checkNakInfo && checkNakInfo.level === 'strong'){
-    document.getElementById('check-relation').textContent = 'This date falls on ' + nakshatras[dayNakIdx].en + ', an Ugra (fierce) nakshatra. Regardless of Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
-    document.getElementById('check-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
+  // Tara Bala section — only show if birth nakshatra is known
+  const taraSection = document.querySelector('.relation-box[style="margin-top:.75rem;"]');
+  if(birthIdx === -1){
+    document.getElementById('check-birth-en').textContent = '—';
+    document.getElementById('check-birth-kn').textContent = 'Select birth nakshatra for Tara Bala';
+    document.getElementById('check-relation').textContent = 'Enter your birth nakshatra above to see Tara Bala compatibility for this date.';
+    document.getElementById('check-badge').innerHTML = '';
   } else {
-    document.getElementById('check-relation').textContent = tara.d;
-    document.getElementById('check-badge').innerHTML =
-      `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+    document.getElementById('check-birth-en').textContent = nakshatras[birthIdx].en;
+    document.getElementById('check-birth-kn').textContent = nakshatras[birthIdx].kn;
+
+    // For strong inauspicious nakshatras (Bharani, Krittika), override Tara Bala
+    const checkNakInfo = INAUSPICIOUS_NAKSHATRAS[nakshatras[dayNakIdx].en];
+    if(checkNakInfo && checkNakInfo.level === 'strong'){
+      document.getElementById('check-relation').textContent = 'This date falls on ' + nakshatras[dayNakIdx].en + ', an Ugra (fierce) nakshatra. Regardless of Tara Bala, this day is considered inauspicious for new beginnings, ceremonies, travel, and important decisions.';
+      document.getElementById('check-badge').innerHTML = `<span class="badge challenging">Inauspicious Day · ಅಶುಭ ದಿನ</span>`;
+    } else {
+      document.getElementById('check-relation').textContent = tara.d;
+      document.getElementById('check-badge').innerHTML =
+        `<span class="badge ${tara.s}">${tara.name} &nbsp;·&nbsp; ${tara.s.charAt(0).toUpperCase()+tara.s.slice(1)}</span>`;
+    }
   }
 
   // Inauspicious nakshatra check
